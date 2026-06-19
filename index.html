@@ -713,8 +713,16 @@
                 placeBtn.disabled = true;
                 placeBtn.innerText = "FELT LOCKED";
             } else {
+                // Convert current real-world time strictly to Belgrade timezone
                 const bNow = new Date(new Date().toLocaleString("en-US", {timeZone: "Europe/Belgrade"}));
-                const bTarget = new Date(bNow.getFullYear(), bNow.getMonth(), bNow.getDate(), 8, 45, 0);
+                
+                // Read the target casino ledger day directly
+                const ledgerDay = new Date(state.currentDate);
+                
+                // Build the absolute deadline: 8:45 AM on that specific target ledger day
+                const bTarget = new Date(ledgerDay.getFullYear(), ledgerDay.getMonth(), ledgerDay.getDate(), 8, 45, 0);
+                
+                // Calculate true difference spanning across the weekend
                 let diff = bTarget - bNow;
                 if (diff < 0) diff = 0;
 
