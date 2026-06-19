@@ -9,75 +9,96 @@
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Playfair+Display:ital,wght@0,700;1,700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
-        /* --- HIGH LIMIT SPORTSBOOK LOUNGE DESIGN --- */
+        /* --- HIGH-END LUXURY CASINO ENGINE DESIGN --- */
         body {
-            color: #ddd; font-family: 'Montserrat', sans-serif; margin: 0; padding: 20px;
-            min-height: 100vh; background-color: #0c0505;
-            background-image: radial-gradient(circle at center, #1b0a0a 0%, #0c0505 80%);
+            color: #f0f0f0; font-family: 'Montserrat', sans-serif; margin: 0; padding: 20px;
+            min-height: 100vh; background-color: #050202;
+            background-image: radial-gradient(circle at center, #1c0909 0%, #050202 80%);
             overflow-x: hidden;
         }
 
-        .diamond-logo { text-align: center; font-size: 2.8em; margin-bottom: -10px; filter: drop-shadow(0 0 15px rgba(0, 150, 255, 0.6)); }
+        .diamond-logo { text-align: center; font-size: 3em; margin-bottom: -5px; filter: drop-shadow(0 0 20px rgba(0, 162, 255, 0.7)); }
 
         h1, h2, h3 { font-family: 'Oswald', sans-serif; text-transform: uppercase; text-align: center; margin-top: 0; }
 
         h1 {
             font-family: 'Playfair Display', serif; font-style: italic; color: #ffdf00;
-            font-size: 3.8em; font-weight: 700; text-shadow: 2px 2px 0px #2a0000, 0 0 15px rgba(255, 223, 0, 0.3);
+            font-size: 4em; font-weight: 700; text-shadow: 2px 3px 0px #1a0000, 0 0 25px rgba(255, 223, 0, 0.4);
             margin-bottom: 5px; letter-spacing: 2px;
         }
-        h1::before, h1::after { content: '♦ ♣ ♥ ♠'; font-size: 0.3em; color: #cc0000; text-shadow: 0 0 8px #ff0000; vertical-align: middle; margin: 0 15px; font-style: normal; }
+        h1::before, h1::after { content: '♦ ♣ ♥ ♠'; font-size: 0.35em; color: #e60000; text-shadow: 0 0 10px #ff3333; vertical-align: middle; margin: 0 15px; font-style: normal; }
 
-        .header-subtitle { text-align: center; font-family: 'Montserrat', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 0.85em; color: #aaa; margin-bottom: 30px; }
+        .header-subtitle { text-align: center; font-family: 'Montserrat', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; font-size: 0.9em; color: #b5b5b5; margin-bottom: 35px; }
 
         .container { display: none; gap: 25px; max-width: 1300px; margin: 0 auto; position: relative; z-index: 1; }
         .main-col { flex: 2.2; min-width: 0; }
         .side-col { flex: 1; min-width: 0; }
 
-        /* DEEP EMERALD SURFACES WITH GOLD BRIGHT OUTLINES */
+        /* DEEP GLOSSY EMERALD PANEL WITH BRILLIANT GOLD OUTLINE */
         .card {
-            background: linear-gradient(180deg, #061f0e 0%, #031409 100%); padding: 25px; border-radius: 12px; 
-            margin-bottom: 25px; border: 2px solid #caa43b; box-shadow: 0 12px 35px rgba(0,0,0,0.95); position: relative;
+            background: linear-gradient(180deg, #021206 0%, #010a03 100%); padding: 25px; border-radius: 14px; 
+            margin-bottom: 25px; border: 2.5px solid #e5c158; box-shadow: 0 15px 40px rgba(0,0,0,0.95), inset 0 1px 15px rgba(0, 255, 50, 0.05); position: relative;
         }
 
-        h3 { color: #ffdf00; font-size: 1.3em; border-bottom: 1px dashed rgba(255, 223, 0, 0.4); padding-bottom: 10px; margin-bottom: 20px; letter-spacing: 2px; }
-        hr { border: 1px dashed rgba(255, 223, 0, 0.3); margin: 20px 0; }
+        h3 { color: #ffdf00; font-size: 1.4em; border-bottom: 1px dashed rgba(229, 193, 88, 0.4); padding-bottom: 12px; margin-bottom: 20px; letter-spacing: 2px; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+        hr { border: 1px dashed rgba(229, 193, 88, 0.3); margin: 20px 0; }
 
-        .history-badge { display: inline-block; padding: 8px 15px; margin: 5px; border-radius: 4px; font-family: 'Oswald', sans-serif; font-weight: 700; text-transform: uppercase; color: #fff; box-shadow: 0 4px 8px rgba(0,0,0,0.8); font-size: 1.05em; min-width: 80px; text-align: center; border: 1px solid rgba(255,255,255,0.15); }
-        .history-skip { background: linear-gradient(180deg, #d61c1c 0%, #7a0909 100%); border-bottom: 2px solid #ff5555; }
-        .history-daily { background: linear-gradient(180deg, #009922 0%, #004d11 100%); border-bottom: 2px solid #44ff66; }
-        .history-date { font-size: 0.65em; display: block; color: #ddd; margin-top: 3px; font-family: 'Montserrat', sans-serif; font-weight: normal; }
+        .history-badge { display: inline-block; padding: 10px 16px; margin: 5px; border-radius: 5px; font-family: 'Oswald', sans-serif; font-weight: 700; text-transform: uppercase; color: #fff; box-shadow: 0 6px 12px rgba(0,0,0,0.8), inset 0 1px 3px rgba(255,255,255,0.3); font-size: 1.1em; min-width: 85px; text-align: center; border: 1px solid rgba(255,255,255,0.2); }
+        .history-skip { background: linear-gradient(180deg, #e62222 0%, #8a0000 100%); border-bottom: 3px solid #ff6666; }
+        .history-daily { background: linear-gradient(180deg, #00b324 0%, #005912 100%); border-bottom: 3px solid #55ff77; }
+        .history-date { font-size: 0.65em; display: block; color: #eee; margin-top: 4px; font-family: 'Montserrat', sans-serif; font-weight: normal; letter-spacing: 0.5px; }
 
         table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 0.95em; }
-        th, td { padding: 12px; text-align: center; border-bottom: 1px solid rgba(255, 223, 0, 0.15); }
-        th { color: #ffdf00; font-family: 'Oswald', sans-serif; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px dashed rgba(255, 223, 0, 0.4); }
+        th, td { padding: 14px 12px; text-align: center; border-bottom: 1px solid rgba(229, 193, 88, 0.15); }
+        th { color: #ffdf00; font-family: 'Oswald', sans-serif; text-transform: uppercase; letter-spacing: 1.5px; border-bottom: 1px dashed rgba(229, 193, 88, 0.4); font-size: 1.05em; }
         tr:nth-child(even) { background-color: rgba(255, 255, 255, 0.02); }
 
-        label { font-family: 'Oswald', sans-serif; text-transform: uppercase; color: #bbb; font-size: 0.85em; display: block; margin-bottom: 6px; letter-spacing: 1px; }
-        input, select { width: 100%; padding: 11px; margin-bottom: 20px; box-sizing: border-box; background-color: #030d05; color: #fff; border: 1px solid #caa43b; border-radius: 6px; font-family: 'Montserrat', sans-serif; font-size: 0.95em; outline: none;}
-        input:focus, select:focus { border-color: #ffdf00; box-shadow: 0 0 8px rgba(255,223,0,0.25); }
+        label { font-family: 'Oswald', sans-serif; text-transform: uppercase; color: #ccc; font-size: 0.9em; display: block; margin-bottom: 6px; letter-spacing: 1.5px; }
+        input, select { width: 100%; padding: 12px; margin-bottom: 25px; box-sizing: border-box; background-color: #010502; color: #fff; border: 1.5px solid #e5c158; border-radius: 6px; font-family: 'Montserrat', sans-serif; font-size: 1em; outline: none; box-shadow: inset 0 2px 5px rgba(0,0,0,0.8); }
+        input:focus, select:focus { border-color: #ffffff; box-shadow: 0 0 12px rgba(229,193,88,0.4); }
 
-        /* GLOSSY 3D PILL BUTTONS */
-        button { font-family: 'Oswald', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; border-radius: 30px; padding: 14px 20px; cursor: pointer; width: 100%; font-size: 1.1em; transition: all 0.2s ease; }
-        button:hover { filter: brightness(1.15); transform: translateY(-1px); }
-        button:active { transform: translateY(1px); }
+        /* HIGH-GLOSS PREMIUM 3D CONTROLLER BUTTONS */
+        button { font-family: 'Oswald', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 2.5px; border-radius: 40px; padding: 16px 25px; cursor: pointer; width: 100%; font-size: 1.2em; transition: all 0.15s cubic-bezier(0.2, 0.8, 0.2, 1); margin-bottom: 5px; }
+        button:hover { filter: brightness(1.2); transform: translateY(-2px); }
+        button:active { transform: translateY(2px); box-shadow: 0 2px 4px rgba(0,0,0,0.9) !important; }
         
-        .btn-gold { background: linear-gradient(180deg, #ffe53b 0%, #caa43b 45%, #8a6508 100%); color: #000; border: 1.5px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.6), inset 0 2px 4px rgba(255,255,255,0.6); }
-        .btn-silver { background: linear-gradient(180deg, #ffffff 0%, #cccccc 45%, #777777 100%); color: #000; border: 1.5px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.6), inset 0 2px 4px rgba(255,255,255,0.8); margin-top: 10px;}
-        .btn-dark { background: linear-gradient(180deg, #2c2c2c 0%, #141414 50%, #000000 100%); color: #ffdf00; border: 1.5px solid #caa43b; box-shadow: 0 5px 12px rgba(0,0,0,0.7), inset 0 1px 2px rgba(255,255,255,0.2); margin-top: 10px; font-size: 0.9em; }
-        .btn-red { background: linear-gradient(180deg, #ff4141 0%, #bd1919 45%, #660000 100%); color: #fff; border: 1.5px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.6), inset 0 2px 4px rgba(255,255,255,0.4); margin-top: 20px; }
-        .cancel-btn { background: transparent; color: #999; border: 1px solid #555; border-radius: 20px; padding: 5px 12px; font-size: 0.8em; width: auto; box-shadow: none;}
+        .btn-gold { 
+            background: linear-gradient(180deg, #fff275 0%, #e5c158 40%, #a88119 100%); color: #000; 
+            border: 2px solid #fff; 
+            box-shadow: 0 8px 16px rgba(0,0,0,0.7), inset 0 4px 6px rgba(255,255,255,0.7), inset 0 -3px 6px rgba(0,0,0,0.4); 
+            text-shadow: 0 1px 1px rgba(255,255,255,0.5);
+        }
+        .btn-silver { 
+            background: linear-gradient(180deg, #ffffff 0%, #dcdcdc 40%, #7a7a7a 100%); color: #000; 
+            border: 2px solid #fff; 
+            box-shadow: 0 8px 16px rgba(0,0,0,0.7), inset 0 4px 6px rgba(255,255,255,0.8), inset 0 -3px 6px rgba(0,0,0,0.4); 
+            margin-top: 10px;
+        }
+        .btn-dark { 
+            background: linear-gradient(180deg, #3a3a3a 0%, #1e1e1e 45%, #050505 100%); color: #ffdf00; 
+            border: 2px solid #e5c158; 
+            box-shadow: 0 6px 12px rgba(0,0,0,0.8), inset 0 2px 4px rgba(255,255,255,0.2), inset 0 -2px 4px rgba(0,0,0,0.6); 
+            margin-top: 10px; font-size: 0.95em;
+        }
+        .btn-red { 
+            background: linear-gradient(180deg, #ff5252 0%, #cc1b1b 40%, #730000 100%); color: #fff; 
+            border: 2px solid #fff; 
+            box-shadow: 0 8px 16px rgba(0,0,0,0.7), inset 0 4px 6px rgba(255,255,255,0.4), inset 0 -3px 6px rgba(0,0,0,0.5); 
+            margin-top: 20px;
+        }
+        .cancel-btn { background: transparent; color: #bbb; border: 1.5px solid #666; border-radius: 20px; padding: 6px 14px; font-size: 0.8em; width: auto; box-shadow: none; margin: 0; }
+        .cancel-btn:hover { background: rgba(255,255,255,0.05); transform: none; filter: none; }
 
-        .streak-counter { color: #fff; background: rgba(0,0,0,0.5); padding: 6px 18px; border-radius: 25px; border: 1px solid #caa43b; display: inline-block; font-family: 'Oswald', sans-serif; font-size: 0.9em; margin-bottom: 20px;}
-        .streak-number { color: #ff3333; font-weight: bold; font-size: 1.25em; }
+        .streak-counter { color: #fff; background: rgba(0,0,0,0.6); padding: 7px 20px; border-radius: 25px; border: 1.5px solid #e5c158; display: inline-block; font-family: 'Oswald', sans-serif; font-size: 0.95em; margin-bottom: 20px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.5); }
+        .streak-number { color: #ff3c3c; font-weight: bold; font-size: 1.3em; text-shadow: 0 0 10px rgba(255,0,0,0.4); }
 
-        .odds-container { display: flex; gap: 15px; justify-content: space-around; margin-top: 10px; }
-        .odds-box { flex: 1; background: #030d05; padding: 20px; border-radius: 8px; text-align: center; border: 1px solid #caa43b; box-shadow: inset 0 0 15px rgba(0,0,0,0.8); }
-        .odds-label { font-family: 'Oswald', sans-serif; font-size: 0.9em; color: #8c8c8c; margin-bottom: 8px; letter-spacing: 2px; }
-        .odds-value { display: flex; justify-content: center; align-items: baseline; color: #fff; font-size: 3.4em; font-weight: 700; font-family: 'Oswald', sans-serif; text-shadow: 0 2px 8px rgba(0,0,0,0.5); }
+        .odds-container { display: flex; gap: 18px; justify-content: space-around; margin-top: 10px; }
+        .odds-box { flex: 1; background: #010602; padding: 22px; border-radius: 10px; text-align: center; border: 1.5px solid #e5c158; box-shadow: inset 0 0 20px rgba(0,0,0,0.9); }
+        .odds-label { font-family: 'Oswald', sans-serif; font-size: 0.95em; color: #9c9c9c; margin-bottom: 8px; letter-spacing: 2px; }
+        .odds-value { display: flex; justify-content: center; align-items: baseline; color: #fff; font-size: 3.6em; font-weight: 700; font-family: 'Oswald', sans-serif; text-shadow: 0 3px 10px rgba(0,0,0,0.7); }
         
         .odds-input { 
-            background: transparent; border: none; border-bottom: 1px solid #555; 
+            background: transparent; border: none; border-bottom: 1px solid #666; 
             color: #fff; font-size: 1em; font-weight: 700; font-family: inherit; 
             text-align: center; width: 140px; outline: none; 
             padding: 0; line-height: 1.2; height: 1.2em; margin: 0; box-shadow: none;
@@ -86,15 +107,15 @@
         .odds-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
         .odds-input[type=number] { -moz-appearance: textfield; }
         .odds-input[readonly] { border-bottom: none; }
-        .odds-x { font-size: 0.45em; color: #ffdf00; margin-left: 5px; font-weight: normal; }
+        .odds-x { font-size: 0.45em; color: #ffdf00; margin-left: 6px; font-weight: normal; }
 
-        /* LOGIN OVERLAY */
-        #loginOverlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(10,5,5,0.97); z-index: 999; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-        .login-box { background: linear-gradient(180deg, #061f0e 0%, #031409 100%); padding: 40px; border: 2px solid #caa43b; border-radius: 12px; width: 350px; text-align: center; box-shadow: 0 0 40px rgba(255,223,0,0.15); }
-        .auth-toggle { color: #aaa; margin-top: 15px; cursor: pointer; text-decoration: underline; font-size: 0.9em; }
+        /* LOGIN SYSTEM STYLE */
+        #loginOverlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(5,2,2,0.98); z-index: 999; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .login-box { background: linear-gradient(180deg, #021206 0%, #010a03 100%); padding: 40px; border: 2.5px solid #e5c158; border-radius: 14px; width: 360px; text-align: center; box-shadow: 0 0 50px rgba(229,193,88,0.2); }
+        .auth-toggle { color: #bbb; margin-top: 18px; cursor: pointer; text-decoration: underline; font-size: 0.9em; }
         
         #pitbossPanel { display: none; }
-        .loading-text { color: #ffdf00; font-family: 'Oswald', sans-serif; font-size: 1.5em; display: none; }
+        .loading-text { color: #ffdf00; font-family: 'Oswald', sans-serif; font-size: 1.6em; display: none; text-shadow: 0 0 10px rgba(255,223,0,0.5); }
     </style>
 </head>
 <body>
@@ -104,7 +125,7 @@
         <h1 style="font-size: 3em; margin-bottom: 30px;">Casino Skiperino</h1>
         <div class="login-box">
             <h3 id="authTitle" style="border:none; margin-bottom: 5px;">Enter The Vault</h3>
-            <p style="color: #aaa; margin-bottom: 20px; font-size: 0.9em;">Authorized personnel only.</p>
+            <p style="color: #bbb; margin-bottom: 25px; font-size: 0.9em;">Authorized personnel only.</p>
             
             <input type="email" id="authEmail" placeholder="Email Address">
             <input type="password" id="authPassword" placeholder="Password">
@@ -234,7 +255,6 @@
         import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
         import { getFirestore, doc, getDoc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
-        // CONFIG BLOCK
         const firebaseConfig = {
           apiKey: "AIzaSyDJ0X8xHF8ys_JeiQiQs5ZP-8fcHFaNCHQ",
           authDomain: "casino-skiperino.firebaseapp.com",
@@ -258,7 +278,6 @@
         let isLoginMode = true;
         let state = null; 
 
-        // 57-DAY ACCURATE LEDGER CORRECTION DATA
         const initialState = {
             balances: { "Shomara": 1058.50, "Nenad": 1037.00, "Sladja": 1006.00, "Cojkana": 851.00, "Milance": 845.50, "Danilo": 800.00, "OG": 750.90, "rat.cleaner": 700.00, "KOL": 600.00, "Markov": 549.00, "Shobibi": 300.00, "Skecmi": 0.00 },
             streaks: { "Shomara": 1, "Nenad": 1, "Sladja": 2, "Cojkana": 0, "Milance": 0, "Danilo": 0, "OG": 0, "rat.cleaner": 0, "KOL": 0, "Markov": 0, "Shobibi": 0, "Skecmi": 0 }, 
@@ -282,7 +301,7 @@
             ]
         };
 
-        // --- INIT UI ---
+        // --- CORE UI CONSTRUCT ---
         const authPlayerSelect = document.getElementById('authPlayerName');
         const betSelect = document.getElementById('betPlayer');
         const adjSelect = document.getElementById('adjPlayer');
@@ -292,7 +311,7 @@
             adjSelect.add(new Option(p, p));
         });
 
-        // --- AUTHENTICATION LOGIC ---
+        // --- AUTH SUBSYSTEM ---
         window.toggleAuthMode = () => {
             isLoginMode = !isLoginMode;
             document.getElementById('authTitle').innerText = isLoginMode ? "Enter The Vault" : "Register Operative";
@@ -357,7 +376,7 @@
             }
         });
 
-        // --- DATABASE LOGIC ---
+        // --- LIVE SYNC CORE ---
         function startDatabaseSync() {
             const stateRef = doc(db, "casino", "state");
             
@@ -384,7 +403,7 @@
             await setDoc(doc(db, "casino", "state"), state);
         }
 
-        // --- GAME MECHANICS ---
+        // --- RISK ENGINE CORRELATION ---
         window.placeBet = async () => {
             const player = isAdmin ? document.getElementById('betPlayer').value : currentUserPlayerName;
             const prediction = document.getElementById('betPrediction').value;
@@ -414,7 +433,7 @@
 
         window.cancelBet = async (index) => {
             const bet = state.bets[index];
-            if (!isAdmin && bet.player !== currentUserPlayerName) return alert("You cannot refund someone else's bet.");
+            if (!isAdmin && bet.player !== currentUserPlayerName) return alert("Security Violation.");
             
             if(confirm(`Refund ${bet.amount} coins back to ${bet.player}?`)) {
                 state.balances[bet.player] += bet.amount; 
@@ -423,12 +442,12 @@
             }
         };
 
-        // --- DYNAMIC TXT LOG ARCHIVER POWERS ---
+        // --- DATA SYSTEM LOG REPORTS ---
         window.downloadLog = () => {
             if (!isAdmin) return;
             
             let logContent = "========================================\n";
-            logContent += "  CASINO SKIPERINO - MASTER LEDGER LOG  \n";
+            logContent += "  CASINO SKIPERINO - SYSTEM LEDGER LOG  \n";
             logContent += "========================================\n";
             logContent += "Date Exported: " + new Date().toLocaleString() + "\n\n";
             
@@ -466,15 +485,15 @@
 
         window.nuclearReset = async () => {
             if (!isAdmin) return;
-            if (confirm("☢️ WARNING: This will erase all current balances, active bets, and recent history. Are you absolutely sure?")) {
-                if (confirm("FINAL WARNING: This action cannot be undone. Initiate Nuclear Reset?")) {
+            if (confirm("☢️ NUCLEAR SYSTEM RESET PROCEDURES STARTED. WIPE CLOUD LEDGER?")) {
+                if (confirm("FINAL COMPLIANCE WARNING: CRITICAL LOSS OF ALL CURRENT CHIPS DATA. PURGE SYSTEM?")) {
                     await setDoc(doc(db, "casino", "state"), initialState);
-                    alert("Casino has been completely reset to the June 19th baseline.");
+                    alert("Cloud purged to original baseline execution metrics.");
                 }
             }
         };
 
-        // ADMIN RESOLUTION ENGINE
+        // RESOLUTION CALCULATION ROUTINE
         window.resolveDay = async () => {
             if (!isAdmin) return;
             const actual = document.getElementById('actualOutcome').value;
@@ -514,7 +533,6 @@
             if (d.getDay() === 6) d.setDate(d.getDate() + 2); 
             state.currentDate = d.getTime();
 
-            // Auto-calculation logic with built-in house vig edge
             let baseProb = state.history[d.getDay()] ? (state.history[d.getDay()].daily / state.history[d.getDay()].total) : 0.50;
             let p_daily = Math.max(0.05, Math.min(baseProb + (state.skipStreak * 0.10), 0.95));
             state.currentOdds.daily = (0.95 / p_daily).toFixed(2);
@@ -541,7 +559,7 @@
             await pushStateToCloud();
         }
 
-        // --- RENDER ENGINE ---
+        // --- HIGH LEVEL SHADER/RENDER ---
         function renderAll() {
             if(!state) return;
             
@@ -567,22 +585,22 @@
                 <tr>
                     <td>${i === 0 ? "👑 1" : i + 1}</td>
                     <td>${p}</td>
-                    <td style="color: #ffdf00;">${state.balances[p].toFixed(2)}</td>
+                    <td style="color: #ffdf00; font-weight: bold;">${state.balances[p].toFixed(2)}</td>
                     <td style="color: ${state.streaks[p] > 0 ? '#ffdf00' : '#555'}; font-weight: bold;">${state.streaks[p] >= 3 ? '🔥 ' + state.streaks[p] : state.streaks[p] || 0}</td>
                 </tr>`).join('');
 
             const tbodyB = document.getElementById('betsTableBody');
             if (state.bets.length === 0) {
-                tbodyB.innerHTML = `<tr><td colspan="5" style="color: #666; padding: 20px;">No chips on the felt. Place your bets.</td></tr>`;
+                tbodyB.innerHTML = `<tr><td colspan="5" style="color: #555; padding: 25px; font-weight: bold; font-size: 0.9em; letter-spacing: 0.5px;">No chips on the felt. Place your bets.</td></tr>`;
             } else {
                 tbodyB.innerHTML = state.bets.map((b, i) => `
                     <tr>
                         <td>${b.player}</td>
-                        <td style="color: ${b.prediction === 'DAILY' ? '#88ff88' : '#ff4d4d'}; font-weight: bold;">${b.prediction}</td>
+                        <td style="color: ${b.prediction === 'DAILY' ? '#66ff66' : '#ff4d4d'}; font-weight: bold;">${b.prediction}</td>
                         <td>${b.amount}</td>
-                        <td style="color: #ffdf00;">${b.win}</td>
+                        <td style="color: #ffdf00; font-weight: bold;">${b.win}</td>
                         <td>
-                            ${(isAdmin || b.player === currentUserPlayerName) ? `<button class="cancel-btn" onclick="cancelBet(${i})">Refund</button>` : `<span style="color:#555; font-size:0.8em;">Locked</span>`}
+                            ${(isAdmin || b.player === currentUserPlayerName) ? `<button class="cancel-btn" onclick="cancelBet(${i})">Refund</button>` : `<span style="color:#555; font-size:0.85em; font-weight: bold;">Locked</span>`}
                         </td>
                     </tr>`).join('');
             }
