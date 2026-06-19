@@ -427,10 +427,39 @@
         // --- NEW PIT BOSS POWERS ---
         window.downloadLog = () => {
             if (!isAdmin) return;
-            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(state, null, 2));
+            
+            let logContent = "========================================\n";
+            logContent += "  CASINO SKIPERINO - MASTER LEDGER LOG  \n";
+            logContent += "========================================\n";
+            logContent += "Date Exported: " + new Date().toLocaleString() + "\n\n";
+            
+            logContent += "--- CURRENT BALANCES & STREAKS ---\n";
+            const sortedPlayers = Object.keys(state.balances).sort((a, b) => state.balances[b] - state.balances[a]);
+            sortedPlayers.forEach(p => {
+                logContent += `${p.padEnd(15)} | ${state.balances[p].toFixed(2).padStart(8)} Coins | Streak: ${state.streaks[p]}\n`;
+            });
+            
+            logContent += "\n--- MATHEMATICAL HISTORY (BASE PROBABILITY) ---\n";
+            logContent += `Mondays:   ${state.history[1].daily}/${state.history[1].total} Dailies\n`;
+            logContent += `Tuesdays:  ${state.history[2].daily}/${state.history[2].total} Dailies\n`;
+            logContent += `Wednesdays:${state.history[3].daily}/${state.history[3].total} Dailies\n`;
+            logContent += `Thursdays: ${state.history[4].daily}/${state.history[4].total} Dailies\n`;
+            logContent += `Fridays:   ${state.history[5].daily}/${state.history[5].total} Dailies\n`;
+
+            logContent += "\n--- RECENT CHRONOLOGICAL HISTORY ---\n";
+            state.chronologicalHistory.forEach(h => {
+                logContent += `${h.date}: ${h.outcome}\n`;
+            });
+
+            logContent += "\n--- CURRENT SYSTEM STATE ---\n";
+            logContent += `Current SKIP Streak: ${state.skipStreak} days\n`;
+            logContent += `Current Locked Odds: DAILY [${state.currentOdds.daily}x] | SKIP [${state.currentOdds.skip}x]\n`;
+            logContent += "========================================\n";
+            
+            const dataStr = "data:text/plain;charset=utf-8," + encodeURIComponent(logContent);
             const downloadAnchorNode = document.createElement('a');
-            downloadAnchorNode.setAttribute("href",     dataStr);
-            downloadAnchorNode.setAttribute("download", "casino_skiperino_ledger.json");
+            downloadAnchorNode.setAttribute("href", dataStr);
+            downloadAnchorNode.setAttribute("download", "casino_skiperino_ledger.txt");
             document.body.appendChild(downloadAnchorNode);
             downloadAnchorNode.click();
             downloadAnchorNode.remove();
