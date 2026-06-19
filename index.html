@@ -17,10 +17,9 @@
             padding: 20px;
             position: relative;
             min-height: 100vh;
-            background-color: #1a0505; /* Deep mahogany red room */
+            background-color: #1a0505; 
         }
 
-        /* The Fading Charlie Kirk Layer - Warm/Sepia blend */
         body::before {
             content: "";
             position: fixed;
@@ -33,7 +32,6 @@
             z-index: -2;
         }
 
-        /* Dark Room Gradient Overlay */
         body::after {
             content: "";
             position: fixed;
@@ -43,7 +41,6 @@
             pointer-events: none; 
         }
 
-        /* --- TYPOGRAPHY & MARQUEE --- */
         h1, h2, h3 {
             font-family: 'Oswald', sans-serif;
             text-transform: uppercase;
@@ -51,17 +48,13 @@
             margin-top: 0;
         }
 
-        /* Vegas Sign Title */
         h1 {
             font-family: 'Playfair Display', serif;
             font-style: italic;
             color: #ffdf00;
             font-size: 4em;
             font-weight: 700;
-            text-shadow: 
-                2px 2px 0px #8b0000, 
-                4px 4px 0px #000, 
-                0 0 20px #ffdf00;
+            text-shadow: 2px 2px 0px #8b0000, 4px 4px 0px #000, 0 0 20px #ffdf00;
             margin-bottom: 5px;
             position: relative;
             z-index: 1;
@@ -89,9 +82,8 @@
 
         hr { border: 1px solid #d4af37; margin: 25px 0; opacity: 0.4; }
 
-        /* --- LAYOUT --- */
         .container {
-            display: none; /* Controlled by Auth */
+            display: none; 
             gap: 25px;
             max-width: 1300px;
             margin: 0 auto;
@@ -101,7 +93,6 @@
         .main-col { flex: 2.2; min-width: 0; }
         .side-col { flex: 1; min-width: 0; }
 
-        /* --- GREEN FELT TABLES (Cards) --- */
         .card {
             background: 
                 repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(0,0,0,0.05) 2px, rgba(0,0,0,0.05) 4px),
@@ -110,14 +101,10 @@
             border-radius: 15px; 
             margin-bottom: 25px;
             border: 4px solid #d4af37;
-            box-shadow: 
-                inset 0 0 30px rgba(0,0,0,0.8), 
-                0 10px 20px rgba(0,0,0,0.7),     
-                0 0 0 6px #3d1c00;              
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.8), 0 10px 20px rgba(0,0,0,0.7), 0 0 0 6px #3d1c00;              
             position: relative;
         }
 
-        /* --- PAST 5 RESULTS BADGES --- */
         .history-badge {
             display: inline-block;
             padding: 8px 15px;
@@ -133,32 +120,12 @@
             text-align: center;
             border: 2px solid #fff;
         }
-        .history-skip {
-            background: radial-gradient(circle, #ff3333 0%, #990000 100%);
-        }
-        .history-daily {
-            background: radial-gradient(circle, #33cc33 0%, #006600 100%);
-        }
-        .history-date {
-            font-size: 0.7em;
-            display: block;
-            color: #e0e0e0;
-            margin-top: 2px;
-            font-weight: normal;
-        }
+        .history-skip { background: radial-gradient(circle, #ff3333 0%, #990000 100%); }
+        .history-daily { background: radial-gradient(circle, #33cc33 0%, #006600 100%); }
+        .history-date { font-size: 0.7em; display: block; color: #e0e0e0; margin-top: 2px; font-weight: normal; }
 
-        /* --- TABLE STYLING --- */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-            font-size: 1em;
-        }
-        th, td {
-            padding: 12px;
-            text-align: center;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
-        }
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 1em; }
+        th, td { padding: 12px; text-align: center; border-bottom: 1px solid rgba(212, 175, 55, 0.3); }
         th {
             background-color: rgba(0, 0, 0, 0.4);
             color: #ffdf00;
@@ -171,36 +138,10 @@
         tr:nth-child(even) { background-color: rgba(0, 0, 0, 0.2); }
         tr:hover td { background-color: rgba(212, 175, 55, 0.1) !important; color: #ffdf00;}
 
-        /* --- FORMS & INPUTS --- */
-        label {
-            font-family: 'Oswald', sans-serif;
-            text-transform: uppercase;
-            color: #d4af37;
-            font-size: 0.9em;
-            display: block;
-            margin-bottom: 5px;
-            text-shadow: 1px 1px 2px #000;
-        }
-        input, select {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 20px;
-            box-sizing: border-box;
-            background-color: #041a0a;
-            color: #fff;
-            border: 2px solid #d4af37;
-            border-radius: 4px;
-            font-family: 'Roboto', sans-serif;
-            font-size: 1em;
-            box-shadow: inset 0 2px 5px #000;
-        }
-        input:focus, select:focus {
-            outline: none;
-            border-color: #ffdf00;
-            box-shadow: 0 0 10px rgba(255, 223, 0, 0.5);
-        }
+        label { font-family: 'Oswald', sans-serif; text-transform: uppercase; color: #d4af37; font-size: 0.9em; display: block; margin-bottom: 5px; text-shadow: 1px 1px 2px #000; }
+        input, select { width: 100%; padding: 12px; margin-bottom: 20px; box-sizing: border-box; background-color: #041a0a; color: #fff; border: 2px solid #d4af37; border-radius: 4px; font-family: 'Roboto', sans-serif; font-size: 1em; box-shadow: inset 0 2px 5px #000; }
+        input:focus, select:focus { outline: none; border-color: #ffdf00; box-shadow: 0 0 10px rgba(255, 223, 0, 0.5); }
 
-        /* --- CLASSIC 3D BLOCK BUTTONS --- */
         button {
             background: linear-gradient(to bottom, #ffea00, #b8860b);
             color: #2b0000;
@@ -219,142 +160,38 @@
         }
         button:hover { filter: brightness(1.1); transform: translateY(2px); box-shadow: 0 4px 0 #7a5905, 0 5px 5px rgba(0,0,0,0.5); }
         button:active { transform: translateY(6px); box-shadow: 0 0 0 #7a5905, 0 2px 2px rgba(0,0,0,0.5); }
+        button:disabled { background: #444; border-color: #666; color: #888; box-shadow: none; cursor: not-allowed; transform: none !important; filter: none !important; }
 
-        .dl-btn {
-            background: linear-gradient(to bottom, #292929, #000000);
-            color: #ffdf00;
-            border-color: #d4af37;
-            box-shadow: 0 6px 0 #000, 0 10px 10px rgba(0,0,0,0.5);
-            margin-top: 10px;
-            font-size: 0.9em;
-        }
+        .dl-btn { background: linear-gradient(to bottom, #292929, #000000); color: #ffdf00; border-color: #d4af37; box-shadow: 0 6px 0 #000, 0 10px 10px rgba(0,0,0,0.5); margin-top: 10px; font-size: 0.9em; }
         .dl-btn:hover { box-shadow: 0 4px 0 #000, 0 5px 5px rgba(0,0,0,0.5); }
-
-        .danger-btn {
-            background: linear-gradient(to bottom, #ff3333, #990000);
-            color: white;
-            border-color: #ffcccc;
-            box-shadow: 0 6px 0 #4d0000, 0 10px 10px rgba(0,0,0,0.5);
-            margin-top: 20px;
-            font-size: 0.9em;
-        }
+        .danger-btn { background: linear-gradient(to bottom, #ff3333, #990000); color: white; border-color: #ffcccc; box-shadow: 0 6px 0 #4d0000, 0 10px 10px rgba(0,0,0,0.5); margin-top: 20px; font-size: 0.9em; }
         .danger-btn:hover { box-shadow: 0 4px 0 #4d0000, 0 5px 5px rgba(0,0,0,0.5); }
 
-        .cancel-btn {
-            background: linear-gradient(to bottom, #ff3333, #990000);
-            color: white;
-            border: 1px solid #ffcccc;
-            border-radius: 4px;
-            padding: 5px 10px;
-            cursor: pointer;
-            font-size: 0.8em;
-            width: auto;
-            box-shadow: 0 2px 0 #4d0000;
-            margin: 0;
-            letter-spacing: 0.5px;
-        }
+        .cancel-btn { background: linear-gradient(to bottom, #ff3333, #990000); color: white; border: 1px solid #ffcccc; border-radius: 4px; padding: 5px 10px; cursor: pointer; font-size: 0.8em; width: auto; box-shadow: 0 2px 0 #4d0000; margin: 0; letter-spacing: 0.5px; }
         .cancel-btn:hover { filter: brightness(1.2); transform: translateY(1px); box-shadow: 0 1px 0 #4d0000; }
         .cancel-btn:active { transform: translateY(2px); box-shadow: none; }
 
-        /* --- SPECIFIC WIDGETS --- */
-        .header-subtitle {
-            text-align: center;
-            font-weight: bold;
-            font-size: 1.2em;
-            color: #d4af37;
-            margin-bottom: 30px;
-            text-shadow: 1px 1px 2px #000;
-            position: relative;
-            z-index: 1;
-        }
+        .header-subtitle { text-align: center; font-weight: bold; font-size: 1.2em; color: #d4af37; margin-bottom: 30px; text-shadow: 1px 1px 2px #000; position: relative; z-index: 1; }
+        .streak-counter { color: #fff; background: rgba(0, 0, 0, 0.6); padding: 10px 20px; border-radius: 20px; border: 1px solid #d4af37; display: inline-block; box-shadow: inset 0 0 10px #000; }
+        .streak-number { color: #ff3333; font-weight: bold; font-size: 1.2em; text-shadow: 0 0 10px #ff0000; }
 
-        .streak-counter {
-            color: #fff;
-            background: rgba(0, 0, 0, 0.6);
-            padding: 10px 20px;
-            border-radius: 20px;
-            border: 1px solid #d4af37;
-            display: inline-block;
-            box-shadow: inset 0 0 10px #000;
-            margin-bottom: 20px;
-        }
-        .streak-number {
-            color: #ff3333; 
-            font-weight: bold;
-            font-size: 1.2em;
-            text-shadow: 0 0 10px #ff0000;
-        }
+        .timer-banner { font-family: 'Oswald', sans-serif; font-size: 1.1em; color: #ffdf00; margin-top: 15px; text-transform: uppercase; letter-spacing: 1px; text-shadow: 1px 1px 2px #000; }
+        .lock-notice { color: #ff3333; font-weight: bold; font-size: 1.3em; display: block; margin-top: 15px; font-family: 'Oswald', sans-serif; text-transform: uppercase; text-shadow: 0 0 10px rgba(255,0,0,0.5); }
 
-        /* The Big Odds Display */
-        .odds-container {
-            display: flex;
-            gap: 15px;
-            justify-content: space-around;
-            margin-top: 20px;
-        }
-        .odds-box {
-            flex: 1;
-            background: radial-gradient(circle, #1a1a1a 0%, #000000 100%);
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            border: 2px solid #d4af37;
-            box-shadow: inset 0 0 15px rgba(212, 175, 55, 0.2), 0 5px 10px rgba(0,0,0,0.5);
-        }
-        .odds-label {
-            font-family: 'Oswald', sans-serif;
-            text-transform: uppercase;
-            font-size: 1em;
-            color: #d4af37;
-            margin-bottom: 10px;
-            letter-spacing: 1px;
-        }
-        .odds-value {
-            display: flex;
-            justify-content: center;
-            align-items: baseline;
-            color: #fff;
-            font-size: 3.5em;
-            font-weight: 700;
-            font-family: 'Oswald', sans-serif;
-            text-shadow: 2px 2px 0 #000, 0 0 15px rgba(255, 223, 0, 0.5);
-            line-height: 1;
-        }
+        .odds-container { display: flex; gap: 15px; justify-content: space-around; margin-top: 20px; }
+        .odds-box { flex: 1; background: radial-gradient(circle, #1a1a1a 0%, #000000 100%); padding: 20px; border-radius: 10px; text-align: center; border: 2px solid #d4af37; box-shadow: inset 0 0 15px rgba(212, 175, 55, 0.2), 0 5px 10px rgba(0,0,0,0.5); }
+        .odds-label { font-family: 'Oswald', sans-serif; text-transform: uppercase; font-size: 1em; color: #d4af37; margin-bottom: 10px; letter-spacing: 1px; }
+        .odds-value { display: flex; justify-content: center; align-items: baseline; color: #fff; font-size: 3.5em; font-weight: 700; font-family: 'Oswald', sans-serif; text-shadow: 2px 2px 0 #000, 0 0 15px rgba(255, 223, 0, 0.5); line-height: 1; }
         
-        .odds-input {
-            background: transparent;
-            border: none;
-            border-bottom: 2px dashed #d4af37;
-            color: #fff;
-            font-size: 1em;
-            font-weight: 700;
-            font-family: inherit;
-            text-shadow: inherit;
-            text-align: center;
-            width: 130px;
-            padding: 0;
-            margin: 0;
-            outline: none;
-            transition: all 0.2s;
-        }
-        .odds-input:focus {
-            border-bottom-color: #ffdf00;
-            background: rgba(255, 255, 255, 0.05);
-        }
-        .odds-input::-webkit-outer-spin-button,
-        .odds-input::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
-        .odds-input[type=number] {
-            -moz-appearance: textfield;
-        }
+        .odds-input { background: transparent; border: none; border-bottom: 2px dashed #d4af37; color: #fff; font-size: 1em; font-weight: 700; font-family: inherit; text-shadow: inherit; text-align: center; width: 130px; padding: 0; margin: 0; outline: none; transition: all 0.2s; }
+        .odds-input:focus { border-bottom-color: #ffdf00; background: rgba(255, 255, 255, 0.05); }
+        .odds-input::-webkit-outer-spin-button, .odds-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+        .odds-input[type=number] { -moz-appearance: textfield; }
         .odds-input[readonly] { border-bottom: none; }
         
         .odds-x { font-size: 0.5em; color: #ffdf00; margin-left: 5px; }
         .coin-icon { color: #ffdf00; margin-right: 5px; }
 
-        /* AUTH SUB-SYSTEM DISPLAYS */
         #loginOverlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: #0c0202; z-index: 999; display: flex; flex-direction: column; align-items: center; justify-content: center; }
         .login-box { background: radial-gradient(circle at center, #155e24 0%, #062b0f 100%); padding: 40px; border: 4px solid #caa43b; border-radius: 15px; width: 350px; text-align: center; box-shadow: inset 0 0 30px rgba(0,0,0,0.8), 0 10px 30px #000; }
         .auth-toggle { color: #fff; margin-top: 15px; cursor: pointer; text-decoration: underline; font-size: 0.9em; text-shadow: 1px 1px 2px #000;}
@@ -403,6 +240,8 @@
                         Current SKIP Streak: <span id="displayStreak" class="streak-number">0</span> days
                     </div>
                     
+                    <div id="timeLockBanner" class="timer-banner"></div>
+                    
                     <div class="odds-container">
                         <div class="odds-box">
                             <div class="odds-label">DAILY MEETING</div>
@@ -426,7 +265,7 @@
                     <div id="past5container"></div>
                 </div>
 
-                <div class="card">
+                <div class="card" id="bettingKioskCard">
                     <h3>🎲 Betting Kiosk</h3>
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
                         <div>
@@ -445,7 +284,7 @@
                         <option value="SKIP">MEETING IS SKIPPED</option>
                     </select>
 
-                    <button onclick="placeBet()">Place Bet on Felt</button>
+                    <button id="placeBetBtn" onclick="placeBet()">Place Bet on Felt</button>
                     <div id="betError" style="color: #ff3333; margin-top: 15px; text-align: center; font-weight: bold; text-shadow: 1px 1px 2px #000;"></div>
                 </div>
 
@@ -525,31 +364,33 @@
         let isAdmin = false;
         let isLoginMode = true;
         let state = null; 
+        let clockInterval = null;
 
+        // HIGH LIMIT SYSTEM SNAPSHOT INITIATION VALUES
         const initialState = {
-            balances: { "Shomara": 1058.50, "Nenad": 1037.00, "Sladja": 1006.00, "Cojkana": 851.00, "Milance": 845.50, "Danilo": 800.00, "OG": 750.90, "rat.cleaner": 700.00, "KOL": 600.00, "Markov": 549.00, "Shobibi": 300.00, "Skecmi": 0.00 },
-            streaks: { "Shomara": 1, "Nenad": 1, "Sladja": 2, "Cojkana": 0, "Milance": 0, "Danilo": 0, "OG": 0, "rat.cleaner": 0, "KOL": 0, "Markov": 0, "Shobibi": 0, "Skecmi": 0 }, 
-            currentDate: new Date(2026, 5, 19).getTime(), 
-            skipStreak: 0, 
+            balances: { "Milance": 1143.50, "Cojkana": 1096.00, "Shomara": 1058.50, "Nenad": 1037.00, "Sladja": 1006.00, "Danilo": 949.00, "rat.cleaner": 700.00, "OG": 600.90, "KOL": 600.00, "Markov": 549.00, "Shobibi": 300.00, "Skecmi": 0.00 },
+            streaks: { "Milance": 1, "Cojkana": 1, "Shomara": 1, "Nenad": 0, "Sladja": 0, "Danilo": 1, "rat.cleaner": 0, "OG": 0, "KOL": 0, "Markov": 0, "Shobibi": 0, "Skecmi": 0 }, 
+            currentDate: new Date(2026, 5, 22).getTime(), // Advanced to next target ledger operational frame (Monday, Jun 22)
+            skipStreak: 1, // Friday layout registered as SKIP
             bets: [],
-            currentOdds: { daily: "2.61", skip: "1.49" },
+            currentOdds: { daily: "1.29", skip: "3.60" },
             history: { 
                 1: { total: 11, daily: 7 }, 
                 2: { total: 11, daily: 7 }, 
                 3: { total: 12, daily: 11 }, 
                 4: { total: 12, daily: 7 }, 
-                5: { total: 11, daily: 4 } 
+                5: { total: 12, daily: 4 } // Adjusted totals to log 19th as skip
             },
             chronologicalHistory: [ 
-                { date: "Fri, 12 Jun", outcome: "SKIP" }, 
                 { date: "Mon, 15 Jun", outcome: "DAILY" }, 
                 { date: "Tue, 16 Jun", outcome: "SKIP" }, 
                 { date: "Wed, 17 Jun", outcome: "DAILY" },
-                { date: "Thu, 18 Jun", outcome: "DAILY" } 
+                { date: "Thu, 18 Jun", outcome: "DAILY" },
+                { date: "Fri, 19 Jun", outcome: "SKIP" }
             ]
         };
 
-        // UI Setup
+        // Dropdown populate
         const authPlayerSelect = document.getElementById('authPlayerName');
         const betSelect = document.getElementById('betPlayer');
         const adjSelect = document.getElementById('adjPlayer');
@@ -590,19 +431,17 @@
 
         window.logOut = () => {
             signOut(auth).then(() => {
-                // Clear state variables
                 currentUser = null;
                 currentUserPlayerName = null;
                 isAdmin = false;
                 state = null;
+                if(clockInterval) clearInterval(clockInterval);
                 
-                // Nuke and hide the panels instantly
                 document.getElementById('pitbossPanel').style.display = "none";
                 document.getElementById('quotaDaily').setAttribute('readonly', 'true');
                 document.getElementById('quotaSkip').setAttribute('readonly', 'true');
                 document.getElementById('betPlayer').disabled = true;
                 
-                // Force layout shift back to entry gateway
                 document.getElementById('loginOverlay').style.display = "flex";
                 document.querySelector('.login-box').style.display = "block";
                 document.getElementById('syncingText').style.display = "none";
@@ -657,6 +496,9 @@
                 }
                 document.getElementById('loginOverlay').style.display = "none";
                 document.getElementById('appContainer').style.display = "flex";
+                
+                if(clockInterval) clearInterval(clockInterval);
+                clockInterval = setInterval(renderAll, 1000);
                 renderAll();
             });
         }
@@ -665,7 +507,38 @@
             await setDoc(doc(db, "casino", "state"), state);
         }
 
+        function isFeltLocked() {
+            if (!state) return true;
+            
+            const currentGlobalTime = new Date();
+            const belgradeStr = currentGlobalTime.toLocaleString("en-US", {timeZone: "Europe/Belgrade"});
+            const belgradeTime = new Date(belgradeStr);
+            
+            const ledgerDay = new Date(state.currentDate);
+            
+            const isTargetDayOrLater = (
+                belgradeTime.getFullYear() > ledgerDay.getFullYear() ||
+                (belgradeTime.getFullYear() === ledgerDay.getFullYear() && belgradeTime.getMonth() > ledgerDay.getMonth()) ||
+                (belgradeTime.getFullYear() === ledgerDay.getFullYear() && belgradeTime.getMonth() === ledgerDay.getMonth() && belgradeTime.getDate() >= ledgerDay.getDate())
+            );
+
+            if (isTargetDayOrLater) {
+                if (belgradeTime.getDate() === ledgerDay.getDate()) {
+                    const currentMinutesSinceMidnight = (belgradeTime.getHours() * 60) + belgradeTime.getMinutes();
+                    const lockMinutesSinceMidnight = (8 * 60) + 45; 
+                    if (currentMinutesSinceMidnight >= lockMinutesSinceMidnight) {
+                        return true;
+                    }
+                } else {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         window.placeBet = async () => {
+            if (isFeltLocked()) return alert("The felt is locked for today. No bets accepted.");
+            
             const player = isAdmin ? document.getElementById('betPlayer').value : currentUserPlayerName;
             const prediction = document.getElementById('betPrediction').value;
             const amount = parseFloat(document.getElementById('betAmount').value);
@@ -693,6 +566,7 @@
         };
 
         window.cancelBet = async (index) => {
+            if (isFeltLocked() && !isAdmin) return alert("Felt is locked down. Cancellations denied.");
             const bet = state.bets[index];
             if (!isAdmin && bet.player !== currentUserPlayerName) return alert("Security Violation.");
             if(confirm(`Refund ${bet.amount} coins back to ${bet.player}?`)) {
@@ -830,6 +704,29 @@
             document.getElementById('displayDate').innerText = "📅 " + d.toLocaleDateString('en-GB', { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' });
             document.getElementById('displayStreak').innerText = state.skipStreak;
             
+            const banner = document.getElementById('timeLockBanner');
+            const placeBtn = document.getElementById('placeBetBtn');
+            const locked = isFeltLocked();
+
+            if (locked) {
+                banner.innerHTML = `<span class="lock-notice">🚨 FELT LOCKED (Bets Closed at 8:45 AM Belgrade Time)</span>`;
+                placeBtn.disabled = true;
+                placeBtn.innerText = "FELT LOCKED";
+            } else {
+                const bNow = new Date(new Date().toLocaleString("en-US", {timeZone: "Europe/Belgrade"}));
+                const bTarget = new Date(bNow.getFullYear(), bNow.getMonth(), bNow.getDate(), 8, 45, 0);
+                let diff = bTarget - bNow;
+                if (diff < 0) diff = 0;
+
+                const hours = Math.floor(diff / (1000 * 60 * 60));
+                const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const secs = Math.floor((diff % (1000 * 60)) / 1000);
+                
+                banner.innerHTML = `⏳ Time remaining until Lock: <strong>${hours.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}</strong>`;
+                placeBtn.disabled = false;
+                placeBtn.innerText = "Place Bet on Felt";
+            }
+            
             if(document.activeElement !== document.getElementById('quotaDaily')) document.getElementById('quotaDaily').value = state.currentOdds.daily;
             if(document.activeElement !== document.getElementById('quotaSkip')) document.getElementById('quotaSkip').value = state.currentOdds.skip;
 
@@ -864,7 +761,7 @@
                         <td>${b.amount}</td>
                         <td>${b.win}</td>
                         <td>
-                            ${(isAdmin || b.player === currentUserPlayerName) ? `<button class="cancel-btn" onclick="cancelBet(${index})">Refund</button>` : `<span style="color:rgba(255,255,255,0.4); font-size:0.85em;">Locked</span>`}
+                            ${(isAdmin || (b.player === currentUserPlayerName && !locked)) ? `<button class="cancel-btn" onclick="cancelBet(${index})">Refund</button>` : `<span style="color:rgba(255,255,255,0.4); font-size:0.85em;">Locked</span>`}
                         </td>
                     </tr>`).join('');
             }
