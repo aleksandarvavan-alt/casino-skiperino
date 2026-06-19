@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casino Skiperino - Live Syndicate</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Playfair+Display:ital,wght@0,700;1,700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- DARK SURREALISM / Elite Horror DESIGN --- */
+        body {
+            color: #ddd; font-family: 'Montserrat', sans-serif; margin: 0; padding: 20px;
+            min-height: 100vh; background-color: #0d0d0d;
+            background-image: radial-gradient(circle at center, #1a080a 0%, #080808 100%);
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: ""; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Charlie_Kirk_by_Gage_Skidmore_2.jpg/800px-Charlie_Kirk_by_Gage_Skidmore_2.jpg');
+            background-size: cover; background-position: center 20%;
+            z-index: -2; opacity: 0.1; filter: sepia(0.8) hue-rotate(-20deg); pointer-events: none;
+        }
+
+        h1, h2, h3 { font-family: 'Oswald', sans-serif; text-transform: uppercase; text-align: center; margin-top: 0; }
+
+        h1 {
+            font-family: 'Playfair Display', serif; font-style: italic; color: #d4af37;
+            font-size: 4em; font-weight: 700; text-shadow: 2px 2px 0px #3d0000, 4px 4px 0px #000, 0 0 30px rgba(212, 175, 55, 0.4);
+            margin-bottom: 5px; letter-spacing: 2px;
+        }
+        h1::before, h1::after { content: '♦ ♣ ♥ ♠'; font-size: 0.3em; color: #8b0000; text-shadow: 0 0 10px #ff0000, 1px 1px 0 #000; vertical-align: middle; margin: 0 15px; font-style: normal; }
+
+        h3 { color: #d4af37; font-size: 1.6em; border-bottom: 1px solid #4a3c18; padding-bottom: 10px; margin-bottom: 20px; letter-spacing: 2px; }
+        hr { border: 1px solid #3d0000; margin: 25px 0; opacity: 0.8; }
+
+        .container { display: none; gap: 25px; max-width: 1300px; margin: 0 auto; position: relative; z-index: 1; }
+        .main-col { flex: 2.2; min-width: 0; }
+        .side-col { flex: 1; min-width: 0; }
+
+        .card {
+            background: linear-gradient(145deg, #111 0%, #050505 100%); padding: 25px; border-radius: 8px; 
+            margin-bottom: 25px; border: 1px solid #33270f; box-shadow: inset 0 0 20px rgba(0,0,0,1), 0 15px 30px rgba(0,0,0,0.9), 0 0 0 2px #1a1a1a; position: relative;
+        }
+        .card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, #d4af37, transparent); opacity: 0.5; }
+
+        .history-badge { display: inline-block; padding: 8px 15px; margin: 5px; border-radius: 3px; font-family: 'Oswald', sans-serif; font-weight: 700; text-transform: uppercase; color: #fff; box-shadow: 0 4px 6px rgba(0,0,0,0.8); font-size: 1.1em; min-width: 80px; text-align: center; border: 1px solid rgba(255,255,255,0.1); }
+        .history-skip { background: linear-gradient(180deg, #660000 0%, #2b0000 100%); border-bottom: 2px solid #ff3333; }
+        .history-daily { background: linear-gradient(180deg, #004d00 0%, #001a00 100%); border-bottom: 2px solid #33cc33; }
+        .history-date { font-size: 0.7em; display: block; color: #888; margin-top: 4px; font-family: 'Montserrat', sans-serif; }
+
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 1em; }
+        th, td { padding: 12px; text-align: center; border-bottom: 1px solid rgba(212, 175, 55, 0.1); }
+        th { color: #888; font-family: 'Oswald', sans-serif; text-transform: uppercase; letter-spacing: 2px; border-bottom: 1px solid #d4af37; }
+        tr:nth-child(even) { background-color: rgba(255, 255, 255, 0.02); }
+
+        label { font-family: 'Oswald', sans-serif; text-transform: uppercase; color: #888; font-size: 0.9em; display: block; margin-bottom: 5px; letter-spacing: 1px; }
+        input, select { width: 100%; padding: 12px; margin-bottom: 20px; box-sizing: border-box; background-color: #000; color: #d4af37; border: 1px solid #33270f; border-radius: 4px; font-family: 'Montserrat', sans-serif; font-size: 1em; }
+        input:focus, select:focus { outline: none; border-color: #d4af37; }
+
+        button { background: linear-gradient(180deg, #d4af37 0%, #8b6508 100%); color: #000; font-family: 'Oswald', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; border: 1px solid #ffdf00; border-radius: 4px; padding: 15px 20px; cursor: pointer; width: 100%; font-size: 1.2em; transition: all 0.2s ease; }
+        button:hover { filter: brightness(1.2); }
+        
+        .dl-btn { background: linear-gradient(180deg, #222 0%, #000 100%); color: #888; border-color: #333; margin-top: 10px; font-size: 0.9em; }
+        .danger-btn { background: linear-gradient(180deg, #4d0000 0%, #1a0000 100%); color: #ff4d4d; border-color: #660000; margin-top: 20px; font-size: 0.9em; }
+        .cancel-btn { background: transparent; color: #888; border: 1px solid #444; border-radius: 3px; padding: 5px 10px; font-size: 0.8em; width: auto; }
+
+        .header-subtitle { text-align: center; font-family: 'Oswald', sans-serif; text-transform: uppercase; letter-spacing: 5px; font-size: 1.1em; color: #888; margin-bottom: 30px; position: relative; z-index: 1; }
+        .streak-counter { color: #888; background: #000; padding: 10px 20px; border-radius: 4px; border: 1px solid #33270f; display: inline-block; font-family: 'Oswald', sans-serif; }
+        .streak-number { color: #d4af37; font-weight: bold; font-size: 1.2em; }
+
+        .odds-container { display: flex; gap: 15px; justify-content: space-around; margin-top: 20px; }
+        .odds-box { flex: 1; background: #000; padding: 20px; border-radius: 6px; text-align: center; border: 1px solid #222; }
+        .odds-label { font-family: 'Oswald', sans-serif; font-size: 1em; color: #555; margin-bottom: 10px; letter-spacing: 2px; }
+        .odds-value { display: flex; justify-content: center; align-items: baseline; color: #d4af37; font-size: 3.5em; font-weight: 700; font-family: 'Oswald', sans-serif; }
+        
+        .odds-input { background: transparent; border: none; border-bottom: 1px solid #33270f; color: #d4af37; font-size: 1em; font-weight: 700; font-family: inherit; text-align: center; width: 130px; outline: none; }
+        .odds-input[readonly] { border-bottom: none; }
+        .odds-x { font-size: 0.5em; color: #666; margin-left: 5px; }
+
+        /* LOGIN OVERLAY */
+        #loginOverlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: #0a0a0a; z-index: 999; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .login-box { background: #111; padding: 40px; border: 1px solid #d4af37; border-radius: 8px; width: 350px; text-align: center; box-shadow: 0 0 50px rgba(212, 175, 55, 0.1); }
+        .auth-toggle { color: #888; margin-top: 15px; cursor: pointer; text-decoration: underline; font-size: 0.9em; }
+        
+        #pitbossPanel { display: none; }
+        .loading-text { color: #d4af37; font-family: 'Oswald', sans-serif; font-size: 1.5em; display: none; }
+    </style>
+</head>
+<body>
+
+    <div id="loginOverlay">
+        <h1 style="font-size: 3em; margin-bottom: 30px;">Casino Skiperino</h1>
+        <div class="login-box">
+            <h3 id="authTitle" style="border:none; margin-bottom: 5px;">Enter The Vault</h3>
+            <p style="color: #666; margin-bottom: 20px; font-size: 0.9em;">Authorized personnel only.</p>
+            
+            <input type="email" id="authEmail" placeholder="Email Address">
+            <input type="password" id="authPassword" placeholder="Password">
+            
+            <div id="registerFields" style="display: none;">
+                <label>Select Operative Identity:</label>
+                <select id="authPlayerName"></select>
+            </div>
+
+            <button id="authBtn" onclick="handleAuth()">Login</button>
+            <div class="auth-toggle" id="authToggleBtn" onclick="toggleAuthMode()">Need an account? Register here.</div>
+            <div id="authError" style="color: #ff3333; margin-top: 15px; font-size: 0.9em;"></div>
+        </div>
+        <div class="loading-text" id="syncingText">Syncing with Syndicate Database...</div>
+    </div>
+
+    <div id="mainDashboard">
+        <h1 style="margin-top: 20px;">Casino Skiperino</h1>
+        <div class="header-subtitle">Elite Syndicate Lounge <span id="currentUserLabel" style="color:#d4af37;"></span></div>
+        
+        <div class="container" id="appContainer">
+            <div class="main-col">
+                <div class="card" style="text-align: center;">
+                    <h3 id="displayDate" style="border: none;">📅 Date: Syncing...</h3>
+                    <div class="streak-counter">
+                        Current SKIP Streak: <span id="displayStreak" class="streak-number">0</span> days
+                    </div>
+                    
+                    <div class="odds-container">
+                        <div class="odds-box">
+                            <div class="odds-label">DAILY MEETING</div>
+                            <div class="odds-value">
+                                <input type="number" id="quotaDaily" class="odds-input" step="0.01" readonly>
+                                <span class="odds-x">x</span>
+                            </div>
+                        </div>
+                        <div class="odds-box">
+                            <div class="odds-label">NO MEETING (SKIP)</div>
+                            <div class="odds-value">
+                                <input type="number" id="quotaSkip" class="odds-input" step="0.01" readonly>
+                                <span class="odds-x">x</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="text-align: center; padding: 15px;">
+                    <h3 style="font-size: 1.2em; border: none; margin-bottom: 15px; color: #888;">⏪ Past 5 Days Trend</h3>
+                    <div id="past5container"></div>
+                </div>
+
+                <div class="card">
+                    <h3>🎲 Betting Kiosk</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <div>
+                            <label>Select Player:</label>
+                            <select id="betPlayer" disabled></select>
+                        </div>
+                        <div>
+                            <label>Bet Amount (Cojke Coins):</label>
+                            <input type="number" id="betAmount" min="1" step="10" placeholder="Min 10">
+                        </div>
+                    </div>
+
+                    <label>Prediction:</label>
+                    <select id="betPrediction">
+                        <option value="DAILY">DAILY MEETING HAPPENS</option>
+                        <option value="SKIP">MEETING IS SKIPPED</option>
+                    </select>
+
+                    <button onclick="placeBet()">Place Bet on Felt</button>
+                    <div id="betError" style="color: #ff3333; margin-top: 15px; text-align: center;"></div>
+                </div>
+
+                <div class="card">
+                    <h3>🎟️ Active Bets Slip</h3>
+                    <table id="betsTable">
+                        <thead>
+                            <tr><th>Player</th><th>Prediction</th><th>Amount</th><th>Win</th><th>Action</th></tr>
+                        </thead>
+                        <tbody id="betsTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="side-col">
+                <div class="card">
+                    <h3>🏆 Leaderboard</h3>
+                    <table>
+                        <thead>
+                            <tr><th>Rank</th><th>Player</th><th>Coins</th><th>Streak</th></tr>
+                        </thead>
+                        <tbody id="leaderboardBody"></tbody>
+                    </table>
+                </div>
+
+                <div class="card" id="pitbossPanel">
+                    <h3 style="color: #ff3333;">🛠️ Pit Boss Panel</h3>
+                    <label>Input Today's Outcome:</label>
+                    <select id="actualOutcome">
+                        <option value="DAILY">DAILY MEETING (Happened)</option>
+                        <option value="SKIP">SKIP (Didn't happen)</option>
+                    </select>
+                    <button onclick="resolveDay()" style="background: #4d0000; color:#fff; border-color:#ff3333;">Pay Out & Settle</button>
+                    
+                    <hr>
+                    <label>Manual Coin Adjustment</label>
+                    <select id="adjPlayer"></select>
+                    <input type="number" id="adjAmount" placeholder="e.g. 500 or -500">
+                    <button onclick="adjustCoins()" style="background: #222; color: #888; border-color: #444;">Force Balance</button>
+                    
+                    <hr>
+                    <button class="dl-btn" onclick="saveOdds()">💾 Force Save Custom Odds</button>
+                </div>
+                <button class="cancel-btn" style="margin-top:20px; width:100%;" onclick="logOut()">Sign Out</button>
+            </div>
+        </div>
+        <div style="text-align: center; color: #555; font-size: 0.85em; padding: 30px 0;">
+            Casino Skiperino © 2026. Play irresponsibly. Property of Charlie Kirk.
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+        import { getFirestore, doc, getDoc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+
+        // YOUR EXACT FIREBASE CONFIG
+        const firebaseConfig = {
+          apiKey: "AIzaSyDJ0X8xHF8ys_JeiQiQs5ZP-8fcHFaNCHQ",
+          authDomain: "casino-skiperino.firebaseapp.com",
+          projectId: "casino-skiperino",
+          storageBucket: "casino-skiperino.firebasestorage.app",
+          messagingSenderId: "1045828543981",
+          appId: "1:1045828543981:web:40cf0bdd8270fee6fff3e4",
+          measurementId: "G-NS2D4EXZLL"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        // --- CORE SYSTEM VARIABLES ---
+        const ADMIN_EMAIL = "pitboss@skiperino.com"; // REGISTER WITH THIS FOR ADMIN POWERS
+        const playersList = ["Shomara", "Nenad", "Sladja", "Cojkana", "Milance", "Danilo", "OG", "rat.cleaner", "KOL", "Markov", "Shobibi", "Skecmi"];
+        
+        let currentUser = null;
+        let currentUserPlayerName = null;
+        let isAdmin = false;
+        let isLoginMode = true;
+        let state = null; 
+
+        // Hardcoded Baseline Data (Pushed on first admin login)
+        const initialState = {
+            balances: { "Shomara": 1058.50, "Nenad": 1037.00, "Sladja": 1006.00, "Cojkana": 851.00, "Milance": 845.50, "Danilo": 800.00, "OG": 750.90, "rat.cleaner": 700.00, "KOL": 600.00, "Markov": 549.00, "Shobibi": 300.00, "Skecmi": 0.00 },
+            streaks: { "Shomara": 1, "Nenad": 1, "Sladja": 2, "Cojkana": 0, "Milance": 0, "Danilo": 0, "OG": 0, "rat.cleaner": 0, "KOL": 0, "Markov": 0, "Shobibi": 0, "Skecmi": 0 }, 
+            currentDate: new Date(2026, 5, 19).getTime(), 
+            skipStreak: 0, 
+            bets: [],
+            currentOdds: { daily: "2.61", skip: "1.49" },
+            history: { 1: { total: 10, daily: 6 }, 2: { total: 10, daily: 7 }, 3: { total: 11, daily: 10 }, 4: { total: 11, daily: 6 }, 5: { total: 11, daily: 4 } },
+            chronologicalHistory: [ { date: "Mon, 15 Jun", outcome: "DAILY" }, { date: "Tue, 16 Jun", outcome: "SKIP" }, { date: "Wed, 17 Jun", outcome: "DAILY" }, { date: "Thu, 18 Jun", outcome: "DAILY" } ]
+        };
+
+        // --- INIT UI ---
+        const authPlayerSelect = document.getElementById('authPlayerName');
+        const betSelect = document.getElementById('betPlayer');
+        const adjSelect = document.getElementById('adjPlayer');
+        playersList.forEach(p => {
+            authPlayerSelect.add(new Option(p, p));
+            betSelect.add(new Option(p, p));
+            adjSelect.add(new Option(p, p));
+        });
+
+        // --- AUTHENTICATION LOGIC ---
+        window.toggleAuthMode = () => {
+            isLoginMode = !isLoginMode;
+            document.getElementById('authTitle').innerText = isLoginMode ? "Enter The Vault" : "Register Operative";
+            document.getElementById('authBtn').innerText = isLoginMode ? "Login" : "Register";
+            document.getElementById('authToggleBtn').innerText = isLoginMode ? "Need an account? Register here." : "Already have clearance? Login.";
+            document.getElementById('registerFields').style.display = isLoginMode ? "none" : "block";
+            document.getElementById('authError').innerText = "";
+        };
+
+        window.handleAuth = async () => {
+            const email = document.getElementById('authEmail').value;
+            const password = document.getElementById('authPassword').value;
+            const errorDiv = document.getElementById('authError');
+            errorDiv.innerText = "";
+
+            try {
+                if (isLoginMode) {
+                    await signInWithEmailAndPassword(auth, email, password);
+                } else {
+                    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                    if (email !== ADMIN_EMAIL) {
+                        const pName = document.getElementById('authPlayerName').value;
+                        await setDoc(doc(db, "users", userCredential.user.uid), { playerName: pName });
+                    }
+                }
+            } catch (error) {
+                errorDiv.innerText = error.message;
+            }
+        };
+
+        window.logOut = () => signOut(auth);
+
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                currentUser = user;
+                isAdmin = (user.email === ADMIN_EMAIL);
+                
+                document.querySelector('.login-box').style.display = "none";
+                document.getElementById('syncingText').style.display = "block";
+
+                if (!isAdmin) {
+                    const userDoc = await getDoc(doc(db, "users", user.uid));
+                    currentUserPlayerName = userDoc.exists() ? userDoc.data().playerName : "Unknown";
+                    document.getElementById('currentUserLabel').innerText = `[ Operative: ${currentUserPlayerName} ]`;
+                    document.getElementById('betPlayer').value = currentUserPlayerName;
+                } else {
+                    document.getElementById('currentUserLabel').innerText = `[ PIT BOSS MODE ]`;
+                    document.getElementById('pitbossPanel').style.display = "block";
+                    document.getElementById('betPlayer').disabled = false; 
+                    document.getElementById('quotaDaily').removeAttribute('readonly'); 
+                    document.getElementById('quotaSkip').removeAttribute('readonly');
+                }
+
+                startDatabaseSync();
+
+            } else {
+                currentUser = null;
+                document.getElementById('loginOverlay').style.display = "flex";
+                document.querySelector('.login-box').style.display = "block";
+                document.getElementById('syncingText').style.display = "none";
+                document.getElementById('appContainer').style.display = "none";
+            }
+        });
+
+        // --- DATABASE LOGIC ---
+        function startDatabaseSync() {
+            const stateRef = doc(db, "casino", "state");
+            
+            onSnapshot(stateRef, async (docSnap) => {
+                if (!docSnap.exists()) {
+                    if (isAdmin) {
+                        await setDoc(stateRef, initialState);
+                        state = initialState;
+                    } else {
+                        alert("The Pit Boss has not initialized the casino yet.");
+                        return;
+                    }
+                } else {
+                    state = docSnap.data();
+                }
+
+                document.getElementById('loginOverlay').style.display = "none";
+                document.getElementById('appContainer').style.display = "flex";
+                renderAll();
+            });
+        }
+
+        async function pushStateToCloud() {
+            await setDoc(doc(db, "casino", "state"), state);
+        }
+
+        // --- GAME MECHANICS ---
+        window.placeBet = async () => {
+            const player = isAdmin ? document.getElementById('betPlayer').value : currentUserPlayerName;
+            const prediction = document.getElementById('betPrediction').value;
+            const amount = parseFloat(document.getElementById('betAmount').value);
+            const errorDiv = document.getElementById('betError');
+
+            if (isNaN(amount) || amount <= 0) return errorDiv.innerText = "Invalid amount.";
+            if (state.balances[player] < amount) return errorDiv.innerText = "Insufficient Cojke Coins.";
+
+            errorDiv.innerText = "";
+            state.balances[player] -= amount;
+            
+            const qDaily = parseFloat(state.currentOdds.daily) || 0;
+            const qSkip = parseFloat(state.currentOdds.skip) || 0;
+            const multiplier = prediction === "DAILY" ? qDaily : qSkip;
+            
+            state.bets.push({
+                player: player,
+                prediction: prediction,
+                amount: amount,
+                win: parseFloat((amount * multiplier).toFixed(2))
+            });
+
+            document.getElementById('betAmount').value = ""; 
+            await pushStateToCloud();
+        };
+
+        window.cancelBet = async (index) => {
+            const bet = state.bets[index];
+            if (!isAdmin && bet.player !== currentUserPlayerName) return alert("You cannot refund someone else's bet.");
+            
+            if(confirm(`Refund ${bet.amount} coins back to ${bet.player}?`)) {
+                state.balances[bet.player] += bet.amount; 
+                state.bets.splice(index, 1); 
+                await pushStateToCloud();
+            }
+        };
+
+        // ADMIN ONLY FUNCTIONS
+        window.resolveDay = async () => {
+            if (!isAdmin) return;
+            const actual = document.getElementById('actualOutcome').value;
+            
+            let playersWhoBet = {};
+            state.bets.forEach(bet => {
+                if (!playersWhoBet[bet.player]) playersWhoBet[bet.player] = { won: false, lost: false };
+                if (bet.prediction === actual) {
+                    state.balances[bet.player] += bet.win;
+                    playersWhoBet[bet.player].won = true;
+                } else {
+                    playersWhoBet[bet.player].lost = true;
+                }
+            });
+
+            for (const player in playersWhoBet) {
+                if (playersWhoBet[player].lost) state.streaks[player] = 0;
+                else if (playersWhoBet[player].won) state.streaks[player] += 1;
+            }
+
+            state.bets = []; 
+            const dateObj = new Date(state.currentDate);
+            const dayOfWeek = dateObj.getDay();
+            
+            if (state.history[dayOfWeek]) {
+                state.history[dayOfWeek].total += 1;
+                if (actual === "DAILY") state.history[dayOfWeek].daily += 1;
+            }
+
+            const dateStr = dateObj.toLocaleDateString('en-GB', { weekday: 'short', day: '2-digit', month: 'short' });
+            state.chronologicalHistory.push({ date: dateStr, outcome: actual });
+
+            state.skipStreak = actual === "SKIP" ? state.skipStreak + 1 : 0;
+
+            let d = new Date(state.currentDate);
+            d.setDate(d.getDate() + 1);
+            if (d.getDay() === 6) d.setDate(d.getDate() + 2); 
+            state.currentDate = d.getTime();
+
+            // Recalculate odds
+            let baseProb = state.history[d.getDay()] ? (state.history[d.getDay()].daily / state.history[d.getDay()].total) : 0.50;
+            let p_daily = Math.max(0.05, Math.min(baseProb + (state.skipStreak * 0.10), 0.95));
+            state.currentOdds.daily = (0.95 / p_daily).toFixed(2);
+            state.currentOdds.skip = (0.95 / (1.0 - p_daily)).toFixed(2);
+
+            await pushStateToCloud();
+        };
+
+        window.adjustCoins = async () => {
+            if (!isAdmin) return;
+            const player = document.getElementById('adjPlayer').value;
+            const amount = parseFloat(document.getElementById('adjAmount').value);
+            if (!isNaN(amount)) {
+                state.balances[player] += amount;
+                document.getElementById('adjAmount').value = "";
+                await pushStateToCloud();
+            }
+        };
+
+        window.saveOdds = async () => {
+            if (!isAdmin) return;
+            state.currentOdds.daily = document.getElementById('quotaDaily').value;
+            state.currentOdds.skip = document.getElementById('quotaSkip').value;
+            await pushStateToCloud();
+            alert("Custom Odds Locked In.");
+        }
+
+        // --- RENDER ENGINE ---
+        function renderAll() {
+            if(!state) return;
+            
+            const last5 = state.chronologicalHistory.slice(-5);
+            document.getElementById('past5container').innerHTML = last5.map(item => 
+                `<div class="history-badge ${item.outcome === 'SKIP' ? 'history-skip' : 'history-daily'}">${item.outcome}<span class="history-date">${item.date}</span></div>`
+            ).join('');
+            
+            const d = new Date(state.currentDate);
+            document.getElementById('displayDate').innerText = "📅 " + d.toLocaleDateString('en-GB', { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' });
+            document.getElementById('displayStreak').innerText = state.skipStreak;
+            
+            if(!isAdmin) {
+                document.getElementById('quotaDaily').value = state.currentOdds.daily;
+                document.getElementById('quotaSkip').value = state.currentOdds.skip;
+            }
+
+            const sortedPlayers = Object.keys(state.balances).sort((a, b) => state.balances[b] - state.balances[a]);
+            document.getElementById('leaderboardBody').innerHTML = sortedPlayers.map((p, i) => `
+                <tr>
+                    <td>${i === 0 ? "👑 1" : i + 1}</td>
+                    <td>${p}</td>
+                    <td><span class="coin-icon">🪙</span>${state.balances[p].toFixed(2)}</td>
+                    <td style="color: ${state.streaks[p] > 0 ? '#d4af37' : '#555'}; font-weight: bold;">${state.streaks[p] >= 3 ? '🔥 ' + state.streaks[p] : state.streaks[p] || 0}</td>
+                </tr>`).join('');
+
+            const tbodyB = document.getElementById('betsTableBody');
+            if (state.bets.length === 0) {
+                tbodyB.innerHTML = `<tr><td colspan="5" style="color: #444; padding: 20px;">No chips on the felt.</td></tr>`;
+            } else {
+                tbodyB.innerHTML = state.bets.map((b, i) => `
+                    <tr>
+                        <td>${b.player}</td>
+                        <td style="color: ${b.prediction === 'DAILY' ? '#4a824a' : '#8a3c3c'}; font-weight: bold;">${b.prediction}</td>
+                        <td>${b.amount}</td>
+                        <td style="color: #d4af37;">${b.win}</td>
+                        <td>
+                            ${(isAdmin || b.player === currentUserPlayerName) ? `<button class="cancel-btn" onclick="cancelBet(${i})">Refund</button>` : `<span style="color:#444; font-size:0.8em;">Locked</span>`}
+                        </td>
+                    </tr>`).join('');
+            }
+        }
+    </script>
+</body>
+</html>
