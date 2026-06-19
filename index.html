@@ -588,7 +588,27 @@
             }
         };
 
-        window.logOut = () => signOut(auth);
+        window.logOut = () => {
+            signOut(auth).then(() => {
+                // Clear state variables
+                currentUser = null;
+                currentUserPlayerName = null;
+                isAdmin = false;
+                state = null;
+                
+                // Nuke and hide the panels instantly
+                document.getElementById('pitbossPanel').style.display = "none";
+                document.getElementById('quotaDaily').setAttribute('readonly', 'true');
+                document.getElementById('quotaSkip').setAttribute('readonly', 'true');
+                document.getElementById('betPlayer').disabled = true;
+                
+                // Force layout shift back to entry gateway
+                document.getElementById('loginOverlay').style.display = "flex";
+                document.querySelector('.login-box').style.display = "block";
+                document.getElementById('syncingText').style.display = "none";
+                document.getElementById('appContainer').style.display = "none";
+            });
+        };
 
         onAuthStateChanged(auth, async (user) => {
             if (user) {
