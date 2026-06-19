@@ -76,7 +76,21 @@
         .odds-label { font-family: 'Oswald', sans-serif; font-size: 1em; color: #555; margin-bottom: 10px; letter-spacing: 2px; }
         .odds-value { display: flex; justify-content: center; align-items: baseline; color: #d4af37; font-size: 3.5em; font-weight: 700; font-family: 'Oswald', sans-serif; }
         
-        .odds-input { background: transparent; border: none; border-bottom: 1px solid #33270f; color: #d4af37; font-size: 1em; font-weight: 700; font-family: inherit; text-align: center; width: 130px; outline: none; }
+        /* CLEAN ODDS INPUT CSS */
+        .odds-input { 
+            background: transparent; border: none; border-bottom: 1px solid #33270f; 
+            color: #d4af37; font-size: 1em; font-weight: 700; font-family: inherit; 
+            text-align: center; width: 140px; outline: none; 
+            padding: 0; line-height: 1.2; height: 1.2em;
+        }
+        .odds-input::-webkit-outer-spin-button,
+        .odds-input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        .odds-input[type=number] {
+            -moz-appearance: textfield;
+        }
         .odds-input[readonly] { border-bottom: none; }
         .odds-x { font-size: 0.5em; color: #666; margin-left: 5px; }
 
@@ -248,7 +262,7 @@
         let isLoginMode = true;
         let state = null; 
 
-        // Hardcoded Baseline Data (Pushed on first admin login)
+        // UPGRADED 57-DAY MATHEMATICAL BASELINE DATA
         const initialState = {
             balances: { "Shomara": 1058.50, "Nenad": 1037.00, "Sladja": 1006.00, "Cojkana": 851.00, "Milance": 845.50, "Danilo": 800.00, "OG": 750.90, "rat.cleaner": 700.00, "KOL": 600.00, "Markov": 549.00, "Shobibi": 300.00, "Skecmi": 0.00 },
             streaks: { "Shomara": 1, "Nenad": 1, "Sladja": 2, "Cojkana": 0, "Milance": 0, "Danilo": 0, "OG": 0, "rat.cleaner": 0, "KOL": 0, "Markov": 0, "Shobibi": 0, "Skecmi": 0 }, 
@@ -494,10 +508,9 @@
             document.getElementById('displayDate').innerText = "📅 " + d.toLocaleDateString('en-GB', { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' });
             document.getElementById('displayStreak').innerText = state.skipStreak;
             
-         
-                document.getElementById('quotaDaily').value = state.currentOdds.daily;
-                document.getElementById('quotaSkip').value = state.currentOdds.skip;
-          
+            // Odds render fixed to display for both Admin and Players
+            document.getElementById('quotaDaily').value = state.currentOdds.daily;
+            document.getElementById('quotaSkip').value = state.currentOdds.skip;
 
             const sortedPlayers = Object.keys(state.balances).sort((a, b) => state.balances[b] - state.balances[a]);
             document.getElementById('leaderboardBody').innerHTML = sortedPlayers.map((p, i) => `
