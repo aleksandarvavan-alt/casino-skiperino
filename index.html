@@ -196,7 +196,7 @@
         .odds-x { font-size: 0.5em; color: #ffdf00; margin-left: 5px; }
         .coin-icon { color: #ffdf00; margin-right: 5px; }
 
-        /* --- SMOOTH ARCADE CABINET SYSTEM --- */
+        /* --- SMOOTH ARCADE SYSTEM MODIFICATIONS --- */
         #arcadeFloorCard { 
             display: none; 
             max-height: 0; 
@@ -206,12 +206,11 @@
         }
         #arcadeFloorCard.visible { 
             display: block; 
-            max-height: 1200px; 
+            max-height: 1500px; 
             padding-top: 25px; padding-bottom: 25px; margin-bottom: 25px;
         }
         .slot-cabinet { background: radial-gradient(circle, #3a1515 0%, #0c0202 100%); border: 5px double #ffdf00; border-radius: 20px; padding: 30px; position: relative; box-shadow: 0 20px 40px rgba(0,0,0,0.9), inset 0 0 40px #000; text-align: center; }
         
-        /* CLEAN STATIC PREMIUM JACKPOT PANEL */
         .jackpot-ticker { 
             background: #000; 
             border: 4px solid #ffdf00; 
@@ -234,12 +233,18 @@
         }
         .reel-strip { position: absolute; width: 100%; top: 0; left: 0; display: flex; flex-direction: column; align-items: center; }
         .reel-symbol { height: 110px; line-height: 110px; width: 100%; text-align: center; }
-        .blur-effect { filter: blur(6px); transform: scaleY(1.2); }
 
         .slot-controls { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 25px; }
         .slot-status-readout { background: rgba(0,0,0,0.85); border: 2px solid #caa43b; padding: 15px; border-radius: 6px; font-family: 'Oswald', sans-serif; font-size: 1.3em; color: #ffdf00; min-height: 25px; margin-top: 15px; text-shadow: 1px 1px 2px #000; }
 
-        /* VINTAGE LEGEND PAYTABLE DESIGN */
+        /* LIVE FEED BOX CSS */
+        .slot-history-card { background: #000; border: 2px dashed #ff00ea; border-radius: 10px; padding: 15px; margin-top: 20px; text-align: left; max-height: 180px; overflow-y: auto; font-family: monospace; font-size: 0.95em; box-shadow: inset 0 0 15px rgba(0,0,0,0.8); }
+        .history-entry { padding: 4px 0; border-bottom: 1px dashed rgba(255,255,255,0.1); display: flex; justify-content: space-between; }
+        .status-win { color: #4dff4d; font-weight: bold; text-shadow: 0 0 5px #00ff00; }
+        .status-loss { color: #ff4d4d; font-weight: bold; text-shadow: 0 0 5px #ff0000; }
+        .status-jackpot { color: #fffb00; font-weight: bold; text-shadow: 0 0 10px #ffea00; animation: flashChamp 0.5s infinite alternate; }
+        @keyframes flashChamp { 0% { opacity: 0.6; } 100% { opacity: 1; } }
+
         .paytable-card { background: rgba(0,0,0,0.5); border: 2px dashed #caa43b; border-radius: 10px; padding: 15px; margin-top: 25px; }
         .paytable-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
         .paytable-item { text-align: center; background: rgba(0,0,0,0.4); padding: 8px; border-radius: 6px; border: 1px solid rgba(212,175,55,0.2); }
@@ -345,7 +350,7 @@
 
                 <div class="card" id="arcadeFloorCard">
                     <div class="slot-cabinet">
-                        <div style="font-family:'Oswald'; color:#ffdf00; letter-spacing:3px; font-size:1.4em; margin-bottom:8px;">🎰 CASINO SKIPERINO PREMIUM SLOTS</div>
+                        <div style="font-family:'Oswald'; color:#ffdf00; letter-spacing:3px; font-size:1.4em; margin-bottom:8px;">🎰 TATA SLOT APARATA</div>
                         
                         <div class="jackpot-ticker">
                             🪙 <span id="jackpotPoolDisplay">500.00</span>
@@ -376,7 +381,12 @@
                             </div>
                         </div>
 
-                        <div class="slot-status-readout" id="slotStatusBox">Pull the arm and roll the gears... Lost bets feed the Vault!</div>
+                        <div class="slot-status-readout" id="slotStatusBox">Pull the handle... Strict 3-of-a-kind required to secure a payout!</div>
+
+                        <div class="slot-history-card">
+                            <div style="color:#ff00ea; font-weight:bold; border-bottom:1px solid #ff00ea; margin-bottom:5px; font-size:0.85em; text-align:center;">📡 LIVE CASINO FLOOR ACTIVITY STREAM</div>
+                            <div id="slotHistoryContainer"></div>
+                        </div>
 
                         <div class="paytable-card">
                             <label style="margin-bottom:10px; font-size:0.85em; text-align:center;">📋 CASINO PAYOUT MULTIPLIER LEGEND</label>
@@ -437,7 +447,9 @@
                     
                     <label>Override Jackpot Pool Balance</label>
                     <input type="number" id="adjJackpotAmount" placeholder="e.g. 1000">
-                    <button onclick="adjustJackpotPool()" style="background: linear-gradient(to bottom, #ff9900, #b36b00); color: #fff; box-shadow: 0 6px 0 #5f3900;">Set Jackpot Pool</button>
+                    <button onclick="adjustJackpotPool()" style="margin-bottom: 15px;">Set Jackpot Pool</button>
+                    
+                    <button onclick="clearSlotHistory()" style="background: linear-gradient(to bottom, #ff33ff, #990099); color: #fff; box-shadow: 0 6px 0 #4d004d;">Clear Slot History Log</button>
 
                     <hr>
                     <button class="dl-btn" onclick="downloadLog()">💾 Download Full Log</button>
@@ -491,6 +503,7 @@
             currentOdds: { daily: "1.29", skip: "3.60" },
             jackpotPool: 500.00,
             reigningJackpotChamp: "None",
+            slotHistory: [], // Structural log stack array integration
             history: { 1: { total: 11, daily: 7 }, 2: { total: 11, daily: 7 }, 3: { total: 12, daily: 11 }, 4: { total: 12, daily: 7 }, 5: { total: 12, daily: 4 } },
             chronologicalHistory: [ { date: "Mon, 15 Jun", outcome: "DAILY" }, { date: "Tue, 16 Jun", outcome: "SKIP" }, { date: "Wed, 17 Jun", outcome: "DAILY" }, { date: "Thu, 18 Jun", outcome: "DAILY" }, { date: "Fri, 19 Jun", outcome: "SKIP" } ]
         };
@@ -617,6 +630,7 @@
                 
                 if (state.jackpotPool === undefined) state.jackpotPool = 500.00;
                 if (state.reigningJackpotChamp === undefined) state.reigningJackpotChamp = "None";
+                if (state.slotHistory === undefined) state.slotHistory = [];
                 
                 document.getElementById('loginOverlay').style.display = "none";
                 document.getElementById('appContainer').style.display = "flex";
@@ -659,7 +673,7 @@
             return false;
         }
 
-        // --- TATA SLOT SYSTEM CORE ENGINE ---
+        // --- TATA SLOT EXTENDED ENGINE (STRICT THREE-OF-A-KIND VERIFICATION PROCESS) ---
         window.spinSlots = async () => {
             const player = isAdmin ? document.getElementById('betPlayer').value : currentUserPlayerName;
             const stake = parseFloat(document.getElementById('slotBetSelection').value);
@@ -672,14 +686,15 @@
             }
 
             spinBtn.disabled = true;
-            statusBox.innerText = "🎰 Pulling mechanical arm... Spinning gears!";
+            statusBox.innerText = "🎰 Gears locked... Dropping gears!";
             state.balances[player] -= stake;
 
+            // Build vertical matrix tracking elements natively without blur injections
             const makeStrip = (el) => {
                 let html = '';
-                for(let i=0; i<35; i++) {
+                for(let i=0; i<40; i++) {
                     const sym = slotSymbols[Math.floor(Math.random() * slotSymbols.length)];
-                    html += `<div class="reel-symbol blur-effect">${sym}</div>`;
+                    html += `<div class="reel-symbol">${sym}</div>`;
                 }
                 el.innerHTML = html;
                 el.style.transition = 'none';
@@ -696,7 +711,7 @@
             let finalSelection = "LOSS";
             let rSymbols = ["🍒", "🔔", "🔥"];
 
-            // INTEGRATED MATH COMBINATION CONFIGURATIONS
+            // STRICT ODDS AND OUTCOME ASSIGNMENTS
             if (rand <= 0.02) {         
                 finalSelection = "JACKPOT"; rSymbols = ["💎", "💎", "💎"];
             } else if (rand <= 0.0533) { 
@@ -709,6 +724,7 @@
                 finalSelection = "CHERRIES"; rSymbols = ["🍒", "🍒", "🍒"];
             } else {                     
                 finalSelection = "LOSS";
+                // CRITICAL STRUCTURAL CORE FIX: Forced absolute non-matching combination row configuration
                 let r1 = slotSymbols[Math.floor(Math.random() * 4)];
                 let r2 = slotSymbols[Math.floor(Math.random() * 4)];
                 while(r1 === r2) { r2 = slotSymbols[Math.floor(Math.random() * 4)]; }
@@ -716,50 +732,68 @@
                 rSymbols = [r1, r2, r3];
             }
 
+            // EXTENDED SMOOTH SPIN ENGINE CYLINDERS
             setTimeout(() => {
                 const animateReel = (el, finalSym, spinDuration) => {
-                    el.style.transition = `top ${spinDuration}s cubic-bezier(0.15, 0.85, 0.35, 1)`;
+                    el.style.transition = `top ${spinDuration}s cubic-bezier(0.2, 0.9, 0.3, 1)`;
                     el.innerHTML = `<div class="reel-symbol">${finalSym}</div>` + el.innerHTML;
                     el.style.top = '-110px';
-                    setTimeout(() => {
-                        Array.from(el.children).forEach(c => c.classList.remove('blur-effect'));
-                    }, (spinDuration * 1000) - 200);
                 };
 
-                animateReel(s1, rSymbols[0], 2.0);
-                animateReel(s2, rSymbols[1], 2.5);
-                animateReel(s3, rSymbols[2], 3.0);
+                // Sequential deceleration frames (Extended longer timer loops: 2.8s, 3.4s, 4.0s)
+                animateReel(s1, rSymbols[0], 2.8);
+                animateReel(s2, rSymbols[1], 3.4);
+                animateReel(s3, rSymbols[2], 4.0);
             }, 50);
 
+            // Synchronize completion callback at 4.1s mark to process cloud balance ingestion mechanics
             setTimeout(async () => {
                 spinBtn.disabled = false;
+                let logMsg = "";
 
-                // FIXED SYSTEM MATH: Enforce dynamic string injection safely without cached evaluation bugs
                 if (finalSelection === "JACKPOT") {
                     const grandPrize = state.jackpotPool;
                     state.balances[player] += grandPrize;
                     state.reigningJackpotChamp = player;
                     state.jackpotPool = 500.00;
                     statusBox.innerHTML = `<span style="color:#ffea00; font-size:1.3em;">🎉 JACKPOT VAULT CRACKED! Won 🪙${grandPrize.toFixed(2)}!!</span>`;
+                    logMsg = `[${player}] Paid 🪙${stake} -> Result: <span class="status-jackpot">JACKPOT (Won 🪙${grandPrize.toFixed(2)})</span> [💎💎💎]`;
                 } else if (finalSelection === "COINS") {
                     const win = stake * 2.5; state.balances[player] += win;
                     statusBox.innerHTML = `🪙 TRIPLE COINS! Won 2.5x: 🪙${win.toFixed(2)}`;
+                    logMsg = `[${player}] Paid 🪙${stake} -> Result: <span class="status-win">WIN (Won 🪙${win.toFixed(2)})</span> [🪙🪙🪙]`;
                 } else if (finalSelection === "FLAMES") {
                     const win = stake * 2.0; state.balances[player] += win;
                     statusBox.innerHTML = `🔥 TRIPLE FLAMES! Won 2.0x: 🪙${win.toFixed(2)}`;
+                    logMsg = `[${player}] Paid 🪙${stake} -> Result: <span class="status-win">WIN (Won 🪙${win.toFixed(2)})</span> [🔥🔥🔥]`;
                 } else if (finalSelection === "BELLS") {
                     const win = stake * 1.2; state.balances[player] += win;
                     statusBox.innerHTML = `🔔 TRIPLE BELLS! Won 1.2x: 🪙${win.toFixed(2)}`;
+                    logMsg = `[${player}] Paid 🪙${stake} -> Result: <span class="status-win">WIN (Won 🪙${win.toFixed(2)})</span> [🔔🔔🔔]`;
                 } else if (finalSelection === "CHERRIES") {
                     const win = stake * 0.6; state.balances[player] += win;
                     statusBox.innerHTML = `🍒 TRIPLE CHERRIES! Partial Return 0.6x: 🪙${win.toFixed(2)}`;
+                    logMsg = `[${player}] Paid 🪙${stake} -> Result: <span class="status-win">WIN (Won 🪙${win.toFixed(2)})</span> [🍒🍒🍒]`;
                 } else {
                     state.jackpotPool += stake;
                     statusBox.innerHTML = `<span style="color:#aaa;">No match. 100% of loss pushed into Progressive Vault!</span>`;
+                    logMsg = `[${player}] Paid 🪙${stake} -> Result: <span class="status-loss">LOSS</span> [${rSymbols.join('')}]`;
                 }
 
+                // Inject activity log line metric element into tracking state stack array
+                state.slotHistory.unshift({ timestamp: new Date().toLocaleTimeString(), message: logMsg });
+                if (state.slotHistory.length > 30) state.slotHistory.pop(); // Caps queue overflow parameters
+
                 await pushStateToCloud();
-            }, 3200);
+            }, 4100);
+        };
+
+        window.clearSlotHistory = async () => {
+            if (!isAdmin) return;
+            if (confirm("Clear all active slot machine activity log streams?")) {
+                state.slotHistory = [];
+                await pushStateToCloud();
+            }
         };
 
         window.adjustJackpotPool = async () => {
@@ -916,6 +950,18 @@
             document.getElementById('jackpotPoolDisplay').innerText = state.jackpotPool.toFixed(2);
             document.getElementById('jackpotChampDisplay').innerText = `Current Holder: ${state.reigningJackpotChamp}`;
             
+            // Render cloud activity stream layout inside target container
+            const historyContainer = document.getElementById('slotHistoryContainer');
+            if (state.slotHistory && state.slotHistory.length > 0) {
+                historyContainer.innerHTML = state.slotHistory.map(h => `
+                    <div class="history-entry">
+                        <span>[${h.timestamp}] ${h.message}</span>
+                    </div>
+                `).join('');
+            } else {
+                historyContainer.innerHTML = `<div style="color:rgba(255,255,255,0.3); text-align:center; padding:10px;">Terminal idle. Awaiting operations...</div>`;
+            }
+
             const last5 = state.chronologicalHistory.slice(-5);
             document.getElementById('past5container').innerHTML = last5.map(item => 
                 `<div class="history-badge ${item.outcome === 'SKIP' ? 'history-skip' : 'history-daily'}">${item.outcome}<span class="history-date">${item.date}</span></div>`
