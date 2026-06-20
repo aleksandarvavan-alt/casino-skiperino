@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Casino Skiperino - High Stakes Sports & Arcade</title>
+    <title>Casino Skiperino - High Stakes Daily Betting</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Playfair+Display:ital,wght@0,700;1,700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
@@ -162,9 +162,6 @@
         button:active { transform: translateY(6px); box-shadow: 0 0 0 #7a5905, 0 2px 2px rgba(0,0,0,0.5); }
         button:disabled { background: #444; border-color: #666; color: #888; box-shadow: none; cursor: not-allowed; transform: none !important; filter: none !important; }
 
-        .btn-arcade-nav { background: linear-gradient(to bottom, #ff00ea, #7a0068); color: white; box-shadow: 0 6px 0 #4a013f, 0 10px 10px rgba(0,0,0,0.5); margin-top: 15px; }
-        .btn-arcade-nav:hover { box-shadow: 0 4px 0 #4a013f, 0 5px 5px rgba(0,0,0,0.5); }
-
         .dl-btn { background: linear-gradient(to bottom, #292929, #000000); color: #ffdf00; border-color: #d4af37; box-shadow: 0 6px 0 #000, 0 10px 10px rgba(0,0,0,0.5); margin-top: 10px; font-size: 0.9em; }
         .dl-btn:hover { box-shadow: 0 4px 0 #000, 0 5px 5px rgba(0,0,0,0.5); }
         .danger-btn { background: linear-gradient(to bottom, #ff3333, #990000); color: white; border-color: #ffcccc; box-shadow: 0 6px 0 #4d0000, 0 10px 10px rgba(0,0,0,0.5); margin-top: 20px; font-size: 0.9em; }
@@ -178,6 +175,7 @@
         .streak-counter { color: #fff; background: rgba(0, 0, 0, 0.6); padding: 10px 20px; border-radius: 20px; border: 1px solid #d4af37; display: inline-block; box-shadow: inset 0 0 10px #000; }
         .streak-number { color: #ff3333; font-weight: bold; font-size: 1.2em; text-shadow: 0 0 10px #ff0000; }
 
+        /* PREMIUM TIMER DISPLAY WIDGET */
         .countdown-widget { background: radial-gradient(circle, #1a1a1a 0%, #000000 100%); padding: 15px; border-radius: 8px; border: 2px solid #d4af37; box-shadow: inset 0 0 15px rgba(0,0,0,0.8); margin-top: 10px; }
         .timer-digits { font-family: 'Oswald', sans-serif; font-size: 2.2em; color: #ffffff; letter-spacing: 2px; text-shadow: 0 0 10px rgba(255, 223, 0, 0.4); margin-top: 5px; font-weight: 700; }
         .lock-notice-box { color: #ff3333; font-family: 'Oswald', sans-serif; font-weight: bold; font-size: 1.4em; letter-spacing: 1px; text-shadow: 0 0 10px rgba(255,0,0,0.4); text-transform: uppercase; padding: 10px 0; }
@@ -195,61 +193,6 @@
         
         .odds-x { font-size: 0.5em; color: #ffdf00; margin-left: 5px; }
         .coin-icon { color: #ffdf00; margin-right: 5px; }
-
-        /* --- SMOOTH ARCADE SYSTEM MODIFICATIONS --- */
-        #arcadeFloorCard { 
-            display: none; 
-            max-height: 0; 
-            overflow: hidden; 
-            transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s ease, margin 0.4s ease;
-            padding-top: 0; padding-bottom: 0; margin-bottom: 0;
-        }
-        #arcadeFloorCard.visible { 
-            display: block; 
-            max-height: 1500px; 
-            padding-top: 25px; padding-bottom: 25px; margin-bottom: 25px;
-        }
-        .slot-cabinet { background: radial-gradient(circle, #3a1515 0%, #0c0202 100%); border: 5px double #ffdf00; border-radius: 20px; padding: 30px; position: relative; box-shadow: 0 20px 40px rgba(0,0,0,0.9), inset 0 0 40px #000; text-align: center; }
-        
-        .jackpot-ticker { 
-            background: #000; 
-            border: 4px solid #ffdf00; 
-            border-radius: 12px; 
-            padding: 20px; 
-            font-family: 'Oswald', sans-serif; 
-            font-size: 3.5em; 
-            color: #fffb00; 
-            font-weight: bold; 
-            margin-bottom: 25px; 
-            letter-spacing: 3px; 
-            box-shadow: inset 0 0 25px rgba(255, 234, 0, 0.2), 0 4px 15px rgba(0,0,0,0.6);
-            text-shadow: 0 0 10px #fffb00;
-        }
-        .champ-tag { font-size: 0.35em; color: #fff; display: block; font-family: 'Oswald', sans-serif; font-weight: normal; letter-spacing: 2px; margin-top: 5px; text-transform: uppercase; text-shadow: 1px 1px 2px #000; }
-
-        .slot-reels-container { display: flex; gap: 15px; justify-content: center; margin: 25px 0; background: #000; padding: 25px; border-radius: 10px; border: 4px solid #caa43b; box-shadow: inset 0 0 30px #000, 0 5px 15px rgba(0,0,0,0.5); }
-        .reel-window { 
-            flex: 1; height: 110px; background: linear-gradient(to bottom, #ccc 0%, #fff 20%, #fff 80%, #ccc 100%); border-radius: 8px; border: 4px solid #222; font-size: 4.5em; line-height: 110px; color: #000; text-align: center; font-weight: bold; overflow: hidden; position: relative; user-select: none; box-shadow: inset 0 10px 10px rgba(0,0,0,0.5), inset 0 -10px 10px rgba(0,0,0,0.5);
-        }
-        .reel-strip { position: absolute; width: 100%; top: 0; left: 0; display: flex; flex-direction: column; align-items: center; }
-        .reel-symbol { height: 110px; line-height: 110px; width: 100%; text-align: center; }
-
-        .slot-controls { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 25px; }
-        .slot-status-readout { background: rgba(0,0,0,0.85); border: 2px solid #caa43b; padding: 15px; border-radius: 6px; font-family: 'Oswald', sans-serif; font-size: 1.3em; color: #ffdf00; min-height: 25px; margin-top: 15px; text-shadow: 1px 1px 2px #000; }
-
-        /* LIVE FEED BOX CSS */
-        .slot-history-card { background: #000; border: 2px dashed #ff00ea; border-radius: 10px; padding: 15px; margin-top: 20px; text-align: left; max-height: 180px; overflow-y: auto; font-family: monospace; font-size: 0.95em; box-shadow: inset 0 0 15px rgba(0,0,0,0.8); }
-        .history-entry { padding: 4px 0; border-bottom: 1px dashed rgba(255,255,255,0.1); display: flex; justify-content: space-between; }
-        .status-win { color: #4dff4d; font-weight: bold; text-shadow: 0 0 5px #00ff00; }
-        .status-loss { color: #ff4d4d; font-weight: bold; text-shadow: 0 0 5px #ff0000; }
-        .status-jackpot { color: #fffb00; font-weight: bold; text-shadow: 0 0 10px #ffea00; animation: flashChamp 0.5s infinite alternate; }
-        @keyframes flashChamp { 0% { opacity: 0.6; } 100% { opacity: 1; } }
-
-        .paytable-card { background: rgba(0,0,0,0.5); border: 2px dashed #caa43b; border-radius: 10px; padding: 15px; margin-top: 25px; }
-        .paytable-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
-        .paytable-item { text-align: center; background: rgba(0,0,0,0.4); padding: 8px; border-radius: 6px; border: 1px solid rgba(212,175,55,0.2); }
-        .paytable-sym { font-size: 1.8em; display: block; margin-bottom: 2px; }
-        .paytable-mult { font-family: 'Oswald', sans-serif; color: #ffdf00; font-weight: bold; font-size: 1.1em; }
 
         #loginOverlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: #0c0202; z-index: 999; display: flex; flex-direction: column; align-items: center; justify-content: center; }
         .login-box { background: radial-gradient(circle at center, #155e24 0%, #062b0f 100%); padding: 40px; border: 4px solid #caa43b; border-radius: 15px; width: 350px; text-align: center; box-shadow: inset 0 0 30px rgba(0,0,0,0.8), 0 10px 30px #000; }
@@ -292,9 +235,8 @@
         <div class="header-subtitle">High Limit Sportsbook Lounge <span id="currentUserLabel" style="color:#fff275;"></span></div>
         
         <div class="container" id="appContainer">
-            
             <div class="main-col">
-                <div class="card" id="sportsbookFloor">
+                <div class="card" style="text-align: center;">
                     <h3 id="displayDate" style="border: none;">📅 Date: Loading...</h3>
                     <div class="streak-counter">
                         Current SKIP Streak: <span id="displayStreak" class="streak-number">0</span> days
@@ -343,62 +285,7 @@
                     </select>
 
                     <button id="placeBetBtn" onclick="placeBet()">Place Bet on Felt</button>
-                    <button class="btn-arcade-nav" id="arcadeFloorToggleBtn" onclick="toggleArcadeFloor()">🎰 ENTER TATA SLOT APARATA</button>
-                    
                     <div id="betError" style="color: #ff3333; margin-top: 15px; text-align: center; font-weight: bold; text-shadow: 1px 1px 2px #000;"></div>
-                </div>
-
-                <div class="card" id="arcadeFloorCard">
-                    <div class="slot-cabinet">
-                        <div style="font-family:'Oswald'; color:#ffdf00; letter-spacing:3px; font-size:1.4em; margin-bottom:8px;">🎰 TATA SLOT APARATA</div>
-                        
-                        <div class="jackpot-ticker">
-                            🪙 <span id="jackpotPoolDisplay">500.00</span>
-                            <span class="champ-tag" id="jackpotChampDisplay">Current Holder: None</span>
-                        </div>
-                        
-                        <div class="slot-reels-container">
-                            <div class="reel-window"><div class="reel-strip" id="strip1"><div class="reel-symbol">🔥</div></div></div>
-                            <div class="reel-window"><div class="reel-strip" id="strip2"><div class="reel-symbol">🔔</div></div></div>
-                            <div class="reel-window"><div class="reel-strip" id="strip3"><div class="reel-symbol">🍒</div></div></div>
-                        </div>
-
-                        <div class="slot-controls">
-                            <div>
-                                <label>Stakes Size</label>
-                                <select id="slotBetSelection">
-                                    <option value="10">10 Coins</option>
-                                    <option value="20">20 Coins</option>
-                                    <option value="30">30 Coins</option>
-                                    <option value="50" selected>50 Coins</option>
-                                    <option value="100">100 Coins</option>
-                                    <option value="200">200 Coins</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label>Action Switch</label>
-                                <button id="slotSpinBtn" onclick="spinSlots()" style="padding:12px;">PULL LEVER</button>
-                            </div>
-                        </div>
-
-                        <div class="slot-status-readout" id="slotStatusBox">Pull the handle... Strict 3-of-a-kind required to secure a payout!</div>
-
-                        <div class="slot-history-card">
-                            <div style="color:#ff00ea; font-weight:bold; border-bottom:1px solid #ff00ea; margin-bottom:5px; font-size:0.85em; text-align:center;">📡 LIVE CASINO FLOOR ACTIVITY STREAM</div>
-                            <div id="slotHistoryContainer"></div>
-                        </div>
-
-                        <div class="paytable-card">
-                            <label style="margin-bottom:10px; font-size:0.85em; text-align:center;">📋 CASINO PAYOUT MULTIPLIER LEGEND</label>
-                            <div class="paytable-grid">
-                                <div class="paytable-item"><span class="paytable-sym">🍒🍒🍒</span><span class="paytable-mult">0.6x</span></div>
-                                <div class="paytable-item"><span class="paytable-sym">🔔🔔🔔</span><span class="paytable-mult">1.2x</span></div>
-                                <div class="paytable-item"><span class="paytable-sym">🔥🔥🔥</span><span class="paytable-mult">2.0x</span></div>
-                                <div class="paytable-item"><span class="paytable-sym">🪙🪙🪙</span><span class="paytable-mult">2.5x</span></div>
-                                <div class="paytable-item" style="border-color:#ffdf00; background:rgba(255,223,0,0.1);"><span class="paytable-sym">💎💎💎</span><span class="paytable-mult" style="color:#fffb00;">VAULT JACKPOT</span></div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
                 <div class="card">
@@ -443,14 +330,8 @@
                     <label>Manual Coin Adjustment</label>
                     <select id="adjPlayer"></select>
                     <input type="number" id="adjAmount" placeholder="e.g. 500 or -500">
-                    <button onclick="adjustCoins()" style="margin-bottom: 15px;">Adjust Balance</button>
+                    <button onclick="adjustCoins()" style="background: linear-gradient(to bottom, #fff, #aaa); color: #000; box-shadow: 0 6px 0 #555, 0 10px 10px rgba(0,0,0,0.5);">Adjust Balance</button>
                     
-                    <label>Override Jackpot Pool Balance</label>
-                    <input type="number" id="adjJackpotAmount" placeholder="e.g. 1000">
-                    <button onclick="adjustJackpotPool()" style="margin-bottom: 15px;">Set Jackpot Pool</button>
-                    
-                    <button onclick="clearSlotHistory()" style="background: linear-gradient(to bottom, #ff33ff, #990099); color: #fff; box-shadow: 0 6px 0 #4d004d;">Clear Slot History Log</button>
-
                     <hr>
                     <button class="dl-btn" onclick="downloadLog()">💾 Download Full Log</button>
                     <button class="danger-btn" onclick="nuclearReset()">Nuclear Reset</button>
@@ -484,7 +365,6 @@
 
         const ADMIN_EMAIL = "pitboss@skiperino.com"; 
         const playersList = ["Shomara", "Nenad", "Sladja", "Cojkana", "Milance", "Danilo", "OG", "rat.cleaner", "KOL", "Markov", "Shobibi", "Skecmi"];
-        const slotSymbols = ["🍒", "🔔", "🔥", "🪙", "💎"];
         
         let currentUser = null;
         let currentUserPlayerName = null;
@@ -492,7 +372,6 @@
         let isLoginMode = true;
         let state = null; 
         let clockInterval = null;
-        let isArcadeVisible = false;
 
         const initialState = {
             balances: { "Milance": 1143.50, "Cojkana": 1096.00, "Shomara": 1058.50, "Nenad": 1037.00, "Sladja": 1006.00, "Danilo": 949.00, "rat.cleaner": 700.00, "OG": 600.90, "KOL": 600.00, "Markov": 549.00, "Shobibi": 300.00, "Skecmi": 0.00 },
@@ -501,11 +380,20 @@
             skipStreak: 1, 
             bets: [],
             currentOdds: { daily: "1.29", skip: "3.60" },
-            jackpotPool: 500.00,
-            reigningJackpotChamp: "None",
-            slotHistory: [], // Structural log stack array integration
-            history: { 1: { total: 11, daily: 7 }, 2: { total: 11, daily: 7 }, 3: { total: 12, daily: 11 }, 4: { total: 12, daily: 7 }, 5: { total: 12, daily: 4 } },
-            chronologicalHistory: [ { date: "Mon, 15 Jun", outcome: "DAILY" }, { date: "Tue, 16 Jun", outcome: "SKIP" }, { date: "Wed, 17 Jun", outcome: "DAILY" }, { date: "Thu, 18 Jun", outcome: "DAILY" }, { date: "Fri, 19 Jun", outcome: "SKIP" } ]
+            history: { 
+                1: { total: 11, daily: 7 }, 
+                2: { total: 11, daily: 7 }, 
+                3: { total: 12, daily: 11 }, 
+                4: { total: 12, daily: 7 }, 
+                5: { total: 12, daily: 4 } 
+            },
+            chronologicalHistory: [ 
+                { date: "Mon, 15 Jun", outcome: "DAILY" }, 
+                { date: "Tue, 16 Jun", outcome: "SKIP" }, 
+                { date: "Wed, 17 Jun", outcome: "DAILY" },
+                { date: "Thu, 18 Jun", outcome: "DAILY" },
+                { date: "Fri, 19 Jun", outcome: "SKIP" }
+            ]
         };
 
         const authPlayerSelect = document.getElementById('authPlayerName');
@@ -516,21 +404,6 @@
             betSelect.add(new Option(p, p));
             adjSelect.add(new Option(p, p));
         });
-
-        window.toggleArcadeFloor = () => {
-            isArcadeVisible = !isArcadeVisible;
-            const card = document.getElementById('arcadeFloorCard');
-            const btn = document.getElementById('arcadeFloorToggleBtn');
-            if (isArcadeVisible) {
-                card.classList.add('visible');
-                btn.innerText = "⏪ LEAVE TATA SLOT APARATA";
-                btn.style.background = "linear-gradient(to bottom, #555, #222)";
-            } else {
-                card.classList.remove('visible');
-                btn.innerText = "🎰 ENTER TATA SLOT APARATA";
-                btn.style.background = "linear-gradient(to bottom, #ff00ea, #7a0068)";
-            }
-        };
 
         window.toggleAuthMode = () => {
             isLoginMode = !isLoginMode;
@@ -568,7 +441,6 @@
                 isAdmin = false;
                 state = null;
                 if(clockInterval) clearInterval(clockInterval);
-                if(isArcadeVisible) toggleArcadeFloor();
                 
                 document.getElementById('pitbossPanel').style.display = "none";
                 document.getElementById('quotaDaily').setAttribute('readonly', 'true');
@@ -627,11 +499,6 @@
                 } else {
                     state = docSnap.data();
                 }
-                
-                if (state.jackpotPool === undefined) state.jackpotPool = 500.00;
-                if (state.reigningJackpotChamp === undefined) state.reigningJackpotChamp = "None";
-                if (state.slotHistory === undefined) state.slotHistory = [];
-                
                 document.getElementById('loginOverlay').style.display = "none";
                 document.getElementById('appContainer').style.display = "flex";
                 
@@ -651,6 +518,7 @@
             const currentGlobalTime = new Date();
             const belgradeStr = currentGlobalTime.toLocaleString("en-US", {timeZone: "Europe/Belgrade"});
             const belgradeTime = new Date(belgradeStr);
+            
             const ledgerDay = new Date(state.currentDate);
             
             const isTargetDayOrLater = (
@@ -672,140 +540,6 @@
             }
             return false;
         }
-
-        // --- TATA SLOT EXTENDED ENGINE (STRICT THREE-OF-A-KIND VERIFICATION PROCESS) ---
-        window.spinSlots = async () => {
-            const player = isAdmin ? document.getElementById('betPlayer').value : currentUserPlayerName;
-            const stake = parseFloat(document.getElementById('slotBetSelection').value);
-            const statusBox = document.getElementById('slotStatusBox');
-            const spinBtn = document.getElementById('slotSpinBtn');
-
-            if(state.balances[player] < stake) {
-                statusBox.innerHTML = `<span style="color:#ff3333;">Insufficient funds for this stake size!</span>`;
-                return;
-            }
-
-            spinBtn.disabled = true;
-            statusBox.innerText = "🎰 Gears locked... Dropping gears!";
-            state.balances[player] -= stake;
-
-            // Build vertical matrix tracking elements natively without blur injections
-            const makeStrip = (el) => {
-                let html = '';
-                for(let i=0; i<40; i++) {
-                    const sym = slotSymbols[Math.floor(Math.random() * slotSymbols.length)];
-                    html += `<div class="reel-symbol">${sym}</div>`;
-                }
-                el.innerHTML = html;
-                el.style.transition = 'none';
-                el.style.top = '0px';
-            };
-
-            const s1 = document.getElementById('strip1');
-            const s2 = document.getElementById('strip2');
-            const s3 = document.getElementById('strip3');
-
-            makeStrip(s1); makeStrip(s2); makeStrip(s3);
-
-            const rand = Math.random();
-            let finalSelection = "LOSS";
-            let rSymbols = ["🍒", "🔔", "🔥"];
-
-            // STRICT ODDS AND OUTCOME ASSIGNMENTS
-            if (rand <= 0.02) {         
-                finalSelection = "JACKPOT"; rSymbols = ["💎", "💎", "💎"];
-            } else if (rand <= 0.0533) { 
-                finalSelection = "COINS"; rSymbols = ["🪙", "🪙", "🪙"];
-            } else if (rand <= 0.1033) { 
-                finalSelection = "FLAMES"; rSymbols = ["🔥", "🔥", "🔥"];
-            } else if (rand <= 0.2033) { 
-                finalSelection = "BELLS"; rSymbols = ["🔔", "🔔", "🔔"];
-            } else if (rand <= 0.4533) { 
-                finalSelection = "CHERRIES"; rSymbols = ["🍒", "🍒", "🍒"];
-            } else {                     
-                finalSelection = "LOSS";
-                // CRITICAL STRUCTURAL CORE FIX: Forced absolute non-matching combination row configuration
-                let r1 = slotSymbols[Math.floor(Math.random() * 4)];
-                let r2 = slotSymbols[Math.floor(Math.random() * 4)];
-                while(r1 === r2) { r2 = slotSymbols[Math.floor(Math.random() * 4)]; }
-                let r3 = slotSymbols[Math.floor(Math.random() * 4)];
-                rSymbols = [r1, r2, r3];
-            }
-
-            // EXTENDED SMOOTH SPIN ENGINE CYLINDERS
-            setTimeout(() => {
-                const animateReel = (el, finalSym, spinDuration) => {
-                    el.style.transition = `top ${spinDuration}s cubic-bezier(0.2, 0.9, 0.3, 1)`;
-                    el.innerHTML = `<div class="reel-symbol">${finalSym}</div>` + el.innerHTML;
-                    el.style.top = '-110px';
-                };
-
-                // Sequential deceleration frames (Extended longer timer loops: 2.8s, 3.4s, 4.0s)
-                animateReel(s1, rSymbols[0], 2.8);
-                animateReel(s2, rSymbols[1], 3.4);
-                animateReel(s3, rSymbols[2], 4.0);
-            }, 50);
-
-            // Synchronize completion callback at 4.1s mark to process cloud balance ingestion mechanics
-            setTimeout(async () => {
-                spinBtn.disabled = false;
-                let logMsg = "";
-
-                if (finalSelection === "JACKPOT") {
-                    const grandPrize = state.jackpotPool;
-                    state.balances[player] += grandPrize;
-                    state.reigningJackpotChamp = player;
-                    state.jackpotPool = 500.00;
-                    statusBox.innerHTML = `<span style="color:#ffea00; font-size:1.3em;">🎉 JACKPOT VAULT CRACKED! Won 🪙${grandPrize.toFixed(2)}!!</span>`;
-                    logMsg = `[${player}] Paid 🪙${stake} -> Result: <span class="status-jackpot">JACKPOT (Won 🪙${grandPrize.toFixed(2)})</span> [💎💎💎]`;
-                } else if (finalSelection === "COINS") {
-                    const win = stake * 2.5; state.balances[player] += win;
-                    statusBox.innerHTML = `🪙 TRIPLE COINS! Won 2.5x: 🪙${win.toFixed(2)}`;
-                    logMsg = `[${player}] Paid 🪙${stake} -> Result: <span class="status-win">WIN (Won 🪙${win.toFixed(2)})</span> [🪙🪙🪙]`;
-                } else if (finalSelection === "FLAMES") {
-                    const win = stake * 2.0; state.balances[player] += win;
-                    statusBox.innerHTML = `🔥 TRIPLE FLAMES! Won 2.0x: 🪙${win.toFixed(2)}`;
-                    logMsg = `[${player}] Paid 🪙${stake} -> Result: <span class="status-win">WIN (Won 🪙${win.toFixed(2)})</span> [🔥🔥🔥]`;
-                } else if (finalSelection === "BELLS") {
-                    const win = stake * 1.2; state.balances[player] += win;
-                    statusBox.innerHTML = `🔔 TRIPLE BELLS! Won 1.2x: 🪙${win.toFixed(2)}`;
-                    logMsg = `[${player}] Paid 🪙${stake} -> Result: <span class="status-win">WIN (Won 🪙${win.toFixed(2)})</span> [🔔🔔🔔]`;
-                } else if (finalSelection === "CHERRIES") {
-                    const win = stake * 0.6; state.balances[player] += win;
-                    statusBox.innerHTML = `🍒 TRIPLE CHERRIES! Partial Return 0.6x: 🪙${win.toFixed(2)}`;
-                    logMsg = `[${player}] Paid 🪙${stake} -> Result: <span class="status-win">WIN (Won 🪙${win.toFixed(2)})</span> [🍒🍒🍒]`;
-                } else {
-                    state.jackpotPool += stake;
-                    statusBox.innerHTML = `<span style="color:#aaa;">No match. 100% of loss pushed into Progressive Vault!</span>`;
-                    logMsg = `[${player}] Paid 🪙${stake} -> Result: <span class="status-loss">LOSS</span> [${rSymbols.join('')}]`;
-                }
-
-                // Inject activity log line metric element into tracking state stack array
-                state.slotHistory.unshift({ timestamp: new Date().toLocaleTimeString(), message: logMsg });
-                if (state.slotHistory.length > 30) state.slotHistory.pop(); // Caps queue overflow parameters
-
-                await pushStateToCloud();
-            }, 4100);
-        };
-
-        window.clearSlotHistory = async () => {
-            if (!isAdmin) return;
-            if (confirm("Clear all active slot machine activity log streams?")) {
-                state.slotHistory = [];
-                await pushStateToCloud();
-            }
-        };
-
-        window.adjustJackpotPool = async () => {
-            if (!isAdmin) return;
-            const amt = parseFloat(document.getElementById('adjJackpotAmount').value);
-            if (!isNaN(amt) && amt >= 0) {
-                state.jackpotPool = amt;
-                document.getElementById('adjJackpotAmount').value = "";
-                await pushStateToCloud();
-                alert("Jackpot pool manually reassigned to: 🪙" + amt);
-            }
-        };
 
         window.placeBet = async () => {
             if (isFeltLocked()) return alert("The felt is locked for today. No bets accepted.");
@@ -860,7 +594,23 @@
                 logContent += `${p.padEnd(15)} | ${state.balances[p].toFixed(2).padStart(8)} Coins | Streak: ${state.streaks[p]}\n`;
             });
             
-            logContent += "\n========================================\n";
+            logContent += "\n--- MATHEMATICAL HISTORY (BASE PROBABILITY) ---\n";
+            logContent += `Mondays:   ${state.history[1].daily}/${state.history[1].total} Dailies\n`;
+            logContent += `Tuesdays:  ${state.history[2].daily}/${state.history[2].total} Dailies\n`;
+            logContent += `Wednesdays:${state.history[3].daily}/${state.history[3].total} Dailies\n`;
+            logContent += `Thursdays: ${state.history[4].daily}/${state.history[4].total} Dailies\n`;
+            logContent += `Fridays:   ${state.history[5].daily}/${state.history[5].total} Dailies\n`;
+
+            logContent += "\n--- RECENT CHRONOLOGICAL HISTORY ---\n";
+            state.chronologicalHistory.forEach(h => {
+                logContent += `${h.date}: ${h.outcome}\n`;
+            });
+
+            logContent += "\n--- CURRENT SYSTEM STATE ---\n";
+            logContent += `Current SKIP Streak: ${state.skipStreak} days\n`;
+            logContent += `Current Locked Odds: DAILY [${state.currentOdds.daily}x] | SKIP [${state.currentOdds.skip}x]\n`;
+            logContent += "========================================\n";
+            
             const blob = new Blob([logContent], { type: 'text/plain' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
@@ -874,9 +624,11 @@
 
         window.nuclearReset = async () => {
             if (!isAdmin) return;
-            if (confirm("☢️ WARNING: Complete wipe of all current cloud database balances. Proceed?")) {
-                await setDoc(doc(db, "casino", "state"), initialState);
-                alert("Casino has been completely reset to baseline parameters.");
+            if (confirm("☢️ WARNING: This will erase all current balances, active bets, and recent history. Are you absolutely sure?")) {
+                if (confirm("FINAL WARNING: This action cannot be undone. Initiate Nuclear Reset?")) {
+                    await setDoc(doc(db, "casino", "state"), initialState);
+                    alert("Casino has been completely reset to the baseline.");
+                }
             }
         };
 
@@ -934,6 +686,7 @@
                 state.balances[player] += amount;
                 document.getElementById('adjAmount').value = "";
                 await pushStateToCloud();
+                alert("Pit Boss Adjustment: " + player + "'s balance changed by " + amount);
             }
         };
 
@@ -947,21 +700,6 @@
         function renderAll() {
             if(!state) return;
             
-            document.getElementById('jackpotPoolDisplay').innerText = state.jackpotPool.toFixed(2);
-            document.getElementById('jackpotChampDisplay').innerText = `Current Holder: ${state.reigningJackpotChamp}`;
-            
-            // Render cloud activity stream layout inside target container
-            const historyContainer = document.getElementById('slotHistoryContainer');
-            if (state.slotHistory && state.slotHistory.length > 0) {
-                historyContainer.innerHTML = state.slotHistory.map(h => `
-                    <div class="history-entry">
-                        <span>[${h.timestamp}] ${h.message}</span>
-                    </div>
-                `).join('');
-            } else {
-                historyContainer.innerHTML = `<div style="color:rgba(255,255,255,0.3); text-align:center; padding:10px;">Terminal idle. Awaiting operations...</div>`;
-            }
-
             const last5 = state.chronologicalHistory.slice(-5);
             document.getElementById('past5container').innerHTML = last5.map(item => 
                 `<div class="history-badge ${item.outcome === 'SKIP' ? 'history-skip' : 'history-daily'}">${item.outcome}<span class="history-date">${item.date}</span></div>`
@@ -971,6 +709,7 @@
             document.getElementById('displayDate').innerText = "📅 " + d.toLocaleDateString('en-GB', { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' });
             document.getElementById('displayStreak').innerText = state.skipStreak;
             
+            // SIDEBAR PREMIUM TIMER RE-RENDER LOGIC
             const banner = document.getElementById('timeLockBanner');
             const placeBtn = document.getElementById('placeBetBtn');
             const locked = isFeltLocked();
@@ -1016,12 +755,9 @@
                 const streak = state.streaks[p] || 0;
                 let streakDisplay = streak;
                 if (streak >= 3) streakDisplay = `🔥 ${streak}`;
-                
-                const crownTag = (state.reigningJackpotChamp === p) ? " <span style='filter:drop-shadow(0 0 4px #ffdf00);'>🎰</span>" : "";
-
                 return `<tr>
                     <td>${rankDisplay}</td>
-                    <td>${p}${crownTag}</td>
+                    <td>${p}</td>
                     <td><span class="coin-icon">🪙</span>${state.balances[p].toFixed(2)}</td>
                     <td style="color: ${streak > 0 ? '#4dff4d' : '#fff'}; font-weight: bold;">${streakDisplay}</td>
                 </tr>`;
