@@ -109,12 +109,12 @@
             border: 4px solid #d4af37; border-radius: 15px; position: relative; 
             overflow: hidden; box-shadow: inset 0 0 40px #000, 0 10px 20px rgba(0,0,0,0.8); 
         }
-        /* Premium 3D Pegs */
+        /* Bright White Glowing Pegs */
         .plinko-peg { 
             position: absolute; width: 12px; height: 12px; 
-            background: radial-gradient(circle at 30% 30%, #ffffff, #d4af37 50%, #8b6508); 
+            background: radial-gradient(circle at 30% 30%, #ffffff 40%, #e6e6e6 80%, #cccccc); 
             border-radius: 50%; transform: translate(-50%, -50%); z-index: 2; 
-            box-shadow: 2px 5px 5px rgba(0,0,0,0.8), inset 0 -2px 2px rgba(0,0,0,0.6);
+            box-shadow: 0 0 8px 2px rgba(255, 255, 255, 0.7), inset 0 -2px 3px rgba(0,0,0,0.2);
         }
         .plinko-bucket { 
             position: absolute; bottom: 0; height: 50px; 
@@ -125,11 +125,11 @@
             border-top: 4px solid; color: #fff; text-shadow: 1px 1px 2px #000, 0 0 5px currentColor;
             z-index: 1;
         }
-        /* Glass Marble Balls */
+        /* Vibrant Neon Glowing Balls */
         .plinko-ball { 
             position: absolute; width: 18px; height: 18px; border-radius: 50%; 
             transform: translate(-50%, -50%); z-index: 10; 
-            box-shadow: 0 5px 10px rgba(0,0,0,0.6); 
+            box-shadow: 0 0 15px currentColor, inset -3px -3px 5px rgba(0,0,0,0.5), inset 2px 2px 5px rgba(255,255,255,0.8); 
         }
         .floating-win { position: absolute; font-family: 'Oswald', sans-serif; font-size: 1.5em; font-weight: bold; transform: translate(-50%, -50%); transition: top 1s ease-out, opacity 1s ease-out; z-index: 20; pointer-events: none; text-shadow: 1px 1px 3px #000; }
         .ball-selector { display: flex; justify-content: space-around; background: rgba(0,0,0,0.6); padding: 15px; border-radius: 10px; margin-bottom: 20px; border: 1px solid #d4af37; flex-wrap: wrap; gap: 10px; }
@@ -295,8 +295,8 @@
                                 <div class="ball-option active" style="color: #FF9933; border-color:#FF9933;" onclick="setPlinkoBall(10, this)">Bronze (10)</div>
                                 <div class="ball-option" style="color: #FFFFFF;" onclick="setPlinkoBall(20, this)">Silver (20)</div>
                                 <div class="ball-option" style="color: #FFEE58;" onclick="setPlinkoBall(30, this)">Gold (30)</div>
-                                <div class="ball-option" style="color: #39FF14;" onclick="setPlinkoBall(50, this)">Jade (50)</div>
-                                <div class="ball-option" style="color: #00FFFF;" onclick="setPlinkoBall(100, this)">Sapphire (100)</div>
+                                <div class="ball-option" style="color: #39FF14;" onclick="setPlinkoBall(50, this)">Đorđe David (50)</div>
+                                <div class="ball-option" style="color: #00FFFF;" onclick="setPlinkoBall(100, this)">Bajaga (100)</div>
                             </div>
 
                             <div class="plinko-board-container" id="plinkoBoard">
@@ -760,7 +760,7 @@
         let currentPlinkoColor = '#FF9933';
         let currentPlinkoName = 'Bronze';
         
-        // Option 3: "The Safe Space" (Perfect 1.0 EV, Low Volatility)
+        // Safe Space
         const plinkoMultipliers = [14.8, 4, 2, 1.1, 0.7, 0.7, 0.7, 1.1, 2, 4, 14.8]; 
 
         window.togglePlinkoGame = () => {
@@ -779,8 +779,8 @@
                 10: {c:'#FF9933', n:'Bronze'}, 
                 20: {c:'#FFFFFF', n:'Silver'}, 
                 30: {c:'#FFEE58', n:'Gold'}, 
-                50: {c:'#39FF14', n:'Jade'}, 
-                100: {c:'#00FFFF', n:'Sapphire'} 
+                50: {c:'#39FF14', n:'Đorđe David'}, 
+                100: {c:'#00FFFF', n:'Bajaga'} 
             };
             currentPlinkoColor = colorMap[wager].c;
             currentPlinkoName = colorMap[wager].n;
@@ -796,14 +796,14 @@
 
         function drawPlinkoBoard() {
             const board = document.getElementById('plinkoBoard');
-            board.innerHTML = ""; // Clear
+            board.innerHTML = ""; 
             const rows = 10;
             const startY = 40;
             const rowSpacing = 50;
             const colSpacing = 45;
-            const centerX = 350; // Middle of 700px width container
+            const centerX = 350; 
 
-            // Draw Premium 3D Pegs
+            // High-End Glowing Pegs
             for (let r = 0; r < rows; r++) {
                 for (let c = 0; c <= r; c++) {
                     const peg = document.createElement('div');
@@ -816,7 +816,6 @@
                 }
             }
 
-            // Draw Upgraded Buckets based on Safe Space math
             for (let b = 0; b <= rows; b++) {
                 const bucket = document.createElement('div');
                 bucket.className = 'plinko-bucket';
@@ -847,13 +846,11 @@
             }
             errorDiv.innerText = "";
 
-            // Deduct the WAGER ONLY instantly so they can spam it without spoiling the win
             const stateRef = doc(db, "casino", "state");
             await updateDoc(stateRef, {
                 [`balances.${player}`]: increment(-currentPlinkoBet)
             });
 
-            // Pre-calculate path
             let path = [];
             let bucketIndex = 0;
             for (let i = 0; i < 10; i++) {
@@ -865,7 +862,6 @@
             const multiplier = plinkoMultipliers[bucketIndex];
             const winAmount = parseFloat((currentPlinkoBet * multiplier).toFixed(2));
 
-            // Start animation (We do NOT await it here, so user can click repeatedly)
             animatePlinkoDrop(path, bucketIndex, currentPlinkoBet, winAmount, player, currentPlinkoName, currentPlinkoColor);
         };
 
@@ -873,8 +869,10 @@
             const board = document.getElementById('plinkoBoard');
             const ball = document.createElement('div');
             ball.className = 'plinko-ball';
-            // Premium Glass Marble look via radial gradient
-            ball.style.background = `radial-gradient(circle at 30% 30%, #ffffff 0%, ${ballColor} 40%, #000000 100%)`;
+            
+            // Bright neon core that pops, extending out evenly
+            ball.style.background = `radial-gradient(circle at 30% 30%, #ffffff 10%, ${ballColor} 50%, ${ballColor} 90%, #333333 100%)`;
+            ball.style.color = ballColor;
             
             const startY = 15;
             const centerX = 350;
@@ -885,29 +883,23 @@
             ball.style.left = `${centerX}px`;
             board.appendChild(ball);
 
-            // Wait for DOM to register the ball
             await new Promise(r => setTimeout(r, 20));
 
             let currentX = centerX;
             let currentY = startY;
 
-            // Upgraded Physics Bouncing Loop
             for (let i = 0; i < path.length; i++) {
                 let nextX = currentX + (path[i] === 0 ? -colSpacing/2 : colSpacing/2);
                 let nextY = startY + (i + 1) * rowSpacing;
                 
-                // 1. Arc up & out (Decelerating bounce off the peg)
                 let arcX = currentX + (path[i] === 0 ? -colSpacing/4 : colSpacing/4);
-                let arcY = currentY - 22; // Higher, more satisfying bounce
+                let arcY = currentY - 22; 
                 
-                // custom cubic-bezier for a sharp pop upwards
                 ball.style.transition = 'top 0.11s cubic-bezier(0.2, 0.8, 0.4, 1), left 0.11s linear';
                 ball.style.top = `${arcY}px`;
                 ball.style.left = `${arcX}px`;
                 await new Promise(r => setTimeout(r, 110));
 
-                // 2. Drop down heavy (Accelerating fall to next peg)
-                // custom cubic-bezier for gravity acceleration
                 ball.style.transition = 'top 0.14s cubic-bezier(0.6, 0.04, 0.9, 0.3), left 0.14s linear';
                 ball.style.top = `${nextY}px`;
                 ball.style.left = `${nextX}px`;
@@ -917,12 +909,10 @@
                 currentY = nextY;
             }
 
-            // Drop heavy into the final bucket
             ball.style.transition = 'top 0.2s cubic-bezier(0.6, 0.04, 0.9, 0.3), left 0.2s linear';
             ball.style.top = `${currentY + 40}px`;
             await new Promise(r => setTimeout(r, 200));
 
-            // Floating win text
             const floatText = document.createElement('div');
             floatText.className = 'floating-win';
             floatText.innerText = winAmount > 0 ? `+${winAmount}` : 'BUST';
@@ -931,19 +921,16 @@
             floatText.style.top = `${currentY - 20}px`;
             board.appendChild(floatText);
 
-            // Animate float text
             setTimeout(() => {
                 floatText.style.top = `${currentY - 60}px`;
                 floatText.style.opacity = '0';
             }, 50);
 
-            // Cleanup DOM
             setTimeout(() => {
                 ball.remove();
                 floatText.remove();
             }, 1000);
 
-            // ANIMATION COMPLETE: Now award the winnings and write the history
             const netChange = winAmount - betAmount;
             const historyEntry = {
                 player: player,
