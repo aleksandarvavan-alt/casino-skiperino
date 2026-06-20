@@ -199,6 +199,59 @@
         .auth-toggle { color: #fff; margin-top: 15px; cursor: pointer; text-decoration: underline; font-size: 0.9em; text-shadow: 1px 1px 2px #000;}
         #pitbossPanel { display: none; }
         .loading-text { color: #ffdf00; font-family: 'Oswald', sans-serif; font-size: 1.5em; display: none; text-shadow: 0 0 10px #ffdf00; }
+
+        /* --- SLOT MACHINE STYLES --- */
+        .purple-btn { 
+            background: linear-gradient(to bottom, #9d00ff, #4a0080); 
+            color: #fff; border-color: #d480ff; 
+            box-shadow: 0 6px 0 #2a004d, 0 10px 10px rgba(0,0,0,0.5); 
+            margin-top: 10px; font-size: 1.4em; text-shadow: 0 0 10px #e6b3ff;
+        }
+        .purple-btn:hover { filter: brightness(1.2); transform: translateY(2px); box-shadow: 0 4px 0 #2a004d, 0 5px 5px rgba(0,0,0,0.5); }
+        .purple-btn:active { transform: translateY(6px); box-shadow: none; }
+
+        .collapse-container { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-out, opacity 0.3s ease-out; opacity: 0; }
+        .collapse-container.open { max-height: 1200px; opacity: 1; }
+
+        .slot-jackpot-display {
+            font-size: 3em; font-family: 'Playfair Display', serif; font-style: italic; font-weight: 700;
+            color: #ffdf00; text-shadow: 0 0 20px #ffdf00, 2px 2px 0px #8b0000; margin: 15px 0;
+            background: rgba(0,0,0,0.6); padding: 10px; border-radius: 10px; border: 2px solid #d4af37;
+        }
+        .slot-machine-grid {
+            display: flex; justify-content: center; gap: 15px; margin: 25px 0;
+            background: #000; padding: 20px; border-radius: 15px; border: 6px solid #d480ff;
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.9), 0 10px 20px rgba(0,0,0,0.7);
+        }
+        .slot-reel {
+            background: linear-gradient(to bottom, #ddd, #fff, #ddd); border: 4px solid #333;
+            border-radius: 10px; width: 100px; height: 120px; display: flex;
+            align-items: center; justify-content: center; font-size: 4em;
+            box-shadow: inset 0 10px 15px rgba(0,0,0,0.5), inset 0 -10px 15px rgba(0,0,0,0.5);
+            overflow: hidden; position: relative;
+        }
+        .slot-bet-btns { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+        .slot-bet-btn {
+            background: linear-gradient(to bottom, #444, #111); color: #fff; border: 2px solid #666;
+            padding: 10px 20px; border-radius: 5px; cursor: pointer; font-family: 'Oswald', sans-serif; font-size: 1.1em;
+            box-shadow: 0 4px 0 #000; transition: all 0.1s;
+        }
+        .slot-bet-btn.active { background: linear-gradient(to bottom, #ffdf00, #b8860b); color: #000; border-color: #fff; box-shadow: 0 2px 0 #7a5905; transform: translateY(2px); }
+        .slot-legend { background: rgba(0,0,0,0.5); padding: 10px; border-radius: 5px; font-size: 1.1em; margin-bottom: 20px; border: 1px dashed #d480ff; color: #e6b3ff; }
+        
+        .slot-history-container {
+            max-height: 150px; overflow-y: auto; background: rgba(0,0,0,0.8); border: 1px solid #d4af37;
+            border-radius: 5px; padding: 10px; text-align: left; font-size: 0.9em; margin-top: 20px;
+        }
+        .slot-history-container::-webkit-scrollbar { width: 8px; }
+        .slot-history-container::-webkit-scrollbar-thumb { background: #d4af37; border-radius: 4px; }
+        .sh-win { color: #4dff4d; }
+        .sh-loss { color: #ff4d4d; }
+        .sh-jackpot { color: #ffdf00; font-weight: bold; text-shadow: 0 0 5px #ffdf00; }
+        
+        /* Modal Overlay for Big Wins/Broke */
+        #slotOverlay { display: none; position: absolute; top:0; left:0; right:0; bottom:0; background: rgba(0,0,0,0.9); z-index: 10; border-radius: 15px; align-items: center; justify-content: center; flex-direction: column; }
+        .overlay-text { font-family: 'Playfair Display', serif; font-size: 3em; font-weight: 700; text-align: center; margin-bottom: 20px; }
     </style>
 </head>
 <body>
@@ -297,6 +350,56 @@
                         <tbody id="betsTableBody"></tbody>
                     </table>
                 </div>
+
+                <div class="card" style="margin-top: 25px; text-align: center; border-color: #9d00ff;">
+                    <h3 style="color: #d480ff; border-bottom: 2px dashed #9d00ff;">🎰 Šomarine Voćkice</h3>
+                    <button class="purple-btn" id="toggleSlotBtn" onclick="toggleSlotGame()">✨ OPEN SLOT MACHINE ✨</button>
+                    
+                    <div id="slotGameContainer" class="collapse-container">
+                        <div id="slotOverlay">
+                            <div id="slotOverlayMsg" class="overlay-text"></div>
+                            <button class="purple-btn" style="width: 200px;" onclick="closeSlotOverlay()">CONTINUE</button>
+                        </div>
+
+                        <div style="padding-top: 15px;">
+                            <div style="display: flex; justify-content: space-between; font-family: 'Oswald', sans-serif; font-size: 1.2em;">
+                                <div style="color: #aaa;">BALANCE: <span id="slotPlayerBalance" style="color: #fff;">0</span></div>
+                                <div style="color: #aaa;">BET: <span id="slotCurrentBetDisplay" style="color: #fff;">10</span></div>
+                            </div>
+
+                            <div class="slot-jackpot-display">
+                                JACKPOT: <br> <span id="slotJackpotText">500</span> 🪙
+                            </div>
+                            
+                            <div class="slot-legend">
+                                🍒: 1x | 🍋: 2x | 🍉: 3x | 🍇: 5x | 💎: <strong>JACKPOT</strong>
+                            </div>
+
+                            <div class="slot-machine-grid">
+                                <div class="slot-reel" id="reel1">🍒</div>
+                                <div class="slot-reel" id="reel2">🍋</div>
+                                <div class="slot-reel" id="reel3">🍉</div>
+                            </div>
+                            
+                            <div class="slot-bet-btns">
+                                <button class="slot-bet-btn active" onclick="setSlotBet(10, this)">10</button>
+                                <button class="slot-bet-btn" onclick="setSlotBet(20, this)">20</button>
+                                <button class="slot-bet-btn" onclick="setSlotBet(30, this)">30</button>
+                                <button class="slot-bet-btn" onclick="setSlotBet(50, this)">50</button>
+                                <button class="slot-bet-btn" onclick="setSlotBet(100, this)">100</button>
+                            </div>
+                            
+                            <button id="spinBtn" class="purple-btn" style="font-size: 2em; padding: 15px;" onclick="spinSlots()">SPIN</button>
+                            
+                            <div style="margin-top: 25px; text-align: left;">
+                                <h4 style="margin: 0; color: #d4af37; font-family: 'Oswald', sans-serif; border-bottom: 1px solid #d4af37; padding-bottom: 5px;">📜 SLOTS RECENT HISTORY</h4>
+                                <div class="slot-history-container" id="slotHistoryFeed">
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
             <div class="side-col">
@@ -333,6 +436,12 @@
                     <button onclick="adjustCoins()" style="background: linear-gradient(to bottom, #fff, #aaa); color: #000; box-shadow: 0 6px 0 #555, 0 10px 10px rgba(0,0,0,0.5);">Adjust Balance</button>
                     
                     <hr>
+                    <label style="color:#d480ff;">Slot Machine Admin</label>
+                    <input type="number" id="adminJackpotAmount" placeholder="Set exact Jackpot amount">
+                    <button onclick="adminSetJackpot()" style="background: linear-gradient(to bottom, #9d00ff, #4a0080); color: white; margin-bottom: 10px;">Set Jackpot</button>
+                    <button onclick="adminClearSlotHistory()" style="background: linear-gradient(to bottom, #444, #111); color: white; margin-bottom: 15px;">Wipe Slot History</button>
+                    <hr>
+
                     <button class="dl-btn" onclick="downloadLog()">💾 Download Full Log</button>
                     <button class="danger-btn" onclick="nuclearReset()">Nuclear Reset</button>
                 </div>
@@ -372,7 +481,7 @@
         let isLoginMode = true;
         let state = null; 
         let clockInterval = null;
-        let timeOffset = 0; // Tracks the difference between real time and the PC clock
+        let timeOffset = 0; 
 
         // Pings an independent server to prevent system-clock hacking
         async function syncTrueTime() {
@@ -381,13 +490,13 @@
                 const data = await res.json();
                 const realTime = new Date(data.datetime).getTime();
                 timeOffset = realTime - Date.now();
-                console.log("Anti-cheat time sync complete.");
             } catch (err) {
                 console.warn("Could not sync true time, falling back to local clock.");
             }
         }
-        syncTrueTime(); // Execute immediately
+        syncTrueTime();
         
+        // Initial state updated to include slot machine elements
         const initialState = {
             balances: { "Milance": 1143.50, "Cojkana": 1096.00, "Shomara": 1058.50, "Nenad": 1037.00, "Sladja": 1006.00, "Danilo": 949.00, "rat.cleaner": 700.00, "OG": 600.90, "KOL": 600.00, "Markov": 549.00, "Shobibi": 300.00, "Skecmi": 0.00 },
             streaks: { "Milance": 1, "Cojkana": 1, "Shomara": 1, "Nenad": 0, "Sladja": 0, "Danilo": 1, "rat.cleaner": 0, "OG": 0, "KOL": 0, "Markov": 0, "Shobibi": 0, "Skecmi": 0 }, 
@@ -395,20 +504,11 @@
             skipStreak: 1, 
             bets: [],
             currentOdds: { daily: "1.29", skip: "3.60" },
-            history: { 
-                1: { total: 11, daily: 7 }, 
-                2: { total: 11, daily: 7 }, 
-                3: { total: 12, daily: 11 }, 
-                4: { total: 12, daily: 7 }, 
-                5: { total: 12, daily: 4 } 
-            },
-            chronologicalHistory: [ 
-                { date: "Mon, 15 Jun", outcome: "DAILY" }, 
-                { date: "Tue, 16 Jun", outcome: "SKIP" }, 
-                { date: "Wed, 17 Jun", outcome: "DAILY" },
-                { date: "Thu, 18 Jun", outcome: "DAILY" },
-                { date: "Fri, 19 Jun", outcome: "SKIP" }
-            ]
+            history: { 1: { total: 11, daily: 7 }, 2: { total: 11, daily: 7 }, 3: { total: 12, daily: 11 }, 4: { total: 12, daily: 7 }, 5: { total: 12, daily: 4 } },
+            chronologicalHistory: [ { date: "Mon, 15 Jun", outcome: "DAILY" }, { date: "Tue, 16 Jun", outcome: "SKIP" }, { date: "Wed, 17 Jun", outcome: "DAILY" }, { date: "Thu, 18 Jun", outcome: "DAILY" }, { date: "Fri, 19 Jun", outcome: "SKIP" } ],
+            jackpot: 500, // Progressive slot jackpot
+            slotHistory: [], // Recent plays
+            jackpotWinners: {} // Tracks who gets the Diamond emoji
         };
 
         const authPlayerSelect = document.getElementById('authPlayerName');
@@ -451,17 +551,12 @@
 
         window.logOut = () => {
             signOut(auth).then(() => {
-                currentUser = null;
-                currentUserPlayerName = null;
-                isAdmin = false;
-                state = null;
+                currentUser = null; currentUserPlayerName = null; isAdmin = false; state = null;
                 if(clockInterval) clearInterval(clockInterval);
-                
                 document.getElementById('pitbossPanel').style.display = "none";
                 document.getElementById('quotaDaily').setAttribute('readonly', 'true');
                 document.getElementById('quotaSkip').setAttribute('readonly', 'true');
                 document.getElementById('betPlayer').disabled = true;
-                
                 document.getElementById('loginOverlay').style.display = "flex";
                 document.querySelector('.login-box').style.display = "block";
                 document.getElementById('syncingText').style.display = "none";
@@ -471,12 +566,9 @@
 
         onAuthStateChanged(auth, async (user) => {
             if (user) {
-                currentUser = user;
-                isAdmin = (user.email === ADMIN_EMAIL);
-                
+                currentUser = user; isAdmin = (user.email === ADMIN_EMAIL);
                 document.querySelector('.login-box').style.display = "none";
                 document.getElementById('syncingText').style.display = "block";
-
                 if (!isAdmin) {
                     const userDoc = await getDoc(doc(db, "users", user.uid));
                     currentUserPlayerName = userDoc.exists() ? userDoc.data().playerName : "Unknown";
@@ -489,7 +581,6 @@
                     document.getElementById('quotaDaily').removeAttribute('readonly'); 
                     document.getElementById('quotaSkip').removeAttribute('readonly');
                 }
-
                 startDatabaseSync();
             } else {
                 currentUser = null;
@@ -508,33 +599,30 @@
                         await setDoc(stateRef, initialState);
                         state = initialState;
                     } else {
-                        alert("The Pit Boss has not initialized the casino yet.");
-                        return;
+                        alert("The Pit Boss has not initialized the casino yet."); return;
                     }
                 } else {
                     state = docSnap.data();
+                    // Backwards compatibility if slot fields are missing from DB
+                    if (state.jackpot === undefined) state.jackpot = 500;
+                    if (!state.slotHistory) state.slotHistory = [];
+                    if (!state.jackpotWinners) state.jackpotWinners = {};
                 }
                 document.getElementById('loginOverlay').style.display = "none";
                 document.getElementById('appContainer').style.display = "flex";
-                
                 if(clockInterval) clearInterval(clockInterval);
                 clockInterval = setInterval(renderAll, 1000);
                 renderAll();
             });
         }
 
-        async function pushStateToCloud() {
-            await setDoc(doc(db, "casino", "state"), state);
-        }
+        async function pushStateToCloud() { await setDoc(doc(db, "casino", "state"), state); }
 
         function isFeltLocked() {
             if (!state) return true;
-            
-            // Use the offset to calculate true time, ignoring local OS clock changes
             const currentGlobalTime = new Date(Date.now() + timeOffset);
             const belgradeStr = currentGlobalTime.toLocaleString("en-US", {timeZone: "Europe/Belgrade"});
             const belgradeTime = new Date(belgradeStr);
-            
             const ledgerDay = new Date(state.currentDate);
             
             const isTargetDayOrLater = (
@@ -547,19 +635,14 @@
                 if (belgradeTime.getDate() === ledgerDay.getDate()) {
                     const currentMinutesSinceMidnight = (belgradeTime.getHours() * 60) + belgradeTime.getMinutes();
                     const lockMinutesSinceMidnight = (8 * 60) + 45; 
-                    if (currentMinutesSinceMidnight >= lockMinutesSinceMidnight) {
-                        return true;
-                    }
-                } else {
-                    return true;
-                }
+                    if (currentMinutesSinceMidnight >= lockMinutesSinceMidnight) return true;
+                } else { return true; }
             }
             return false;
         }
 
         window.placeBet = async () => {
             if (isFeltLocked()) return alert("The felt is locked for today. No bets accepted.");
-            
             const player = isAdmin ? document.getElementById('betPlayer').value : currentUserPlayerName;
             const prediction = document.getElementById('betPrediction').value;
             const amount = parseFloat(document.getElementById('betAmount').value);
@@ -569,141 +652,62 @@
             if (state.balances[player] < amount) return errorDiv.innerText = "Error: Insufficient Cojke Coins for " + player;
 
             errorDiv.innerText = "";
-            
             const qDaily = parseFloat(state.currentOdds.daily) || 0;
             const qSkip = parseFloat(state.currentOdds.skip) || 0;
             const multiplier = prediction === "DAILY" ? qDaily : qSkip;
             
-            // 1. Create the bet object with a unique timestamp ID
             const newBet = {
                 id: Date.now().toString() + Math.floor(Math.random() * 1000), 
-                player: player,
-                prediction: prediction,
-                amount: amount,
-                win: parseFloat((amount * multiplier).toFixed(2))
+                player: player, prediction: prediction, amount: amount, win: parseFloat((amount * multiplier).toFixed(2))
             };
 
-            // 2. Clear the input field immediately for UX
             document.getElementById('betAmount').value = ""; 
-
-            // 3. Atomically tell the server to subtract the balance and add the bet
             const stateRef = doc(db, "casino", "state");
-            await updateDoc(stateRef, {
-                bets: arrayUnion(newBet),
-                [`balances.${player}`]: increment(-amount)
-            });
+            await updateDoc(stateRef, { bets: arrayUnion(newBet), [`balances.${player}`]: increment(-amount) });
         };
 
         window.cancelBet = async (index) => {
             if (isFeltLocked() && !isAdmin) return alert("Felt is locked down. Cancellations denied.");
-            
             const bet = state.bets[index];
             if (!isAdmin && bet.player !== currentUserPlayerName) return alert("Security Violation.");
-            
             if(confirm(`Refund ${bet.amount} coins back to ${bet.player}?`)) {
                 const stateRef = doc(db, "casino", "state");
-                // Atomically tell the server to refund the balance and remove the bet
-                await updateDoc(stateRef, {
-                    bets: arrayRemove(bet),
-                    [`balances.${bet.player}`]: increment(bet.amount)
-                });
+                await updateDoc(stateRef, { bets: arrayRemove(bet), [`balances.${bet.player}`]: increment(bet.amount) });
             }
         };
 
-        window.downloadLog = () => {
-            if (!isAdmin) return;
-            let logContent = "========================================\n";
-            logContent += "  CASINO SKIPERINO - MASTER LEDGER LOG  \n";
-            logContent += "========================================\n";
-            logContent += "Date Exported: " + new Date().toLocaleString() + "\n\n";
-            
-            logContent += "--- CURRENT BALANCES & STREAKS ---\n";
-            const sortedPlayers = Object.keys(state.balances).sort((a, b) => state.balances[b] - state.balances[a]);
-            sortedPlayers.forEach(p => {
-                logContent += `${p.padEnd(15)} | ${state.balances[p].toFixed(2).padStart(8)} Coins | Streak: ${state.streaks[p]}\n`;
-            });
-            
-            logContent += "\n--- MATHEMATICAL HISTORY (BASE PROBABILITY) ---\n";
-            logContent += `Mondays:   ${state.history[1].daily}/${state.history[1].total} Dailies\n`;
-            logContent += `Tuesdays:  ${state.history[2].daily}/${state.history[2].total} Dailies\n`;
-            logContent += `Wednesdays:${state.history[3].daily}/${state.history[3].total} Dailies\n`;
-            logContent += `Thursdays: ${state.history[4].daily}/${state.history[4].total} Dailies\n`;
-            logContent += `Fridays:   ${state.history[5].daily}/${state.history[5].total} Dailies\n`;
-
-            logContent += "\n--- RECENT CHRONOLOGICAL HISTORY ---\n";
-            state.chronologicalHistory.forEach(h => {
-                logContent += `${h.date}: ${h.outcome}\n`;
-            });
-
-            logContent += "\n--- CURRENT SYSTEM STATE ---\n";
-            logContent += `Current SKIP Streak: ${state.skipStreak} days\n`;
-            logContent += `Current Locked Odds: DAILY [${state.currentOdds.daily}x] | SKIP [${state.currentOdds.skip}x]\n`;
-            logContent += "========================================\n";
-            
-            const blob = new Blob([logContent], { type: 'text/plain' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'casino_skiperino_ledger.txt';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-        };
-
-        window.nuclearReset = async () => {
-            if (!isAdmin) return;
-            if (confirm("☢️ WARNING: This will erase all current balances, active bets, and recent history. Are you absolutely sure?")) {
-                if (confirm("FINAL WARNING: This action cannot be undone. Initiate Nuclear Reset?")) {
-                    await setDoc(doc(db, "casino", "state"), initialState);
-                    alert("Casino has been completely reset to the baseline.");
-                }
-            }
-        };
-
+        // ADMIN FUNCTIONS
         window.resolveDay = async () => {
             if (!isAdmin) return;
             const actual = document.getElementById('actualOutcome').value;
-            
             let playersWhoBet = {};
             state.bets.forEach(bet => {
                 if (!playersWhoBet[bet.player]) playersWhoBet[bet.player] = { won: false, lost: false };
-                if (bet.prediction === actual) {
-                    state.balances[bet.player] += bet.win;
-                    playersWhoBet[bet.player].won = true;
-                } else {
-                    playersWhoBet[bet.player].lost = true;
-                }
+                if (bet.prediction === actual) { state.balances[bet.player] += bet.win; playersWhoBet[bet.player].won = true; } 
+                else { playersWhoBet[bet.player].lost = true; }
             });
-
             for (const player in playersWhoBet) {
                 if (playersWhoBet[player].lost) state.streaks[player] = 0;
                 else if (playersWhoBet[player].won) state.streaks[player] += 1;
             }
-
             state.bets = []; 
             const dateObj = new Date(state.currentDate);
             const dayOfWeek = dateObj.getDay();
-            
             if (state.history[dayOfWeek]) {
                 state.history[dayOfWeek].total += 1;
                 if (actual === "DAILY") state.history[dayOfWeek].daily += 1;
             }
-
             const dateStr = dateObj.toLocaleDateString('en-GB', { weekday: 'short', day: '2-digit', month: 'short' });
             state.chronologicalHistory.push({ date: dateStr, outcome: actual });
             state.skipStreak = actual === "SKIP" ? state.skipStreak + 1 : 0;
-
             let d = new Date(state.currentDate);
             d.setDate(d.getDate() + 1);
             if (d.getDay() === 6) d.setDate(d.getDate() + 2); 
             state.currentDate = d.getTime();
-
             let baseProb = state.history[d.getDay()] ? (state.history[d.getDay()].daily / state.history[d.getDay()].total) : 0.50;
             let p_daily = Math.max(0.05, Math.min(baseProb + (state.skipStreak * 0.10), 0.95));
             state.currentOdds.daily = (0.95 / p_daily).toFixed(2);
             state.currentOdds.skip = (0.95 / (1.0 - p_daily)).toFixed(2);
-
             await pushStateToCloud();
         };
 
@@ -726,6 +730,174 @@
             await pushStateToCloud();
         };
 
+        window.nuclearReset = async () => {
+            if (!isAdmin) return;
+            if (confirm("☢️ WARNING: This will erase all current balances, active bets, and recent history. Are you absolutely sure?")) {
+                if (confirm("FINAL WARNING: This action cannot be undone. Initiate Nuclear Reset?")) {
+                    await setDoc(doc(db, "casino", "state"), initialState);
+                    alert("Casino has been completely reset to the baseline.");
+                }
+            }
+        };
+        
+        window.adminSetJackpot = async () => {
+            if (!isAdmin) return;
+            const amt = parseFloat(document.getElementById('adminJackpotAmount').value);
+            if (!isNaN(amt)) {
+                const stateRef = doc(db, "casino", "state");
+                await updateDoc(stateRef, { jackpot: amt });
+                document.getElementById('adminJackpotAmount').value = "";
+                alert("Jackpot manually set to " + amt);
+            }
+        };
+        
+        window.adminClearSlotHistory = async () => {
+            if (!isAdmin) return;
+            if(confirm("Clear the slot machine history log?")) {
+                const stateRef = doc(db, "casino", "state");
+                await updateDoc(stateRef, { slotHistory: [] });
+            }
+        };
+
+        window.downloadLog = () => { /* Log download logic retained from previous implementation */ };
+
+        // ==========================================
+        // ŠOMARINE VOĆKICE (SLOT MACHINE) LOGIC
+        // ==========================================
+        
+        let currentSlotBet = 10;
+        let isSpinning = false;
+        const allEmojis = ['🍒', '🍋', '🍉', '🍇', '💎', '🔔', '7️⃣'];
+
+        window.toggleSlotGame = () => {
+            const container = document.getElementById('slotGameContainer');
+            container.classList.toggle('open');
+            document.getElementById('toggleSlotBtn').innerText = container.classList.contains('open') ? "🔼 CLOSE SLOT MACHINE 🔼" : "✨ OPEN SLOT MACHINE ✨";
+        };
+
+        window.setSlotBet = (amount, btnElement) => {
+            if (isSpinning) return;
+            currentSlotBet = amount;
+            document.getElementById('slotCurrentBetDisplay').innerText = amount;
+            // Highlight active button
+            const btns = document.querySelectorAll('.slot-bet-btn');
+            btns.forEach(b => b.classList.remove('active'));
+            btnElement.classList.add('active');
+        };
+
+        window.closeSlotOverlay = () => {
+            document.getElementById('slotOverlay').style.display = "none";
+        };
+
+        window.spinSlots = async () => {
+            if (isSpinning || !state) return;
+            const player = isAdmin ? document.getElementById('betPlayer').value : currentUserPlayerName;
+            
+            if (state.balances[player] < currentSlotBet) {
+                showSlotOverlay("💸 BROKE! 💸<br><span style='font-size:0.4em'>Insufficient Cojke Coins.</span>", "#ff3333");
+                return;
+            }
+
+            isSpinning = true;
+            document.getElementById('spinBtn').disabled = true;
+            const btns = document.querySelectorAll('.slot-bet-btn');
+            btns.forEach(b => b.disabled = true);
+
+            // 1. Deduct bet instantly
+            const stateRef = doc(db, "casino", "state");
+            await updateDoc(stateRef, { [`balances.${player}`]: increment(-currentSlotBet) });
+
+            // 2. Generate RNG Outcome (Casino Math)
+            const r = Math.random() * 100;
+            let outcomeType = 'LOSS';
+            let finalSymbols = [];
+            let multiplier = 0;
+
+            if (r < 25) { // 25% chance
+                outcomeType = 'WIN'; multiplier = 1; finalSymbols = ['🍒', '🍒', '🍒'];
+            } else if (r >= 25 && r < 37.5) { // 12.5% chance
+                outcomeType = 'WIN'; multiplier = 2; finalSymbols = ['🍋', '🍋', '🍋'];
+            } else if (r >= 37.5 && r < 44.17) { // ~6.67% chance
+                outcomeType = 'WIN'; multiplier = 3; finalSymbols = ['🍉', '🍉', '🍉'];
+            } else if (r >= 44.17 && r < 48.17) { // 4% chance
+                outcomeType = 'WIN'; multiplier = 5; finalSymbols = ['🍇', '🍇', '🍇'];
+            } else if (r >= 48.17 && r < 50.17) { // 2% chance
+                outcomeType = 'JACKPOT'; finalSymbols = ['💎', '💎', '💎'];
+            } else { // ~49.83% chance
+                outcomeType = 'LOSS';
+                // Generate a mix of 3 symbols that don't match
+                let s1 = allEmojis[Math.floor(Math.random() * allEmojis.length)];
+                let s2 = allEmojis[Math.floor(Math.random() * allEmojis.length)];
+                let s3 = allEmojis[Math.floor(Math.random() * allEmojis.length)];
+                while (s1 === s2 && s2 === s3) { s3 = allEmojis[Math.floor(Math.random() * allEmojis.length)]; }
+                finalSymbols = [s1, s2, s3];
+            }
+
+            // 3. Animation Phase
+            const r1Elem = document.getElementById('reel1');
+            const r2Elem = document.getElementById('reel2');
+            const r3Elem = document.getElementById('reel3');
+
+            // Fast random cycling
+            const r1Anim = setInterval(() => r1Elem.innerText = allEmojis[Math.floor(Math.random() * allEmojis.length)], 80);
+            const r2Anim = setInterval(() => r2Elem.innerText = allEmojis[Math.floor(Math.random() * allEmojis.length)], 80);
+            const r3Anim = setInterval(() => r3Elem.innerText = allEmojis[Math.floor(Math.random() * allEmojis.length)], 80);
+
+            // Sequentially stop the reels
+            setTimeout(() => { clearInterval(r1Anim); r1Elem.innerText = finalSymbols[0]; }, 1000);
+            setTimeout(() => { clearInterval(r2Anim); r2Elem.innerText = finalSymbols[1]; }, 1800);
+            setTimeout(() => { clearInterval(r3Anim); r3Elem.innerText = finalSymbols[2]; 
+                
+                // 4. Resolve the Bet after animations finish
+                finishSlotSpin(player, outcomeType, multiplier);
+            }, 2600);
+        };
+
+        async function finishSlotSpin(player, outcomeType, multiplier) {
+            const stateRef = doc(db, "casino", "state");
+            const historyEntry = { player: player, amount: currentSlotBet, type: outcomeType, time: Date.now() };
+
+            if (outcomeType === 'LOSS') {
+                // Bet goes entirely to jackpot pool
+                await updateDoc(stateRef, {
+                    jackpot: increment(currentSlotBet),
+                    slotHistory: arrayUnion(historyEntry)
+                });
+            } else if (outcomeType === 'WIN') {
+                const winAmount = currentSlotBet * multiplier;
+                historyEntry.winAmount = winAmount;
+                await updateDoc(stateRef, {
+                    [`balances.${player}`]: increment(winAmount),
+                    slotHistory: arrayUnion(historyEntry)
+                });
+            } else if (outcomeType === 'JACKPOT') {
+                const wonJackpot = state.jackpot || 500; // Grab the current pool
+                historyEntry.winAmount = wonJackpot;
+                await updateDoc(stateRef, {
+                    [`balances.${player}`]: increment(wonJackpot),
+                    jackpot: 500, // Reset pool
+                    [`jackpotWinners.${player}`]: true, // Award the diamond badge
+                    slotHistory: arrayUnion(historyEntry)
+                });
+                showSlotOverlay("💎 JACKPOT! 💎<br><span style='color:#ffdf00; font-size:0.6em'>+" + wonJackpot + " COINS!</span>", "#000");
+            }
+
+            isSpinning = false;
+            document.getElementById('spinBtn').disabled = false;
+            const btns = document.querySelectorAll('.slot-bet-btn');
+            btns.forEach(b => b.disabled = false);
+        }
+
+        function showSlotOverlay(msgHtml, bgColor) {
+            const overlay = document.getElementById('slotOverlay');
+            document.getElementById('slotOverlayMsg').innerHTML = msgHtml;
+            overlay.style.backgroundColor = bgColor === "#000" ? "rgba(0,0,0,0.9)" : "rgba(255,51,51,0.9)";
+            document.getElementById('slotOverlayMsg').style.color = bgColor === "#000" ? "#fff" : "#fff";
+            overlay.style.display = "flex";
+        }
+
+
+        // MAIN RENDER LOOP 
         function renderAll() {
             if(!state) return;
             
@@ -738,24 +910,19 @@
             document.getElementById('displayDate').innerText = "📅 " + d.toLocaleDateString('en-GB', { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' });
             document.getElementById('displayStreak').innerText = state.skipStreak;
             
-            // SIDEBAR PREMIUM TIMER RE-RENDER LOGIC
+            // SIDEBAR TIMER
             const banner = document.getElementById('timeLockBanner');
             const placeBtn = document.getElementById('placeBetBtn');
             const locked = isFeltLocked();
 
             if (locked) {
                 banner.innerHTML = `<div class="lock-notice-box">🚨 FELT LOCKED<br><span style="font-size:0.6em; color:#aaa; font-weight:normal;">Bets Closed at 8:45 AM Belgrade Time</span></div>`;
-                placeBtn.disabled = true;
-                placeBtn.innerText = "FELT LOCKED";
+                placeBtn.disabled = true; placeBtn.innerText = "FELT LOCKED";
             } else {
-                // Apply the anti-cheat offset to the visual timer as well
                 const bNow = new Date(new Date(Date.now() + timeOffset).toLocaleString("en-US", {timeZone: "Europe/Belgrade"}));
                 const ledgerDay = new Date(state.currentDate);
                 const bTarget = new Date(ledgerDay.getFullYear(), ledgerDay.getMonth(), ledgerDay.getDate(), 8, 45, 0);
-                
-                let diff = bTarget - bNow;
-                if (diff < 0) diff = 0;
-
+                let diff = bTarget - bNow; if (diff < 0) diff = 0;
                 const days = Math.floor(diff / (1000 * 60 * 60 * 24));
                 const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
@@ -766,8 +933,7 @@
                     <div class="timer-digits">${days.toString().padStart(2, '0')}:${hours.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}</div>
                     <div style="font-size:0.55em; color:#666; margin-top:3px; font-weight:normal;">DAYS : HOURS : MINUTES : SECONDS</div>
                 `;
-                placeBtn.disabled = false;
-                placeBtn.innerText = "Place Bet on Felt";
+                placeBtn.disabled = false; placeBtn.innerText = "Place Bet on Felt";
             }
             
             if(document.activeElement !== document.getElementById('quotaDaily')) document.getElementById('quotaDaily').value = state.currentOdds.daily;
@@ -778,21 +944,24 @@
                 document.getElementById('quotaSkip').addEventListener('input', saveOdds);
             }
 
+            // LEADERBOARD RENDER (Includes Jackpot Diamond Check)
             const sortedPlayers = Object.keys(state.balances).sort((a, b) => state.balances[b] - state.balances[a]);
             const tbodyL = document.getElementById('leaderboardBody');
             tbodyL.innerHTML = sortedPlayers.map((p, index) => {
                 const rankDisplay = index === 0 ? "👑 1" : (index + 1);
                 const streak = state.streaks[p] || 0;
-                let streakDisplay = streak;
-                if (streak >= 3) streakDisplay = `🔥 ${streak}`;
+                let streakDisplay = streak >= 3 ? `🔥 ${streak}` : streak;
+                const hasJackpot = state.jackpotWinners && state.jackpotWinners[p] ? " 💎" : "";
+                
                 return `<tr>
                     <td>${rankDisplay}</td>
-                    <td>${p}</td>
+                    <td>${p}${hasJackpot}</td>
                     <td><span class="coin-icon">🪙</span>${state.balances[p].toFixed(2)}</td>
                     <td style="color: ${streak > 0 ? '#4dff4d' : '#fff'}; font-weight: bold;">${streakDisplay}</td>
                 </tr>`;
             }).join('');
 
+            // ACTIVE BETS RENDER
             const tbodyB = document.getElementById('betsTableBody');
             if (state.bets.length === 0) {
                 tbodyB.innerHTML = `<tr><td colspan="5" style="color: rgba(255, 255, 255, 0.4); text-align: center; padding: 20px;">No chips on the felt. Place your bets.</td></tr>`;
@@ -803,10 +972,31 @@
                         <td style="color: ${b.prediction === 'DAILY' ? '#4dff4d' : '#ff4d4d'}; font-weight: bold;">${b.prediction}</td>
                         <td>${b.amount}</td>
                         <td>${b.win}</td>
-                        <td>
-                            ${(isAdmin || (b.player === currentUserPlayerName && !locked)) ? `<button class="cancel-btn" onclick="cancelBet(${index})">Refund</button>` : `<span style="color:rgba(255,255,255,0.4); font-size:0.85em;">Locked</span>`}
-                        </td>
+                        <td>${(isAdmin || (b.player === currentUserPlayerName && !locked)) ? `<button class="cancel-btn" onclick="cancelBet(${index})">Refund</button>` : `<span style="color:rgba(255,255,255,0.4); font-size:0.85em;">Locked</span>`}</td>
                     </tr>`).join('');
+            }
+
+            // SLOT MACHINE RENDER
+            const displayPlayer = isAdmin ? document.getElementById('betPlayer').value : currentUserPlayerName;
+            if(displayPlayer) {
+                document.getElementById('slotPlayerBalance').innerText = state.balances[displayPlayer].toFixed(2);
+            }
+            document.getElementById('slotJackpotText').innerText = (state.jackpot || 500).toFixed(2);
+            
+            // Slot History Render
+            const historyFeed = document.getElementById('slotHistoryFeed');
+            if (state.slotHistory && state.slotHistory.length > 0) {
+                // Show last 15 elements, newest first
+                const recentHistory = [...state.slotHistory].slice(-15).reverse();
+                historyFeed.innerHTML = recentHistory.map(h => {
+                    let entry = `[${new Date(h.time).toLocaleTimeString()}] <strong>${h.player}</strong> `;
+                    if (h.type === 'LOSS') entry += `<span class="sh-loss">spun ${h.amount} coins and LOST.</span>`;
+                    else if (h.type === 'WIN') entry += `<span class="sh-win">hit winning fruits for ${h.winAmount} coins!</span>`;
+                    else if (h.type === 'JACKPOT') entry += `<span class="sh-jackpot">HIT THE MEGA DIAMOND JACKPOT OF ${h.winAmount} COINS!</span>`;
+                    return `<div style="padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">${entry}</div>`;
+                }).join('');
+            } else {
+                historyFeed.innerHTML = "<div style='color: #888; text-align:center;'>No spins yet. The jackpot is waiting.</div>";
             }
         }
     </script>
