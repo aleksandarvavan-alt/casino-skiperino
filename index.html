@@ -214,13 +214,13 @@
         .collapse-container.open { max-height: 1200px; opacity: 1; }
 
         .slot-jackpot-display {
-            font-size: 3em; font-family: 'Playfair Display', serif; font-style: italic; font-weight: 700;
+            font-size: 3em; font-family: 'Oswald', sans-serif; font-weight: 700; text-transform: uppercase;
             color: #ffdf00; text-shadow: 0 0 20px #ffdf00, 2px 2px 0px #8b0000; margin: 15px 0;
             background: rgba(0,0,0,0.6); padding: 10px; border-radius: 10px; border: 2px solid #d4af37;
         }
         .slot-machine-grid {
             display: flex; justify-content: center; gap: 15px; margin: 25px 0;
-            background: #000; padding: 20px; border-radius: 15px; border: 6px solid #d480ff;
+            background: #000; padding: 20px; border-radius: 15px; border: 6px solid #d4af37;
             box-shadow: inset 0 0 30px rgba(0,0,0,0.9), 0 10px 20px rgba(0,0,0,0.7);
         }
         .slot-reel {
@@ -230,14 +230,7 @@
             box-shadow: inset 0 10px 15px rgba(0,0,0,0.5), inset 0 -10px 15px rgba(0,0,0,0.5);
             overflow: hidden; position: relative;
         }
-        .slot-bet-btns { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
-        .slot-bet-btn {
-            background: linear-gradient(to bottom, #444, #111); color: #fff; border: 2px solid #666;
-            padding: 10px 20px; border-radius: 5px; cursor: pointer; font-family: 'Oswald', sans-serif; font-size: 1.1em;
-            box-shadow: 0 4px 0 #000; transition: all 0.1s;
-        }
-        .slot-bet-btn.active { background: linear-gradient(to bottom, #ffdf00, #b8860b); color: #000; border-color: #fff; box-shadow: 0 2px 0 #7a5905; transform: translateY(2px); }
-        .slot-legend { background: rgba(0,0,0,0.5); padding: 10px; border-radius: 5px; font-size: 1.1em; margin-bottom: 20px; border: 1px dashed #d480ff; color: #e6b3ff; }
+        .slot-legend { background: rgba(0,0,0,0.5); padding: 10px; border-radius: 5px; font-size: 1.1em; margin-bottom: 20px; border: 1px dashed #d4af37; color: #fff; }
         
         .slot-history-container {
             max-height: 150px; overflow-y: auto; background: rgba(0,0,0,0.8); border: 1px solid #d4af37;
@@ -251,7 +244,7 @@
         
         /* Modal Overlay for Big Wins/Broke */
         #slotOverlay { display: none; position: absolute; top:0; left:0; right:0; bottom:0; background: rgba(0,0,0,0.9); z-index: 10; border-radius: 15px; align-items: center; justify-content: center; flex-direction: column; }
-        .overlay-text { font-family: 'Playfair Display', serif; font-size: 3em; font-weight: 700; text-align: center; margin-bottom: 20px; }
+        .overlay-text { font-family: 'Oswald', sans-serif; font-size: 3em; font-weight: 700; text-align: center; margin-bottom: 20px; }
     </style>
 </head>
 <body>
@@ -351,8 +344,9 @@
                     </table>
                 </div>
 
-                <div class="card" style="margin-top: 25px; text-align: center; border-color: #9d00ff;">
-                    <h3 style="color: #d480ff; border-bottom: 2px dashed #9d00ff;">🎰 Šomarine Voćkice</h3>
+                <!-- NEW SLOT MACHINE WIDGET -->
+                <div class="card" style="margin-top: 25px; text-align: center; border-color: #d4af37;">
+                    <h3 style="color: #ffdf00; border-bottom: 2px dashed #d4af37;">🎰 Šomarine Voćkice</h3>
                     <button class="purple-btn" id="toggleSlotBtn" onclick="toggleSlotGame()">✨ OPEN SLOT MACHINE ✨</button>
                     
                     <div id="slotGameContainer" class="collapse-container">
@@ -381,12 +375,15 @@
                                 <div class="slot-reel" id="reel3">🍉</div>
                             </div>
                             
-                            <div class="slot-bet-btns">
-                                <button class="slot-bet-btn active" onclick="setSlotBet(10, this)">10</button>
-                                <button class="slot-bet-btn" onclick="setSlotBet(20, this)">20</button>
-                                <button class="slot-bet-btn" onclick="setSlotBet(30, this)">30</button>
-                                <button class="slot-bet-btn" onclick="setSlotBet(50, this)">50</button>
-                                <button class="slot-bet-btn" onclick="setSlotBet(100, this)">100</button>
+                            <div style="margin-bottom: 20px; text-align: left;">
+                                <label>Select Wager (Cojke Coins):</label>
+                                <select id="slotBetSelect" onchange="document.getElementById('slotCurrentBetDisplay').innerText = this.value">
+                                    <option value="10">10</option>
+                                    <option value="20">20</option>
+                                    <option value="30">30</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                </select>
                             </div>
                             
                             <button id="spinBtn" class="purple-btn" style="font-size: 2em; padding: 15px;" onclick="spinSlots()">SPIN</button>
@@ -394,7 +391,8 @@
                             <div style="margin-top: 25px; text-align: left;">
                                 <h4 style="margin: 0; color: #d4af37; font-family: 'Oswald', sans-serif; border-bottom: 1px solid #d4af37; padding-bottom: 5px;">📜 SLOTS RECENT HISTORY</h4>
                                 <div class="slot-history-container" id="slotHistoryFeed">
-                                    </div>
+                                    <!-- History injected here -->
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -436,7 +434,8 @@
                     <button onclick="adjustCoins()" style="background: linear-gradient(to bottom, #fff, #aaa); color: #000; box-shadow: 0 6px 0 #555, 0 10px 10px rgba(0,0,0,0.5);">Adjust Balance</button>
                     
                     <hr>
-                    <label style="color:#d480ff;">Slot Machine Admin</label>
+                    <!-- ADMIN SLOTS CONTROLS -->
+                    <label style="color:#d4af37;">Slot Machine Admin</label>
                     <input type="number" id="adminJackpotAmount" placeholder="Set exact Jackpot amount">
                     <button onclick="adminSetJackpot()" style="background: linear-gradient(to bottom, #9d00ff, #4a0080); color: white; margin-bottom: 10px;">Set Jackpot</button>
                     <button onclick="adminClearSlotHistory()" style="background: linear-gradient(to bottom, #444, #111); color: white; margin-bottom: 15px;">Wipe Slot History</button>
@@ -483,7 +482,6 @@
         let clockInterval = null;
         let timeOffset = 0; 
 
-        // Pings an independent server to prevent system-clock hacking
         async function syncTrueTime() {
             try {
                 const res = await fetch('https://worldtimeapi.org/api/timezone/Europe/Belgrade');
@@ -496,7 +494,6 @@
         }
         syncTrueTime();
         
-        // Initial state updated to include slot machine elements
         const initialState = {
             balances: { "Milance": 1143.50, "Cojkana": 1096.00, "Shomara": 1058.50, "Nenad": 1037.00, "Sladja": 1006.00, "Danilo": 949.00, "rat.cleaner": 700.00, "OG": 600.90, "KOL": 600.00, "Markov": 549.00, "Shobibi": 300.00, "Skecmi": 0.00 },
             streaks: { "Milance": 1, "Cojkana": 1, "Shomara": 1, "Nenad": 0, "Sladja": 0, "Danilo": 1, "rat.cleaner": 0, "OG": 0, "KOL": 0, "Markov": 0, "Shobibi": 0, "Skecmi": 0 }, 
@@ -506,9 +503,9 @@
             currentOdds: { daily: "1.29", skip: "3.60" },
             history: { 1: { total: 11, daily: 7 }, 2: { total: 11, daily: 7 }, 3: { total: 12, daily: 11 }, 4: { total: 12, daily: 7 }, 5: { total: 12, daily: 4 } },
             chronologicalHistory: [ { date: "Mon, 15 Jun", outcome: "DAILY" }, { date: "Tue, 16 Jun", outcome: "SKIP" }, { date: "Wed, 17 Jun", outcome: "DAILY" }, { date: "Thu, 18 Jun", outcome: "DAILY" }, { date: "Fri, 19 Jun", outcome: "SKIP" } ],
-            jackpot: 500, // Progressive slot jackpot
-            slotHistory: [], // Recent plays
-            jackpotWinners: {} // Tracks who gets the Diamond emoji
+            jackpot: 500, 
+            slotHistory: [], 
+            jackpotWinners: {} 
         };
 
         const authPlayerSelect = document.getElementById('authPlayerName');
@@ -603,7 +600,6 @@
                     }
                 } else {
                     state = docSnap.data();
-                    // Backwards compatibility if slot fields are missing from DB
                     if (state.jackpot === undefined) state.jackpot = 500;
                     if (!state.slotHistory) state.slotHistory = [];
                     if (!state.jackpotWinners) state.jackpotWinners = {};
@@ -765,7 +761,6 @@
         // ŠOMARINE VOĆKICE (SLOT MACHINE) LOGIC
         // ==========================================
         
-        let currentSlotBet = 10;
         let isSpinning = false;
         const allEmojis = ['🍒', '🍋', '🍉', '🍇', '💎', '🔔', '7️⃣'];
 
@@ -773,16 +768,6 @@
             const container = document.getElementById('slotGameContainer');
             container.classList.toggle('open');
             document.getElementById('toggleSlotBtn').innerText = container.classList.contains('open') ? "🔼 CLOSE SLOT MACHINE 🔼" : "✨ OPEN SLOT MACHINE ✨";
-        };
-
-        window.setSlotBet = (amount, btnElement) => {
-            if (isSpinning) return;
-            currentSlotBet = amount;
-            document.getElementById('slotCurrentBetDisplay').innerText = amount;
-            // Highlight active button
-            const btns = document.querySelectorAll('.slot-bet-btn');
-            btns.forEach(b => b.classList.remove('active'));
-            btnElement.classList.add('active');
         };
 
         window.closeSlotOverlay = () => {
@@ -793,6 +778,8 @@
             if (isSpinning || !state) return;
             const player = isAdmin ? document.getElementById('betPlayer').value : currentUserPlayerName;
             
+            const currentSlotBet = parseInt(document.getElementById('slotBetSelect').value);
+            
             if (state.balances[player] < currentSlotBet) {
                 showSlotOverlay("💸 BROKE! 💸<br><span style='font-size:0.4em'>Insufficient Cojke Coins.</span>", "#ff3333");
                 return;
@@ -800,8 +787,7 @@
 
             isSpinning = true;
             document.getElementById('spinBtn').disabled = true;
-            const btns = document.querySelectorAll('.slot-bet-btn');
-            btns.forEach(b => b.disabled = true);
+            document.getElementById('slotBetSelect').disabled = true;
 
             // 1. Deduct bet instantly
             const stateRef = doc(db, "casino", "state");
@@ -825,7 +811,6 @@
                 outcomeType = 'JACKPOT'; finalSymbols = ['💎', '💎', '💎'];
             } else { // ~49.83% chance
                 outcomeType = 'LOSS';
-                // Generate a mix of 3 symbols that don't match
                 let s1 = allEmojis[Math.floor(Math.random() * allEmojis.length)];
                 let s2 = allEmojis[Math.floor(Math.random() * allEmojis.length)];
                 let s3 = allEmojis[Math.floor(Math.random() * allEmojis.length)];
@@ -849,11 +834,11 @@
             setTimeout(() => { clearInterval(r3Anim); r3Elem.innerText = finalSymbols[2]; 
                 
                 // 4. Resolve the Bet after animations finish
-                finishSlotSpin(player, outcomeType, multiplier);
+                finishSlotSpin(player, outcomeType, multiplier, currentSlotBet);
             }, 2600);
         };
 
-        async function finishSlotSpin(player, outcomeType, multiplier) {
+        async function finishSlotSpin(player, outcomeType, multiplier, currentSlotBet) {
             const stateRef = doc(db, "casino", "state");
             const historyEntry = { player: player, amount: currentSlotBet, type: outcomeType, time: Date.now() };
 
@@ -876,7 +861,7 @@
                 await updateDoc(stateRef, {
                     [`balances.${player}`]: increment(wonJackpot),
                     jackpot: 500, // Reset pool
-                    [`jackpotWinners.${player}`]: true, // Award the diamond badge
+                    [`jackpotWinners.${player}`]: true, // Award the diamond/slot badge
                     slotHistory: arrayUnion(historyEntry)
                 });
                 showSlotOverlay("💎 JACKPOT! 💎<br><span style='color:#ffdf00; font-size:0.6em'>+" + wonJackpot + " COINS!</span>", "#000");
@@ -884,8 +869,7 @@
 
             isSpinning = false;
             document.getElementById('spinBtn').disabled = false;
-            const btns = document.querySelectorAll('.slot-bet-btn');
-            btns.forEach(b => b.disabled = false);
+            document.getElementById('slotBetSelect').disabled = false;
         }
 
         function showSlotOverlay(msgHtml, bgColor) {
@@ -895,7 +879,6 @@
             document.getElementById('slotOverlayMsg').style.color = bgColor === "#000" ? "#fff" : "#fff";
             overlay.style.display = "flex";
         }
-
 
         // MAIN RENDER LOOP 
         function renderAll() {
@@ -944,14 +927,14 @@
                 document.getElementById('quotaSkip').addEventListener('input', saveOdds);
             }
 
-            // LEADERBOARD RENDER (Includes Jackpot Diamond Check)
+            // LEADERBOARD RENDER (Includes Jackpot Slot Machine Emoji Check)
             const sortedPlayers = Object.keys(state.balances).sort((a, b) => state.balances[b] - state.balances[a]);
             const tbodyL = document.getElementById('leaderboardBody');
             tbodyL.innerHTML = sortedPlayers.map((p, index) => {
                 const rankDisplay = index === 0 ? "👑 1" : (index + 1);
                 const streak = state.streaks[p] || 0;
                 let streakDisplay = streak >= 3 ? `🔥 ${streak}` : streak;
-                const hasJackpot = state.jackpotWinners && state.jackpotWinners[p] ? " 💎" : "";
+                const hasJackpot = state.jackpotWinners && state.jackpotWinners[p] ? " 🎰" : "";
                 
                 return `<tr>
                     <td>${rankDisplay}</td>
@@ -986,7 +969,6 @@
             // Slot History Render
             const historyFeed = document.getElementById('slotHistoryFeed');
             if (state.slotHistory && state.slotHistory.length > 0) {
-                // Show last 15 elements, newest first
                 const recentHistory = [...state.slotHistory].slice(-15).reverse();
                 historyFeed.innerHTML = recentHistory.map(h => {
                     let entry = `[${new Date(h.time).toLocaleTimeString()}] <strong>${h.player}</strong> `;
