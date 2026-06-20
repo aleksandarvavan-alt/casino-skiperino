@@ -372,7 +372,22 @@
         let isLoginMode = true;
         let state = null; 
         let clockInterval = null;
+        let timeOffset = 0; // Tracks the difference between real time and the PC clock
 
+// Pings an independent server to prevent system-clock hacking
+        async function syncTrueTime() {
+            try {
+                const res = await fetch('https://worldtimeapi.org/api/timezone/Europe/Belgrade');
+                const data = await res.json();
+                const realTime = new Date(data.datetime).getTime();
+                timeOffset = realTime - Date.now();
+                console.log("Anti-cheat time sync complete.");
+            } catch (err) {
+                console.warn("Could not sync true time, falling back to local clock.");
+            }
+        }
+        syncTrueTime(); // Execute immediately
+        
         const initialState = {
             balances: { "Milance": 1143.50, "Cojkana": 1096.00, "Shomara": 1058.50, "Nenad": 1037.00, "Sladja": 1006.00, "Danilo": 949.00, "rat.cleaner": 700.00, "OG": 600.90, "KOL": 600.00, "Markov": 549.00, "Shobibi": 300.00, "Skecmi": 0.00 },
             streaks: { "Milance": 1, "Cojkana": 1, "Shomara": 1, "Nenad": 0, "Sladja": 0, "Danilo": 1, "rat.cleaner": 0, "OG": 0, "KOL": 0, "Markov": 0, "Shobibi": 0, "Skecmi": 0 }, 
@@ -515,7 +530,8 @@
         function isFeltLocked() {
             if (!state) return true;
             
-            const currentGlobalTime = new Date();
+            // Use the offset to calculate true time, ignoring local OS clock changes
+            const currentGlobalTime = new Date(Date.now() + timeOffset);
             const belgradeStr = currentGlobalTime.toLocaleString("en-US", {timeZone: "Europe/Belgrade"});
             const belgradeTime = new Date(belgradeStr);
             
@@ -737,7 +753,8 @@
                 placeBtn.disabled = true;
                 placeBtn.innerText = "FELT LOCKED";
             } else {
-                const bNow = new Date(new Date().toLocaleString("en-US", {timeZone: "Europe/Belgrade"}));
+                // Apply the anti-cheat offset to the visual timer as well
+                const bNow = new Date(new Date(Date.now() + timeOffset).toLocaleString("en-US", {timeZone: "Europe/Belgrade"}));
                 const ledgerDay = new Date(state.currentDate);
                 const bTarget = new Date(ledgerDay.getFullYear(), ledgerDay.getMonth(), ledgerDay.getDate(), 8, 45, 0);
                 
