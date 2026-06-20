@@ -196,6 +196,11 @@
                     </div>
                 </div>
 
+                <div class="card" style="text-align: center; padding: 15px;">
+                    <h3 style="font-size: 1.2em; border: none; margin-bottom: 10px; color: #fff;">⏪ Past 5 Days Trend</h3>
+                    <div id="past5container"></div>
+                </div>
+
                 <div class="card" id="bettingKioskCard">
                     <h3>🎲 Betting Kiosk</h3>
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
@@ -331,11 +336,6 @@
                     <div class="countdown-widget" id="countdownContainer">
                         <div id="timeLockBanner">Loading Timeline Metrics...</div>
                     </div>
-                </div>
-
-                <div class="card" style="text-align: center; padding: 15px;">
-                    <h3 style="font-size: 1.2em; border: none; margin-bottom: 10px; color: #fff;">⏪ Past 5 Days Trend</h3>
-                    <div id="past5container"></div>
                 </div>
 
                 <div class="card" id="pitbossPanel">
@@ -953,15 +953,6 @@
         function renderAll() {
             if(!state) return;
             
-            const last5 = state.chronologicalHistory.slice(-5);
-            document.getElementById('past5container').innerHTML = last5.map(item => 
-                `<div class="history-badge ${item.outcome === 'SKIP' ? 'history-skip' : 'history-daily'}">${item.outcome}<span class="history-date">${item.date}</span></div>`
-            ).join('');
-            
-            const d = new Date(state.currentDate);
-            document.getElementById('displayDate').innerText = "📅 " + d.toLocaleDateString('en-GB', { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' });
-            document.getElementById('displayStreak').innerText = state.skipStreak;
-            
             // SIDEBAR TIMER
             const banner = document.getElementById('timeLockBanner');
             const placeBtn = document.getElementById('placeBetBtn');
@@ -987,6 +978,16 @@
                 `;
                 placeBtn.disabled = false; placeBtn.innerText = "Place Bet on Felt";
             }
+            
+            // PAST 5 DAYS TREND
+            const last5 = state.chronologicalHistory.slice(-5);
+            document.getElementById('past5container').innerHTML = last5.map(item => 
+                `<div class="history-badge ${item.outcome === 'SKIP' ? 'history-skip' : 'history-daily'}">${item.outcome}<span class="history-date">${item.date}</span></div>`
+            ).join('');
+            
+            const d = new Date(state.currentDate);
+            document.getElementById('displayDate').innerText = "📅 " + d.toLocaleDateString('en-GB', { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' });
+            document.getElementById('displayStreak').innerText = state.skipStreak;
             
             if(document.activeElement !== document.getElementById('quotaDaily')) document.getElementById('quotaDaily').value = state.currentOdds.daily;
             if(document.activeElement !== document.getElementById('quotaSkip')) document.getElementById('quotaSkip').value = state.currentOdds.skip;
