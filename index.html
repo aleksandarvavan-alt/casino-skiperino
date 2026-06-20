@@ -102,11 +102,34 @@
         .slot-reel::after { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 45%; background: linear-gradient(to bottom, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 100%); pointer-events: none; border-radius: 8px 8px 0 0; }
         .slot-legend { background: rgba(0,0,0,0.5); padding: 10px; border-radius: 5px; font-size: 1.1em; margin-bottom: 20px; border: 1px dashed #d4af37; color: #fff; }
 
-        /* --- PLINKO MACHINE --- */
-        .plinko-board-container { width: 100%; max-width: 500px; height: 500px; margin: 20px auto; background: radial-gradient(circle at top, #2a0a4a 0%, #05010f 100%); border: 4px solid #d4af37; border-radius: 15px; position: relative; overflow: hidden; box-shadow: inset 0 0 40px #000, 0 10px 20px rgba(0,0,0,0.8); }
-        .plinko-peg { position: absolute; width: 8px; height: 8px; background: #fff; border-radius: 50%; box-shadow: 0 0 5px #fff, 0 0 10px #d480ff; transform: translate(-50%, -50%); z-index: 2; }
-        .plinko-bucket { position: absolute; bottom: 0; height: 40px; background: rgba(157, 0, 255, 0.3); border-right: 1px solid #9d00ff; border-left: 1px solid #9d00ff; border-top: 2px solid #d480ff; color: #fff; font-family: 'Oswald'; font-size: 0.9em; display: flex; align-items: center; justify-content: center; transform: translateX(-50%); font-weight: bold; text-shadow: 1px 1px 2px #000; z-index: 1; box-sizing: border-box; }
-        .plinko-ball { position: absolute; width: 16px; height: 16px; border-radius: 50%; transform: translate(-50%, -50%); transition: top 0.2s linear, left 0.2s linear; z-index: 10; box-shadow: inset -4px -4px 6px rgba(0,0,0,0.6), 0 0 12px currentColor; }
+        /* --- PLINKO MACHINE UPGRADES --- */
+        .plinko-board-container { 
+            width: 100%; max-width: 700px; height: 650px; margin: 20px auto; 
+            background: radial-gradient(circle at top, #2a0a4a 0%, #05010f 100%); 
+            border: 4px solid #d4af37; border-radius: 15px; position: relative; 
+            overflow: hidden; box-shadow: inset 0 0 40px #000, 0 10px 20px rgba(0,0,0,0.8); 
+        }
+        .plinko-peg { 
+            position: absolute; width: 10px; height: 10px; background: #fff; 
+            border-radius: 50%; box-shadow: 0 0 5px #fff, 0 0 10px #d480ff; 
+            transform: translate(-50%, -50%); z-index: 2; 
+        }
+        /* Upgraded Buckets */
+        .plinko-bucket { 
+            position: absolute; bottom: 0; height: 50px; 
+            display: flex; align-items: center; justify-content: center; 
+            transform: translateX(-50%); font-weight: bold; font-family: 'Oswald';
+            border-radius: 0 0 8px 8px; box-sizing: border-box;
+            box-shadow: inset 0 10px 15px -5px rgba(0,0,0,0.8);
+            border-top: 4px solid; color: #fff; text-shadow: 1px 1px 2px #000, 0 0 5px currentColor;
+            z-index: 1;
+        }
+        /* Brighter Balls with less glow */
+        .plinko-ball { 
+            position: absolute; width: 18px; height: 18px; border-radius: 50%; 
+            transform: translate(-50%, -50%); z-index: 10; 
+            box-shadow: inset -5px -5px 8px rgba(0,0,0,0.5), inset 2px 2px 5px rgba(255,255,255,0.8), 0 0 3px currentColor; 
+        }
         .floating-win { position: absolute; font-family: 'Oswald', sans-serif; font-size: 1.5em; font-weight: bold; transform: translate(-50%, -50%); transition: top 1s ease-out, opacity 1s ease-out; z-index: 20; pointer-events: none; text-shadow: 1px 1px 3px #000; }
         .ball-selector { display: flex; justify-content: space-around; background: rgba(0,0,0,0.6); padding: 15px; border-radius: 10px; margin-bottom: 20px; border: 1px solid #d4af37; flex-wrap: wrap; gap: 10px; }
         .ball-option { padding: 10px 15px; border-radius: 8px; cursor: pointer; font-family: 'Oswald', sans-serif; font-size: 1.1em; border: 2px solid #444; opacity: 0.5; transition: all 0.2s; color: #fff; text-shadow: 1px 1px 2px #000; }
@@ -268,11 +291,11 @@
 
                             <label style="text-align: left; color:#d4af37;">Select Ball to Buy & Drop:</label>
                             <div class="ball-selector">
-                                <div class="ball-option active" style="color: #CD7F32; border-color:#CD7F32;" onclick="setPlinkoBall(10, this)">Bronze (10)</div>
-                                <div class="ball-option" style="color: #C0C0C0;" onclick="setPlinkoBall(20, this)">Silver (20)</div>
-                                <div class="ball-option" style="color: #FFDF00;" onclick="setPlinkoBall(30, this)">Gold (30)</div>
-                                <div class="ball-option" style="color: #00A86B;" onclick="setPlinkoBall(50, this)">Jade (50)</div>
-                                <div class="ball-option" style="color: #0F52BA;" onclick="setPlinkoBall(100, this)">Sapphire (100)</div>
+                                <div class="ball-option active" style="color: #FF9933; border-color:#FF9933;" onclick="setPlinkoBall(10, this)">Bronze (10)</div>
+                                <div class="ball-option" style="color: #FFFFFF;" onclick="setPlinkoBall(20, this)">Silver (20)</div>
+                                <div class="ball-option" style="color: #FFEE58;" onclick="setPlinkoBall(30, this)">Gold (30)</div>
+                                <div class="ball-option" style="color: #39FF14;" onclick="setPlinkoBall(50, this)">Jade (50)</div>
+                                <div class="ball-option" style="color: #00FFFF;" onclick="setPlinkoBall(100, this)">Sapphire (100)</div>
                             </div>
 
                             <div class="plinko-board-container" id="plinkoBoard">
@@ -733,7 +756,7 @@
         
         let plinkoInitialized = false;
         let currentPlinkoBet = 10;
-        let currentPlinkoColor = '#CD7F32';
+        let currentPlinkoColor = '#FF9933';
         let currentPlinkoName = 'Bronze';
         
         const plinkoMultipliers = [54, 8, 2, 1, 0.5, 0.5, 0.5, 1, 2, 8, 54]; // Exact EV 1.0 logic
@@ -750,7 +773,13 @@
 
         window.setPlinkoBall = (wager, element) => {
             currentPlinkoBet = wager;
-            const colorMap = { 10: {c:'#CD7F32', n:'Bronze'}, 20: {c:'#C0C0C0', n:'Silver'}, 30: {c:'#FFDF00', n:'Gold'}, 50: {c:'#00A86B', n:'Jade'}, 100: {c:'#0F52BA', n:'Sapphire'} };
+            const colorMap = { 
+                10: {c:'#FF9933', n:'Bronze'}, 
+                20: {c:'#FFFFFF', n:'Silver'}, 
+                30: {c:'#FFEE58', n:'Gold'}, 
+                50: {c:'#39FF14', n:'Jade'}, 
+                100: {c:'#00FFFF', n:'Sapphire'} 
+            };
             currentPlinkoColor = colorMap[wager].c;
             currentPlinkoName = colorMap[wager].n;
             
@@ -768,11 +797,11 @@
             board.innerHTML = ""; // Clear
             const rows = 10;
             const startY = 40;
-            const rowSpacing = 40;
-            const colSpacing = 36;
-            const centerX = 250; // Middle of 500px width container
+            const rowSpacing = 50;
+            const colSpacing = 45;
+            const centerX = 350; // Middle of 700px width container
 
-            // Draw Pegs (Pyramid shape)
+            // Draw Pegs
             for (let r = 0; r < rows; r++) {
                 for (let c = 0; c <= r; c++) {
                     const peg = document.createElement('div');
@@ -785,7 +814,7 @@
                 }
             }
 
-            // Draw Buckets at the bottom
+            // Draw Buckets
             for (let b = 0; b <= rows; b++) {
                 const bucket = document.createElement('div');
                 bucket.className = 'plinko-bucket';
@@ -794,11 +823,12 @@
                 bucket.style.width = `${colSpacing}px`;
                 bucket.innerText = `${plinkoMultipliers[b]}x`;
                 
-                // Color coding buckets
-                if (plinkoMultipliers[b] >= 10) bucket.style.background = 'rgba(255, 51, 51, 0.4)';
-                else if (plinkoMultipliers[b] > 1) bucket.style.background = 'rgba(255, 223, 0, 0.3)';
-                else if (plinkoMultipliers[b] === 1) bucket.style.background = 'rgba(255, 255, 255, 0.1)';
-                else bucket.style.background = 'rgba(0, 0, 0, 0.5)';
+                const multi = plinkoMultipliers[b];
+                if (multi === 54) { bucket.style.background = 'linear-gradient(to bottom, #FF8C00, #8B0000)'; bucket.style.color = '#FFDF00'; bucket.style.borderTopColor = '#FFDF00'; }
+                else if (multi === 8) { bucket.style.background = 'linear-gradient(to bottom, #9d00ff, #4a0080)'; bucket.style.color = '#e6b3ff'; bucket.style.borderTopColor = '#d480ff'; }
+                else if (multi === 2) { bucket.style.background = 'linear-gradient(to bottom, #00A86B, #004d26)'; bucket.style.color = '#99ff99'; bucket.style.borderTopColor = '#4dff4d'; }
+                else if (multi === 1) { bucket.style.background = 'linear-gradient(to bottom, #666, #222)'; bucket.style.color = '#ccc'; bucket.style.borderTopColor = '#999'; }
+                else { bucket.style.background = 'linear-gradient(to bottom, #800000, #330000)'; bucket.style.color = '#ff9999'; bucket.style.borderTopColor = '#ff3333'; }
                 
                 board.appendChild(bucket);
             }
@@ -815,86 +845,89 @@
             }
             errorDiv.innerText = "";
 
-            // Pre-calculate path instantly (Casino Magic)
+            // Deduct the WAGER ONLY instantly so they can spam it without spoiling the win
+            const stateRef = doc(db, "casino", "state");
+            await updateDoc(stateRef, {
+                [`balances.${player}`]: increment(-currentPlinkoBet)
+            });
+
+            // Pre-calculate path
             let path = [];
             let bucketIndex = 0;
             for (let i = 0; i < 10; i++) {
-                const dir = Math.random() < 0.5 ? 0 : 1; // 0 left, 1 right
+                const dir = Math.random() < 0.5 ? 0 : 1; 
                 bucketIndex += dir;
                 path.push(dir);
             }
 
             const multiplier = plinkoMultipliers[bucketIndex];
             const winAmount = parseFloat((currentPlinkoBet * multiplier).toFixed(2));
-            const netChange = winAmount - currentPlinkoBet; // Deduct bet and add win at the same time
 
-            const historyEntry = {
-                player: player,
-                ball: currentPlinkoName,
-                color: currentPlinkoColor,
-                wager: currentPlinkoBet,
-                multiplier: multiplier,
-                net: netChange,
-                time: Date.now()
-            };
-
-            // Write to database immediately so they can spam the drop button securely
-            const stateRef = doc(db, "casino", "state");
-            await updateDoc(stateRef, {
-                [`balances.${player}`]: increment(netChange),
-                plinkoHistory: arrayUnion(historyEntry)
-            });
-
-            // Animate it visually (No await here, allows spamming)
-            animatePlinkoDrop(path, bucketIndex, winAmount);
+            // Start animation (We do NOT await it here, so user can click repeatedly)
+            animatePlinkoDrop(path, bucketIndex, currentPlinkoBet, winAmount, player, currentPlinkoName, currentPlinkoColor);
         };
 
-        async function animatePlinkoDrop(path, bucketIndex, winAmount) {
+        async function animatePlinkoDrop(path, bucketIndex, betAmount, winAmount, player, ballName, ballColor) {
             const board = document.getElementById('plinkoBoard');
             const ball = document.createElement('div');
             ball.className = 'plinko-ball';
-            ball.style.backgroundColor = currentPlinkoColor;
-            ball.style.color = currentPlinkoColor; // For glow
+            ball.style.backgroundColor = ballColor;
+            ball.style.color = ballColor;
             
             const startY = 15;
-            const centerX = 250;
-            const rowSpacing = 40;
-            const colSpacing = 36;
+            const centerX = 350;
+            const rowSpacing = 50;
+            const colSpacing = 45;
 
             ball.style.top = `${startY}px`;
             ball.style.left = `${centerX}px`;
             board.appendChild(ball);
 
-            // Small delay to let browser render the start position
+            // Wait for DOM
             await new Promise(r => setTimeout(r, 20));
 
             let currentX = centerX;
             let currentY = startY;
 
-            // Move through the 10 rows
+            // Physics Bouncing Loop
             for (let i = 0; i < path.length; i++) {
-                currentY = 40 + i * rowSpacing; // Hit the peg
-                currentX = currentX + (path[i] === 0 ? -colSpacing/2 : colSpacing/2);
-                ball.style.top = `${currentY}px`;
-                ball.style.left = `${currentX}px`;
-                await new Promise(r => setTimeout(r, 200)); // CSS transition duration
+                let nextX = currentX + (path[i] === 0 ? -colSpacing/2 : colSpacing/2);
+                let nextY = startY + (i + 1) * rowSpacing;
+                
+                // 1. Arc up (Bounce off the peg)
+                let arcX = currentX + (path[i] === 0 ? -colSpacing/4 : colSpacing/4);
+                let arcY = currentY - 15;
+                
+                ball.style.transition = 'top 0.12s ease-out, left 0.12s linear';
+                ball.style.top = `${arcY}px`;
+                ball.style.left = `${arcX}px`;
+                await new Promise(r => setTimeout(r, 120));
+
+                // 2. Drop down to next peg
+                ball.style.transition = 'top 0.15s ease-in, left 0.15s linear';
+                ball.style.top = `${nextY}px`;
+                ball.style.left = `${nextX}px`;
+                await new Promise(r => setTimeout(r, 150));
+                
+                currentX = nextX;
+                currentY = nextY;
             }
 
-            // Fall into the bucket
-            currentY += rowSpacing;
-            ball.style.top = `${currentY}px`;
+            // Drop into the final bucket
+            ball.style.transition = 'top 0.2s ease-in, left 0.2s linear';
+            ball.style.top = `${currentY + 40}px`;
             await new Promise(r => setTimeout(r, 200));
 
             // Floating win text
             const floatText = document.createElement('div');
             floatText.className = 'floating-win';
             floatText.innerText = winAmount > 0 ? `+${winAmount}` : 'BUST';
-            floatText.style.color = winAmount > currentPlinkoBet ? '#4dff4d' : (winAmount > 0 ? '#ffdf00' : '#ff3333');
+            floatText.style.color = winAmount > betAmount ? '#4dff4d' : (winAmount > 0 ? '#ffdf00' : '#ff3333');
             floatText.style.left = `${currentX}px`;
             floatText.style.top = `${currentY - 20}px`;
             board.appendChild(floatText);
 
-            // Animate float
+            // Animate float text
             setTimeout(() => {
                 floatText.style.top = `${currentY - 60}px`;
                 floatText.style.opacity = '0';
@@ -905,6 +938,24 @@
                 ball.remove();
                 floatText.remove();
             }, 1000);
+
+            // ANIMATION COMPLETE: Now award the winnings and write the history
+            const netChange = winAmount - betAmount;
+            const historyEntry = {
+                player: player,
+                ball: ballName,
+                color: ballColor,
+                wager: betAmount,
+                multiplier: plinkoMultipliers[bucketIndex],
+                net: netChange,
+                time: Date.now()
+            };
+
+            const stateRef = doc(db, "casino", "state");
+            await updateDoc(stateRef, {
+                [`balances.${player}`]: increment(winAmount),
+                plinkoHistory: arrayUnion(historyEntry)
+            });
         }
 
         // MAIN RENDER LOOP 
